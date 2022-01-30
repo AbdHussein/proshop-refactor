@@ -1,0 +1,12 @@
+.ag-theme-balham .ag-header {
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    font: bold normal ;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.ag-theme-balham .ag-root-wrapper {
+    border:none
+}
