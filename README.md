@@ -1,1 +1,1 @@
-# Colors_proshop
+# Colors_proshop_refactor_by_Challenge_team
