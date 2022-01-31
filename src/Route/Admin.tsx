@@ -1,25 +1,25 @@
-import { Outlet, Route } from 'react-router-dom';
+import React, {lazy} from 'react';
 
-import { lazy } from 'react';
+const Dashboard = lazy(() => import('../pages/DashBoard'));
+const AddNewProduct = lazy(() => import('../pages/NewProduct'));
 
-import Loadable from '../components/Loadable';
+const role = Boolean(localStorage.getItem('role'));
+let adminRoutes;
 
-const Dashboard = Loadable(lazy(() => import('../pages/DashBoard')));
-const AddNewProduct = Loadable(lazy(() => import('../pages/NewProduct')));
-
-export const adminRoutes = () => {
-  const role = Boolean(localStorage.getItem('role'));
-  return (
-    <>
-      {role && (
-        <>
-          <Route path="/dashboard" element={<Dashboard />} />
-
-          <Route path="/addProduct" element={<AddNewProduct />} />
-
-          <Route path="/updateroduct/:id" element={<AddNewProduct />} />
-        </>
-      )}
-    </>
-  );
-};
+if (role) {
+    adminRoutes = [
+        {
+            path: "/dashboard",
+            component: <Dashboard/>
+        },
+        {
+            path: '/addProduct',
+            component: <AddNewProduct/>
+        },
+        {
+            path: '/updateroduct/:id',
+            component: <AddNewProduct/>
+        },
+    ];
+}
+export default adminRoutes;
