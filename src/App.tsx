@@ -12,7 +12,6 @@ import useTheme from './Hoc/UseTheme';
 import { Providers } from './providers';
 import { darkTheme, GlobalStyle, lightTheme } from './theme';
 import { Route, Routes } from "react-router-dom";
-import adminRoutes from "./Route/Admin";
 
 const stripePromise = loadStripe('pk_test_kvaWWuoOUKU8FfTgtn5U2LVC00If7nyUo0');
 
@@ -20,7 +19,6 @@ const App: React.FC = () => {
   const [open, setstate] = useState(false);
   const {theme, setToggle} = useTheme();
   const currentTheme = theme === 'dark' ? darkTheme : lightTheme;
-  console.log(adminRoutes,'adminRoutes')
   return (
       <Elements stripe={stripePromise}>
         <HelmetProvider>
