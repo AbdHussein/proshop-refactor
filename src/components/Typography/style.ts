@@ -21,6 +21,7 @@ const getTypographySize = (variant: string) => {
 
 const Wrapper = styled('p')<any>`
   /* color: ${props => props.color || 'black'}; */
+
   font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 750 : 500)};
   color: ${props =>
     props
@@ -31,9 +32,8 @@ const Wrapper = styled('p')<any>`
   font-size: ${props =>
     props?.fontSize || getTypographySize(props?.variant || '')};
   line-height: ${props => (props?.bold ? 1.1 : 1.25)};
-  font-family: ${props => props?.['font-family'] || 'roboto'};
-  font-size: ${props =>
-    props?.['font-Size'] || getTypographySize(props?.variant || '')};
+  font-family: ${props => props?.['font-family'] || ' mulish'};
+
   text-align: ${props => props?.['text-align'] || 'left'};
 `;
 
