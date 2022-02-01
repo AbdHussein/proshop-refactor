@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -52,11 +52,31 @@ const Dailog = ({
   title?: string;
   onClose?: () => void;
 }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const closeIfClickedOutside = useCallback((e: MouseEvent) => {
+    if (
+      ref.current !== null &&
+      e.target !== null &&
+      ref.current.contains(e.target as any)
+    ) {
+      return;
+    }
+    onClose?.();
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', closeIfClickedOutside);
+    return () => {
+      document.removeEventListener('mousedown', closeIfClickedOutside);
+    };
+  }, []);
+
   return createPortal(
     <>
       {open && (
         <Modal>
-          <div>
+          <div ref={ref}>
             <ModalHeader>
               <h2>{title}</h2>
               <button type="button" onClick={onClose}>

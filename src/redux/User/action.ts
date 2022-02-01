@@ -48,36 +48,23 @@ export const updateUser = (data: InterfaceUpdateUser) => {
     });
 
     try {
-      const formData = new FormData();
-      formData.append('image', data.profileImage);
-      try {
-        const profileImage = await Api.post('/upload', formData);
-        const dataObj = {
-          ...data,
-          profileImage: profileImage.data,
-        };
+      const dataObj = {
+        ...data,
+      };
 
-        const response = await Api.update<InterfaceUpdateUser>(
-          `/users/profile`,
-          dataObj,
-        );
+      const response = await Api.update<InterfaceUpdateUser>(
+        `/users/profile`,
+        dataObj,
+      );
 
-        dispatch({
-          type: EnumUserAction.GET_PROFILE_USER_SUCCESS,
-          payload: {
-            user: response.data,
-          },
-        });
-        localStorage.setItem('user', JSON.stringify(response.data));
-        localStorage.setItem('token', JSON.stringify(response.data.token));
-      } catch (e: any) {
-        dispatch({
-          type: EnumUserAction.GET_PROFILE_USER_FILL,
-          payload: {
-            error: e?.response?.data?.message,
-          },
-        });
-      }
+      dispatch({
+        type: EnumUserAction.GET_PROFILE_USER_SUCCESS,
+        payload: {
+          user: response.data,
+        },
+      });
+      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('token', JSON.stringify(response.data.token));
     } catch (e: any) {
       dispatch({
         type: EnumUserAction.GET_PROFILE_USER_FILL,
@@ -101,6 +88,36 @@ export const changeAvatar =
       const dataObj = {
         ...data,
         profileImage: profileImage.data,
+      };
+      const response = await Api.update<InterfaceUpdateUser>(
+        `/users/profile`,
+        dataObj,
+      );
+      dispatch({
+        type: EnumUserAction.GET_PROFILE_USER_SUCCESS,
+        payload: {
+          user: response.data,
+        },
+      });
+    } catch (error: any) {
+      dispatch({
+        type: EnumUserAction.UPDATE_PROFILE_USER_FILL,
+        payload: {
+          error: error?.response?.data?.message,
+        },
+      });
+    }
+  };
+
+export const changePassword =
+  (data: InterfaceUpdateUser) => async (dispatch: Dispatch<TAllActionUser>) => {
+    try {
+      dispatch({
+        type: EnumUserAction.UPDATE_PROFILE_USER_START,
+      });
+      const dataObj = {
+        ...data,
+        password: data.password,
       };
       const response = await Api.update<InterfaceUpdateUser>(
         `/users/profile`,

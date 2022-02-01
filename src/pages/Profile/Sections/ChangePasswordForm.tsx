@@ -1,17 +1,18 @@
 import { Formik, Form } from 'formik';
+import { ChangeEvent } from 'react';
 import * as yup from 'yup';
 import { InputController } from '../../../components';
 import { Button } from '../../../components/Button/ButtonStyle';
 
-interface IPassword {
+export interface IPassword {
   password: string;
   passwordConfirmation: string;
 }
 interface IProps {
-  handleChangePassword?: (values: IPassword) => void;
+  handleSubmitPassword?: (values: IPassword) => void;
 }
 
-const ChangePasswordForm = ({ handleChangePassword }: IProps) => {
+const ChangePasswordForm = ({ handleSubmitPassword }: IProps) => {
   return (
     <Formik
       initialValues={{
@@ -19,16 +20,23 @@ const ChangePasswordForm = ({ handleChangePassword }: IProps) => {
         passwordConfirmation: '',
       }}
       validationSchema={yup.object().shape({
-        password: yup.string().required('Password is required'),
+        password: yup
+          .string()
+          .matches(
+            /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9!@#$%./^&*()_+<>,~`"':;]{8,}$/,
+            `Password should be 8 digits length at least, contains at least one Capital letter, contains at least one number.`,
+          )
+          .required('Password is required'),
         passwordConfirmation: yup
           .string()
+          .required('Password Confirmation is required')
           .oneOf([yup.ref('password'), null], 'Passwords must match'),
       })}
       onSubmit={values => {
-        handleChangePassword?.(values);
+        handleSubmitPassword?.(values);
       }}
     >
-      {() => (
+      {({ errors, touched, setFieldValue, setFieldTouched }) => (
         <Form
           style={{
             display: 'flex',
@@ -40,13 +48,29 @@ const ChangePasswordForm = ({ handleChangePassword }: IProps) => {
             type="password"
             name="password"
             label="Enter New Password"
+            errors={errors.password}
+            touched={touched.password}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setFieldValue('password', e.target.value);
+            }}
+            onBlur={() => {
+              setFieldTouched('password', true);
+            }}
           />
           <InputController
             type="password"
             name="passwordConfirmation"
             label="Enter Password Confirmation"
+            errors={errors.passwordConfirmation}
+            touched={touched.passwordConfirmation}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setFieldValue('passwordConfirmation', e.target.value);
+            }}
+            onBlur={() => {
+              setFieldTouched('passwordConfirmation', true);
+            }}
           />
-          <Button style={{ justifySelf: 'flex-end' }}>Update Password</Button>
+          <Button type="submit">Update Password</Button>
         </Form>
       )}
     </Formik>
