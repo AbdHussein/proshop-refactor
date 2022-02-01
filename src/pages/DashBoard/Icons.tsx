@@ -16,3 +16,7 @@ export const StyledEdit = styled(MdModeEditOutline)`
   height: 18px;
   cursor: pointer;
 `;
+export const Button = styled(`button`)`
+  background-color: unset;
+  border: none;
+`

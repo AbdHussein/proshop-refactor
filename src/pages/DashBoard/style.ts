@@ -3,7 +3,7 @@ import { Container } from '../../components';
 import { Button } from '../../components/Button/ButtonStyle';
 
 export const ContainAgGrid = styled('div')`
-  height: 500px;
+  height: 90vh;
   width: 85.5%;
   margin: 140px auto;
   border: none !important;

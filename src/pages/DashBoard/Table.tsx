@@ -9,7 +9,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AgGridColumn } from 'ag-grid-react/lib/shared/agGridColumn';
 import { columnDefs, defaultColDef, rowStyle, getRowStyle } from './data';
 import { ContainAgGrid } from './style';
-import { StyledDelete, StyledEdit } from './Icons';
+import {Button, StyledDelete, StyledEdit} from './Icons';
 import { IProducts } from '../../redux/Product/type';
 import { AppState } from '../../redux/store';
 import { delateProduct } from '../../redux/Admin/action';
@@ -18,57 +18,56 @@ import { getProducts } from '../../redux/Product/action';
 
 interface IProps {
   data?: IProducts[];
+  // column:[]
 }
 
-const row = (PRODUCTID, PRODUCTNAME, PRODUCTPRICE, CATEGORY, ACTION) => ({
-  PRODUCTID,
-  PRODUCTNAME,
-  PRODUCTPRICE,
+const row = (ID, NAME, PRICE, CATEGORY, ACTION) => ({
+  ID,
+  NAME,
+  PRICE,
   CATEGORY,
   ACTION,
 });
 
 const Table = ({ data }: IProps) => {
-  console.log('data of table', data);
   const getRowData = () => {
     return (
       data &&
-      data.length &&
       data?.map(e => {
         return row(
           // eslint-disable-next-line no-underscore-dangle
           e?._id,
-          e?.brand,
+          e?.name,
           e?.price,
           e?.categories[0],
           <>
-            <Link to={`/updateroduct/${e._id}`}>
+            <Link to={`/update-product/${e._id}`}>
               <StyledEdit />
             </Link>
-            <StyledDelete />
-            {/* onClick={deleteOnClick(e._id)} */}
+            <Button
+                // onClick={()=>deleteOnClick(e._id)}
+            >
+              <StyledDelete />
+            </Button>
           </>,
         );
       })
     );
   };
-  console.log('data of table 455', data);
-
   return (
     <>
       <ContainAgGrid className="ag-theme-balham">
         <AgGridReact
-          reactUi
+          reactUi // icons
           getRowStyle={getRowStyle}
           rowStyle={rowStyle}
-          rowHeight={62}
-          defaultColDef={defaultColDef}
-          rowData={getRowData() as any}
-          // columnDefs={columnDefs}
+          rowHeight={60}
+          rowData={getRowData() as []}
         >
-          <AgGridColumn field="PRODUCTID" width={300} />
-          <AgGridColumn field="PRODUCTNAME" width={220} />
-          <AgGridColumn field="PRODUCTPRICE" width={220} />
+
+          <AgGridColumn field="ID" width={300} />
+          <AgGridColumn field="NAME" width={350} />
+          <AgGridColumn field="PRICE" width={220} />
           <AgGridColumn field="CATEGORY" width={220} />
           <AgGridColumn field="ACTION" width={200} />
         </AgGridReact>
@@ -79,8 +78,3 @@ const Table = ({ data }: IProps) => {
 
 export default Table;
 
-// <AgGridColumn field="PRODUCTID" width={150} />
-// <AgGridColumn field="PRODUCTNAME" width={90} />
-// <AgGridColumn field="PRODUCTPRICE" width={150} />
-// <AgGridColumn field="CATEGORY" width={90} />
-// <AgGridColumn field="ACTION" width={150} />
