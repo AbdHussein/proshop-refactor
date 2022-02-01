@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const SpinnerContainer = styled.div`
   display: flex;
-  border: 6px solid ${props => props.theme?.primary?.lightYallow};
+  border: 6px solid ${props => props.theme?.primary?.main};
   width: 120px;
   justify-content: center;
   height: 120px;

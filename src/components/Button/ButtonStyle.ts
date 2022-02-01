@@ -29,9 +29,7 @@ export const ButtonStyle = styled.button<IStyleButton>(
     fontWeight: `${fontWeight}`,
     background: `${
       background ||
-      (brand
-        ? props.theme.primary?.lightYallow
-        : props.theme.background?.lightGrey)
+      (brand ? props.theme.primary?.main : props.theme.secondary?.main)
     }`,
 
     color: `${color}`,
@@ -46,6 +44,6 @@ export const ButtonStyle = styled.button<IStyleButton>(
 export const Button = styled(ButtonStyle)`
   &:hover {
     color: white;
-    background: #fcdd06;
+    background: ${props => props.theme.primary?.main};
   }
 `;

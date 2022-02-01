@@ -24,7 +24,7 @@ export const SliderItem = ({ name, description, price, image, _id }: Props) => (
   <ContentContainer
     key={_id}
     justifyContent="space-between"
-    background="#F2F2F2"
+    background="#1f2933"
   >
     <Column style={{ maxWidth: '521px' }}>
       <PriceText variant="p"> Save up to ${price}</PriceText>

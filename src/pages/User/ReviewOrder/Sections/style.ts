@@ -15,7 +15,7 @@ export const OrderDetailsText = styled(ReviewText)`
 export const TextFooter = styled('p')`
   font-size: 16px;
   letter-spacing: 0.32px;
-  color: ${props => props.theme?.background?.darkGrey};
+  color: ${props => props.theme.text?.primary};
   opacity: 1;
 `;
 export const ChangeText = styled(Link)`
@@ -41,7 +41,7 @@ export const BoxNumber = styled('div')<IBoxNumber>`
   height: 2em;
   background: ${props =>
     props.isActive
-      ? `${props.theme?.primary?.lightYallow}; 0% 0% no-repeat padding-box`
+      ? `${props.theme?.primary?.main}; 0% 0% no-repeat padding-box`
       : '#707070 0% 0% no-repeat padding-box'};
   color: ${props => (props.isActive ? '#242424' : '#FFFFFF ')};
 `;
@@ -295,7 +295,7 @@ export const TextTitle = styled(Typography)`
 export const PriceText = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
-  color: ${props => props.theme?.background?.darkGrey};
+  color: ${props => props.theme?.text?.primary};
   padding-left: 10px;
   font-family: mulish;
 `;
@@ -321,7 +321,7 @@ export const CountText = styled(Typography)`
 export const RevieworderButton = styled.button`
   width: 324px;
   height: 62px;
-  background: ${props => props.theme?.primary?.lightYallow};
+  background: ${props => props.theme?.primary?.main};
   border-radius: 10px;
   opacity: 1;
   display: flex;
