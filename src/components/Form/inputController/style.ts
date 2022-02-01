@@ -27,6 +27,7 @@ export const Label = styled('label')`
   font-size: 15px;
   font-weight: bold;
   font-family: mulish;
+  color: ${props => props.theme.text?.primary};
 `;
 
 interface IInput {
@@ -47,16 +48,19 @@ export const Input = styled('input')<IInput>`
   /* border-top-left-radius: 0; */
   border-bottom-left-radius: 0;
   background: transparent;
+  color: ${props => props.theme.text?.primary};
   ::placeholder {
     padding-left: 5px;
     outline: none;
     background: transparent;
+    color: ${props => props.theme.text?.secondary};
   }
   &:disabled {
     box-shadow: none;
     cursor: not-allowed;
     outline: none;
     background: transparent;
+    color: ${props => props.theme.text?.disabled};
   }
 
   &:focus:not(:disabled) {

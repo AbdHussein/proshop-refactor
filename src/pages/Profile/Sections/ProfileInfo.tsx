@@ -13,7 +13,7 @@ import {
   ActionsWrapper,
 } from '../style';
 import { IUser } from '../../../redux/Auth/type';
-import { formatDate } from '../../../utils/helper/formatDay';
+import { formatDate, formatDate_ } from '../../../utils/helper/formatDay';
 import {
   changeAvatar,
   changePassword,
@@ -23,6 +23,7 @@ import {
 import ChangePasswordForm, { IPassword } from './ChangePasswordForm';
 import Dailog from '../../../components/Dialog';
 import UpdateProfileForm, { IProfile } from './UpdateProfileForm';
+import { notify } from '../../../utils/helper/notification';
 
 interface IProfileDashboard {
   user?: IUser;
@@ -44,12 +45,14 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
           profileImage: e.target.files?.[0] as File,
         } as InterfaceUpdateUser),
       );
+      notify('success', 'Avatar Changed successfully');
     },
     [user],
   );
 
   const handleSubmitPassword = useCallback((values: IPassword) => {
     dispatch(changePassword({ ...(user as IUser), password: values.password }));
+    notify('success', 'Password changed successfully');
     handlePasswordDialogClose();
   }, []);
 
@@ -61,6 +64,7 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
         ...values,
       }),
     );
+    notify('success', 'Profile Updated');
     handleProfileDialogClose();
   }, []);
 
@@ -92,6 +96,7 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
             justify-content="space-between"
             min-height="150px"
             max-width="50%"
+            height="fit-content !important"
           >
             <SpanTitle>First Name</SpanTitle>
             <SpanTitle>Last Name</SpanTitle>
@@ -104,12 +109,13 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
             justify-content="space-between"
             min-height="150px"
             max-width="60%"
+            height="fit-content !important"
           >
             <DataValue>{user?.firstName}</DataValue>
             <DataValue>{user?.lastName}</DataValue>
             <DataValue>{user?.email}</DataValue>
             <DataValue>
-              {user?.dateOfBirth && formatDate(user?.dateOfBirth as string)}
+              {user?.dateOfBirth && formatDate_(user?.dateOfBirth as string)}
             </DataValue>
           </Container>
         </InfoDetailsContainer>
@@ -166,7 +172,7 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
       <Dailog
         open={isProfileDialogOpen}
         onClose={handleProfileDialogClose}
-        title="Change Profile"
+        title="Update Profile"
       >
         <UpdateProfileForm
           handleSubmitProfile={handleSubmitProfile}

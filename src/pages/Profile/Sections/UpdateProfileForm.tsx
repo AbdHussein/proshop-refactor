@@ -54,7 +54,13 @@ const UpdateProfileForm = ({ data, handleSubmitProfile }: IProps) => {
       }}
     >
       {({ values, errors, touched, setFieldValue, setFieldTouched }) => (
-        <Form>
+        <Form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+          }}
+        >
           <InputController
             name="firstName"
             label="First Name"
