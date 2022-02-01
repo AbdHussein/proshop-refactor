@@ -6,7 +6,7 @@ export const formatDate = (dataString: string): string => {
   const month = date[1];
   const year = date[3];
 
-  return `${day} ${month} ${year}`;
+  return `${day}, ${month} ${year}`;
 };
 
 export const formatDate_ = (date_: string) => {
