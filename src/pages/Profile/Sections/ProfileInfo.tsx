@@ -14,9 +14,15 @@ import {
 } from '../style';
 import { IUser } from '../../../redux/Auth/type';
 import { formatDate } from '../../../utils/helper/formatDay';
-import { changeAvatar, InterfaceUpdateUser } from '../../../redux/User/action';
-import ChangePasswordForm from './ChangePasswordForm';
+import {
+  changeAvatar,
+  changePassword,
+  InterfaceUpdateUser,
+  updateUser,
+} from '../../../redux/User/action';
+import ChangePasswordForm, { IPassword } from './ChangePasswordForm';
 import Dailog from '../../../components/Dialog';
+import UpdateProfileForm, { IProfile } from './UpdateProfileForm';
 
 interface IProfileDashboard {
   user?: IUser;
@@ -25,7 +31,10 @@ interface IProfileDashboard {
 const ProfileInfo = ({ user }: IProfileDashboard) => {
   const dispatch = useDispatch();
 
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const [isPasswordDialogOpen, setPasswordDialogOpen] =
+    useState<boolean>(false);
+
+  const [isProfileDialogOpen, setProfileDialogOpen] = useState<boolean>(false);
 
   const uploadPhoto = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,8 +48,28 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
     [user],
   );
 
-  const handleClose = useCallback(() => {
-    setOpen(false);
+  const handleSubmitPassword = useCallback((values: IPassword) => {
+    dispatch(changePassword({ ...(user as IUser), password: values.password }));
+    handlePasswordDialogClose();
+  }, []);
+
+  const handleSubmitProfile = useCallback((values: IProfile) => {
+    // Update Profile
+    dispatch(
+      updateUser({
+        ...(user as IUser),
+        ...values,
+      }),
+    );
+    handleProfileDialogClose();
+  }, []);
+
+  const handlePasswordDialogClose = useCallback(() => {
+    setPasswordDialogOpen(false);
+  }, []);
+
+  const handleProfileDialogClose = useCallback(() => {
+    setProfileDialogOpen(false);
   }, []);
 
   return (
@@ -89,7 +118,7 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
             fontSize="13px"
             style={{ marginBottom: '2em', marginTop: '2em' }}
             padding="1em"
-            onClick={() => setOpen(true)}
+            onClick={() => setPasswordDialogOpen(true)}
           >
             Change Password
           </Button>
@@ -97,6 +126,7 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
             fontSize="13px"
             style={{ marginBottom: '2em', marginTop: '2em' }}
             padding="1em"
+            onClick={() => setProfileDialogOpen(true)}
           >
             Update Profile
           </Button>
@@ -125,8 +155,28 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
           />
         </label>
       </ImageContainer>
-      <Dailog open={isOpen} onClose={handleClose} title="Change Password">
-        <ChangePasswordForm />
+      <Dailog
+        open={isPasswordDialogOpen}
+        onClose={handlePasswordDialogClose}
+        title="Change Password"
+      >
+        <ChangePasswordForm handleSubmitPassword={handleSubmitPassword} />
+      </Dailog>
+
+      <Dailog
+        open={isProfileDialogOpen}
+        onClose={handleProfileDialogClose}
+        title="Change Profile"
+      >
+        <UpdateProfileForm
+          handleSubmitProfile={handleSubmitProfile}
+          data={{
+            firstName: user?.firstName as string,
+            lastName: user?.lastName as string,
+            email: user?.email as string,
+            dateOfBirth: user?.dateOfBirth as string,
+          }}
+        />
       </Dailog>
     </InfoContainer>
   );

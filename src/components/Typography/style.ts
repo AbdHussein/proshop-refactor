@@ -23,7 +23,7 @@ const Wrapper = styled('p')<any>`
   /* color: ${props => props.color || 'black'}; */
 
   font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 750 : 500)};
-  color: ${props => props.theme.text?.primary};
+  color: ${props => props.color || props.theme.text?.primary};
   font-size: ${props =>
     props?.fontSize || getTypographySize(props?.variant || '')};
   line-height: ${props => (props?.bold ? 1.1 : 1.25)};

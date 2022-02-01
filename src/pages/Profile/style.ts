@@ -23,6 +23,7 @@ export const NavLink = styled(Link)`
 `;
 
 export const OutLink = styled(NavLink)`
+  color: ${props => props.theme.text?.primary};
   padding: 1em;
 `;
 
@@ -56,6 +57,7 @@ export const ProfileContainer = styled(Container)`
 `;
 
 export const DashboardContainer = styled(Container)`
+  background-color: ${props => props.theme.background?.paper};
   @media only screen and (max-width: 767px) {
     margin-bottom: 2em;
     width: 100%;
@@ -65,6 +67,7 @@ export const DashboardContainer = styled(Container)`
 `;
 
 export const DashImgContainer = styled(Container)`
+  gap: 40px;
   @media only screen and (max-width: 767px) {
     width: 100%;
     flex-direction: column;
@@ -74,7 +77,7 @@ export const DashImgContainer = styled(Container)`
 
 export const InfoContainer = styled(Container)`
   margin-left: 2em;
-  background-color: ${props => props.theme.background?.default};
+  background-color: ${props => props.theme.background?.paper};
   @media only screen and (max-width: 767px) {
     flex-direction: column;
     width: 100%;
