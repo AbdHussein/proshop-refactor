@@ -213,6 +213,6 @@ export const ProductReducer = (
       };
 
     default:
-      return initialState;
+      return state;
   }
 };

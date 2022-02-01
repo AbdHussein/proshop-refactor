@@ -21,11 +21,7 @@ interface Props {
 }
 
 export const SliderItem = ({ name, description, price, image, _id }: Props) => (
-  <ContentContainer
-    key={_id}
-    justifyContent="space-between"
-    background="#1f2933"
-  >
+  <ContentContainer key={_id} justifyContent="space-between">
     <Column style={{ maxWidth: '551px' }}>
       <PriceText variant="p"> Save up to ${price}</PriceText>
       <NameText>{name.substring(0, 15)}</NameText>
