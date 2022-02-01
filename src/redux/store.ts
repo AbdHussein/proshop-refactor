@@ -1,6 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { ProductReducer } from './Product/reducer';
 import { ThemeReducer } from './Theme/reducer';
@@ -10,8 +8,11 @@ import { UserReducer } from './User/reducer';
 import { CartReducer } from './Cart/reducer';
 import { OrderReducer } from './Order/reducer';
 
-const middleware = [thunk];
-
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
 const reducers = combineReducers({
   theme: ThemeReducer,
   auth: AuthReducer,
@@ -21,10 +22,15 @@ const reducers = combineReducers({
   cart: CartReducer,
   order: OrderReducer,
 });
+const middleware = [thunk];
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const Store = createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(...middleware)),
+  composeEnhancers(applyMiddleware(...middleware)),
 );
+
 export type AppDispatch = typeof Store.dispatch;
 export type AppState = ReturnType<typeof reducers>;
 (window as any).store = Store;

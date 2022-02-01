@@ -12,7 +12,7 @@ export const InnerSection = styled(Column)`
   width: 100%;
 `;
 export const ListNav = styled(Container)`
-  background-color: ${props => props.theme.common?.black || '#242424'};
+  background-color: #121212;
   height: auto;
   z-index: 999;
   padding: 0 5%;
@@ -39,7 +39,7 @@ export const Badge = styled('div')`
 export const SearchButton = styled(FlexBox)`
   cursor: pointer;
   align-items: center;
-  background: #fcdd06;
+  background: ${props => props.theme.primary?.main};
   border-radius: 6px;
   display: flex;
   height: 42px;
