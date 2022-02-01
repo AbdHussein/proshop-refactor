@@ -4,7 +4,8 @@ import { Suspense, useState } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { AllRouter } from './AllRouter';
+import { Route, Routes } from 'react-router-dom';
+import { AllRoutes } from './Route/AllRouter';
 import { Container, Navbar } from './components';
 import ErrorBoundary from './components/ErrorBoundary';
 import Burger from './components/Navbar/Burger';
@@ -26,8 +27,15 @@ const App: React.FC = () => {
             <ErrorBoundary>
               <Burger open={open} setOpen={setstate} />
               <Navbar open={open} />
-              <Container height="3rem" />
-              <AllRouter />
+              <Routes>
+                {AllRoutes.map((route, Index) => (
+                  <Route
+                    path={route.path}
+                    element={route.component}
+                    key={Index}
+                  />
+                ))}
+              </Routes>
             </ErrorBoundary>
           </Suspense>{' '}
         </ThemeProvider>
