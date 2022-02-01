@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { ProductReducer } from './Product/reducer';
-
+import { ThemeReducer } from './Theme/reducer';
 import { AuthReducer } from './Auth/reducer';
 import { AdminReducer } from './Admin/reducer';
 import { UserReducer } from './User/reducer';
@@ -13,6 +13,7 @@ import { OrderReducer } from './Order/reducer';
 const middleware = [thunk];
 
 const reducers = combineReducers({
+  theme: ThemeReducer,
   auth: AuthReducer,
   product: ProductReducer,
   admin: AdminReducer,
