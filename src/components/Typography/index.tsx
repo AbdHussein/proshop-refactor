@@ -3,10 +3,11 @@ import { IPropTypography } from './interface';
 
 const Typography: React.FC<IPropTypography> = ({
   variant = 'p',
+  fontFamily = 'Mulish',
   ...props
 }: IPropTypography) => {
   return (
-    <Wrapper variant={variant} {...(props as any)}>
+    <Wrapper as={variant} font-family={fontFamily} {...(props as any)}>
       {props.children}
     </Wrapper>
   );

@@ -1,8 +1,6 @@
-import {Navigate, Route, Routes} from 'react-router-dom';
-
-import React, {lazy} from 'react';
+import React, { lazy } from 'react';
 import adminRoutes from './Admin';
-import {userRoutes} from './User';
+import { userRoutes } from './User';
 
 const Signup = lazy(() => import('../pages/Auth/Signup'));
 const Login = lazy(() => import('../pages/Auth/Login'));
@@ -15,27 +13,27 @@ const AddNewProduct = lazy(() => import('../pages/NewProduct'));
 const ProductDetails = lazy(() => import('../pages/Gest/ProductDetails'));
 const PaymentSuccess = lazy(() => import('../pages/PaymentSuccess'));
 
-
 export const AllRoutes = [
-    {
-        path: "/",
-        component: <Home/>
-    },
-    {
-        path: 'login',
-        component: <Login/>
-    },
-    {
-        path: 'Signup',
-        component: <Signup/>
-    },
-    {
-        path: '/product/:id',
-        component: <ProductDetails/>
-    },
-    {
-        path: 'search',
-        component: <Search/>
-    },
-    ...adminRoutes
+  {
+    path: '/',
+    component: <Home />,
+  },
+  {
+    path: 'login',
+    component: <Login />,
+  },
+  {
+    path: 'Signup',
+    component: <Signup />,
+  },
+  {
+    path: '/product/:id',
+    component: <ProductDetails />,
+  },
+  {
+    path: 'search',
+    component: <Search />,
+  },
+  ...adminRoutes,
+  ...userRoutes,
 ];

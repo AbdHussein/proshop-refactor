@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
 
 export const NavLink = styled(Link)`
   font-size: 24px;
-  color: #242424;
+  color: ${props => props.theme.text?.primary};
   text-decoration: none;
   &:hover {
     color: rgba(36, 36, 36, 0.7);
@@ -27,17 +27,17 @@ export const OutLink = styled(NavLink)`
 `;
 
 export const SpanTitle = styled.span`
-  font-size: 24px;
-  color: #707070;
+  font-size: 20px;
+  color: ${props => props.theme.text?.primary};
   @media only screen and (max-width: 767px) {
     font-size: 18px;
   }
 `;
 
 export const DataValue = styled.h4`
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
-  color: #000000;
+  color: ${props => props.theme.text?.secondary};
   overflow-wrap: anywhere;
   @media only screen and (max-width: 767px) {
     font-size: 18px;
@@ -74,6 +74,7 @@ export const DashImgContainer = styled(Container)`
 
 export const InfoContainer = styled(Container)`
   margin-left: 2em;
+  background-color: ${props => props.theme.background?.default};
   @media only screen and (max-width: 767px) {
     flex-direction: column;
     width: 100%;
@@ -84,6 +85,7 @@ export const InfoContainer = styled(Container)`
 `;
 
 export const InfoBoxContainer = styled(Container)`
+  justify-content: flex-start;
   @media only screen and (max-width: 767px) {
     width: 100%;
     align-items: center;
@@ -102,4 +104,28 @@ export const ImageContainer = styled(Container)`
     width: 100%;
     margin-top: 0;
   }
+  & label {
+    margin-top: 15px;
+    margin-inline: auto;
+  }
+`;
+
+export const UploadButton = styled.span`
+  background-color: ${props => props.theme.primary?.main};
+  border: none;
+  border-radius: 10px;
+  padding: 1em 2em;
+  color: ${props => props.theme.text?.primary};
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 13px;
+  &:hover {
+    color: ${props => props.theme.text?.secondary};
+  }
+`;
+
+export const ActionsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 `;
