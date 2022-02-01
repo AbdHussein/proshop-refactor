@@ -13,7 +13,8 @@ import OrdersProduct from './Orders';
 const Profile = () => {
   const [active, setActive] = useState(false);
   const isActive = () => setActive(true);
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionUser>>();
+
+  const dispatch = useDispatch();
 
   const useProfile = useSelector((state: AppState) => state.user.myProfile);
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Container, Typography, Image } from '../../../components';
 import {
@@ -15,6 +15,8 @@ import {
 import { IUser } from '../../../redux/Auth/type';
 import { formatDate } from '../../../utils/helper/formatDay';
 import { changeAvatar, InterfaceUpdateUser } from '../../../redux/User/action';
+import ChangePasswordForm from './ChangePasswordForm';
+import Dailog from '../../../components/Dialog';
 
 interface IProfileDashboard {
   user?: IUser;
@@ -22,6 +24,8 @@ interface IProfileDashboard {
 
 const ProfileInfo = ({ user }: IProfileDashboard) => {
   const dispatch = useDispatch();
+
+  const [isOpen, setOpen] = useState<boolean>(false);
 
   const uploadPhoto = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +38,10 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
     },
     [user],
   );
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, []);
 
   return (
     <InfoContainer
@@ -81,6 +89,7 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
             fontSize="13px"
             style={{ marginBottom: '2em', marginTop: '2em' }}
             padding="1em"
+            onClick={() => setOpen(true)}
           >
             Change Password
           </Button>
@@ -116,6 +125,9 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
           />
         </label>
       </ImageContainer>
+      <Dailog open={isOpen} onClose={handleClose}>
+        <ChangePasswordForm />
+      </Dailog>
     </InfoContainer>
   );
 };

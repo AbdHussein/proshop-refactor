@@ -83,6 +83,6 @@ export const UserReducer = (
       };
     /** * TOP PRODUCT */
     default:
-      return initialState;
+      return state;
   }
 };
