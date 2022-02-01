@@ -6,8 +6,10 @@ const Profile = lazy(() => import('../pages/Profile'));
 const PaymentSuccess = lazy(() => import('../pages/PaymentSuccess'));
 
 const token = localStorage.getItem('token');
-export const userRoutes =
-  (token && [
+const userRoutes: { path: string; component: React.ReactNode }[] = [];
+
+if (token) {
+  userRoutes.push(
     {
       path: '/profile',
       component: <Profile />,
@@ -24,5 +26,6 @@ export const userRoutes =
       path: '/payment-success',
       component: <PaymentSuccess />,
     },
-  ]) ||
-  [];
+  );
+}
+export default userRoutes;

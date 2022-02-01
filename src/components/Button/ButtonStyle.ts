@@ -18,7 +18,6 @@ export const ButtonStyle = styled.button<IStyleButton>(
     letterSpace = '0px',
     margin = 'none',
     brand = false,
-    type = 'button',
     ...props
   }) => ({
     width: `${width}`,

@@ -8,3 +8,11 @@ export const formatDate = (dataString: string): string => {
 
   return `${day} ${month} ${year}`;
 };
+
+export const formatDate_ = (date_: string) => {
+  const _date = new Date(date_);
+  const day = `0${_date.getDate()}`.slice(-2);
+  const month = `0${_date.getMonth() + 1}`.slice(-2);
+  const date = `${_date.getFullYear()}-${month}-${day}`;
+  return date;
+};

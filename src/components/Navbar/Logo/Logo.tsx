@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <LogoSt as={Link} to="/">
       <Typography
-        color="#FCDD06"
+        color="#edc298"
         font-family="mulish"
         display="inline"
         style={{ fontWeight: '900' }}

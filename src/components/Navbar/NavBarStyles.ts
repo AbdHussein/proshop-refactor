@@ -45,7 +45,7 @@ export const Badge = styled('div')`
 export const SearchButton = styled(FlexBox)`
   cursor: pointer;
   align-items: center;
-  background: #fcdd06;
+  background: ${props => props.theme.primary?.main};
   border-radius: 6px;
   display: flex;
   height: 42px;

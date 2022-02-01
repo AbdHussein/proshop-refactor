@@ -25,7 +25,6 @@ const App: React.FC = () => {
           <GlobalStyle />
           <Suspense fallback={<SpinnerContainer />}>
             <ErrorBoundary>
-              <Burger open={open} setOpen={setstate} />
               <Navbar open={open} />
               <Routes>
                 {AllRoutes.map((route, Index) => (
