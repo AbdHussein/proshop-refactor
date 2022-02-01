@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
@@ -74,7 +74,6 @@ const ReviewOrder = () => {
       };
       try {
         dispatch(createOrder(billingDetails));
-        console.log('myOrder', myOrder);
         const paymentElement = elements?.getElement(CardElement);
         const paymentMethodReq = await stripe.createPaymentMethod({
           type: 'card',
@@ -102,6 +101,14 @@ const ReviewOrder = () => {
     if (ev.error) setCheckoutError(ev.error.message);
     else setCheckoutError(undefined);
   };
+
+  const price = useMemo(
+    () =>
+      cart?.cart?.items
+        .reduce((acc, item) => acc + item?.product?.price * item?.qty, 0)
+        .toFixed(2),
+    [cart],
+  );
 
   return (
     <OrfferSection>
@@ -131,7 +138,6 @@ const ReviewOrder = () => {
                     }}
                   >
                     <ShapeAddress>Shipping Address</ShapeAddress>
-
                     <WrapperRowInput>
                       <InputController
                         name="country"
@@ -189,7 +195,7 @@ const ReviewOrder = () => {
                         style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
-                    {/* {/* <ShapeAddress>Payment Details</ShapeAddress> */}
+                    <ShapeAddress>Payment Details</ShapeAddress>
 
                     <CardElement
                       options={cardElementOpts as any}
@@ -243,15 +249,7 @@ const ReviewOrder = () => {
 
                 <FooterTitleRight>
                   <TextFooter>Subtotal</TextFooter>
-                  <TextFooter>
-                    {cart?.cart?.items
-                      .reduce(
-                        (acc, item) => acc + item?.product?.price * item?.qty,
-                        0,
-                      )
-                      .toFixed(2)}{' '}
-                    $
-                  </TextFooter>
+                  <TextFooter>{price} $</TextFooter>
                 </FooterTitleRight>
                 <FooterTitleRight>
                   <TextFooter>Tax</TextFooter>
@@ -264,13 +262,7 @@ const ReviewOrder = () => {
                 <FooterTitleRight>
                   <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
                   <TextFooter style={{ fontWeight: 'bold' }}>
-                    {cart?.cart?.items
-                      .reduce(
-                        (acc, item) => acc + item?.product?.price * item?.qty,
-                        0,
-                      )
-                      .toFixed(2)}{' '}
-                    $
+                    {price} $
                   </TextFooter>
                 </FooterTitleRight>
               </RightSection>

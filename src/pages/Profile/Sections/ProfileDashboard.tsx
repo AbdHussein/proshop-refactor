@@ -62,9 +62,6 @@ const ProfileDashboard = ({ user, isActive }: IProfileDashboard) => {
         <NavLink to="#" onClick={isActive}>
           My Orders
         </NavLink>
-        <NavLink to="#">Wishlist</NavLink>
-        <NavLink to="#">Notifications</NavLink>
-        <NavLink to="#">Settings</NavLink>
       </Container>
       <Divider color="#707070" />
       <OutLink to="#" onClick={handleLoagout}>

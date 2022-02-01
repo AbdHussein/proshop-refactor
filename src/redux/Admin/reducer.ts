@@ -251,6 +251,6 @@ export const AdminReducer = (
         },
       };
     default:
-      return initialState;
+      return state;
   }
 };

@@ -1,4 +1,4 @@
-import React, {lazy} from 'react';
+import React, { lazy } from 'react';
 
 const Cart = lazy(() => import('../pages/Cart'));
 const ReviewOrder = lazy(() => import('../pages/User/ReviewOrder'));
@@ -6,27 +6,23 @@ const Profile = lazy(() => import('../pages/Profile'));
 const PaymentSuccess = lazy(() => import('../pages/PaymentSuccess'));
 
 const token = localStorage.getItem('token');
-let userRoutes;
-
-
-if (token) {
-  userRoutes = [
+export const userRoutes =
+  (token && [
     {
-      path: "/profile",
-      component: <Profile/>
+      path: '/profile',
+      component: <Profile />,
     },
     {
       path: '/review',
-      component: <ReviewOrder/>
+      component: <ReviewOrder />,
     },
     {
       path: '/cart',
-      component: <Cart/>
+      component: <Cart />,
     },
     {
       path: '/payment-success',
-      component: <PaymentSuccess/>
+      component: <PaymentSuccess />,
     },
-  ];
-}
-export default userRoutes;
+  ]) ||
+  [];
