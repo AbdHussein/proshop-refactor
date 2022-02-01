@@ -42,7 +42,7 @@ const ComplexCard = ({ ...props }: IProducts) => {
     );
   };
   return (
-    <MainCard>
+    <MainCard width="450px">
       {props?.discount > 0 && (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
@@ -50,15 +50,17 @@ const ComplexCard = ({ ...props }: IProducts) => {
           </Typography>
         </Discount>
       )}
-      <ContentAction onClick={() => navigate(`/product/${props._id}`)}>
+
+      <ContentAction>
         <Image
           src={props.image}
           variant="square"
           size="lg"
           style={{
+            padding: '25px 0',
             flexShrink: 0,
             minWidth: '100%',
-            maxHeight: '18rem',
+            maxHeight: '350px',
           }}
         />
       </ContentAction>
@@ -67,10 +69,15 @@ const ComplexCard = ({ ...props }: IProducts) => {
         style={{ textAlign: 'center' }}
       >
         <Typography
+          style={{
+            height: '70px ',
+            maxWidth: '95%',
+            fontSize: '24px',
+            width: '80%',
+            textAlign: 'center',
+          }}
           variant="h2"
-          font-size="30px"
           font-family="mulish"
-          width="80%"
           margin="20px auto"
         >
           {props.name}
@@ -92,12 +99,18 @@ const ComplexCard = ({ ...props }: IProducts) => {
             text-decoration={props.discount ? 'line-through' : 'none'}
             fontFamily="mulish"
             color="red"
-            marginRight="20px"
+            fontSize="30px"
+            style={{ marginRight: '11px', fontSize: '30px !important' }}
           >
             ${props.price}
           </Typography>
         )}
-        <Typography variant="h2" fontFamily="mulish">
+        <Typography
+          variant="h2"
+          fontFamily="mulish"
+          fontSize="30px"
+          style={{ marginRight: '11px', fontSize: '30px !important' }}
+        >
           ${props.discount}
         </Typography>
       </Content>
@@ -116,7 +129,7 @@ const ComplexCard = ({ ...props }: IProducts) => {
           height="62px"
           width="65.3%"
           background="#F2F2F2"
-          fontSize="15px"
+          fontSize="24px"
           margin="0 5%"
           onClick={handelAddCart}
         >

@@ -1,6 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, CSSProperties } from 'react';
 import SwipeableViews from 'react-swipeable-views';
+import { ReactComponent as ArrowLeftIcon } from '../../assets/icons/leftArrowIcon.svg';
+import { ReactComponent as ArrowRightIcon } from '../../assets/icons/rightArrowIcon.svg';
 import { SliderItem } from './SliderItem';
 import { Arrow, Dot, SliderSection } from './SliderStyle';
 import { Container } from '..';
@@ -50,7 +52,12 @@ export const Slider = ({ data }: IProps) => {
     ));
 
   return (
-    <Container direction="column" background="#F2F2F2" overflow="hidden">
+    <Container
+      direction="column"
+      background="#F2F2F2"
+      overflow="hidden"
+      position="relative"
+    >
       <SliderSection>
         <SwipeableViews
           index={sliderIndex}
@@ -60,29 +67,36 @@ export const Slider = ({ data }: IProps) => {
         >
           {sliders}
         </SwipeableViews>
+        <Container
+          flexDirection="row"
+          padding="1em"
+          margin="auto"
+          width="auto"
+          height="50px"
+          justifyContent="center"
+          position="absolute"
+          bottom="10px"
+          left="50%"
+          transform="translateX(-50%)"
+          backgroundColor="transparent"
+        >
+          <Arrow>
+            <ArrowLeftIcon onClick={handleLeft} />
+          </Arrow>
+          {Array(3)
+            .fill(0)
+            .map((x, index) => (
+              <Dot
+                width="25px"
+                isGrey={sliderIndex !== index}
+                onClick={() => setSliderIndex(index)}
+              />
+            ))}
+          <Arrow>
+            <ArrowRightIcon onClick={handleRight} />
+          </Arrow>
+        </Container>
       </SliderSection>
-      <Container
-        flexDirection="row"
-        background="#F2F2F2"
-        padding="1em"
-        margin="auto"
-        width="auto"
-        height="10%"
-      >
-        <Arrow isLeft onClick={handleRight}>
-          &#8250;
-        </Arrow>
-        {Array(3)
-          .fill(0)
-          .map((x, index) => (
-            <Dot
-              width="25px"
-              isGrey={sliderIndex !== index}
-              onClick={() => setSliderIndex(index)}
-            />
-          ))}
-        <Arrow onClick={handleLeft}>&#8250;</Arrow>
-      </Container>
     </Container>
   );
 };

@@ -6,36 +6,17 @@ import { Column } from '../Col';
 import { FlexBox } from '../Row';
 import { Container } from '..';
 
-interface Props {
-  open: boolean;
-}
-
 export const InnerSection = styled(Column)`
   margin: 0 auto;
   max-width: 1640px;
   width: 100%;
 `;
-export const ListNav = styled(Container)<Props>`
-  background-color: #121212;
-  height: ${props => (props.open ? '100vh' : '70px')};
+export const ListNav = styled(Container)`
+  background-color: ${props => props.theme.common?.black || '#242424'};
+  height: auto;
   z-index: 999;
-  padding: 7px 5%;
-  @media (max-width: 768px) {
-    flex-flow: column wrap;
-    background-color: #242424;
-    position: fixed;
-    transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
-    top: 0;
-    right: 0;
-    height: 100vh;
-    z-index: 10;
-    list-style: none;
-    display: flex;
-    width: 100%;
-    padding-top: 3.5rem;
-    transition: transform 0.3s ease-in-out;
-    align-items: center;
-    flex-direction: column;
+  padding: 0 5%;
+  @media (max-width: 900px) {
   }
   position: fixed;
   top: 0;
@@ -110,9 +91,14 @@ export const IconList = styled('li')`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 50px;
-  width: 50px;
-  margin: auto 0 auto 32px;
+  width: auto;
+  & svg {
+    margin-bottom: 7px !important;
+    width: 25px;
+    height: 25px;
+    border: none;
+    outline: none;
+  }
   span {
     color: #000;
     background: #06aefc;
@@ -170,13 +156,13 @@ export const SearchInput = styled.input`
     border: none;
     outline: none;
   }
-  ::placeholder,
+  /* ::placeholder,
   ::-webkit-input-placeholder {
     color: black;
   }
   :-ms-input-placeholder {
     color: black;
-  }
+  }*/
 `;
 export const List = styled('ul')`
   text-decoration: none;
