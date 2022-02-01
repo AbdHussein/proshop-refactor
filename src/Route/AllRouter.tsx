@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import adminRoutes from './Admin';
 import userRoutes from './User';
 

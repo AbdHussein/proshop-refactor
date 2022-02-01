@@ -1,18 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import {
-  BsFillBookmarkDashFill,
-  BsFillCartFill,
-  BsToggleOff,
-  BsToggleOn,
-} from 'react-icons/bs';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
 import { FiSettings } from 'react-icons/fi';
 import { ReactComponent as PersonIcon } from '../../assets/icons/personIcon.svg';
-import { ListNavItem } from './ListNavItem';
 import {
   List,
   StyleObj,
@@ -23,21 +15,21 @@ import {
   ListNav,
   IconList,
   NavIcon,
-  Hamburger,
   Badge,
   IConsContainer,
 } from './NavBarStyles';
 import Logo from './Logo/Logo';
 import { useToken } from '../../utils/helper/useToken';
 import { AppState } from '../../redux/store';
-import { ActionCartType } from '../../redux/Cart/type';
 import { IUser } from '../../redux/Auth/type';
 import { logoutSuccess } from '../../redux/Auth/action';
-import useTheme from '../../Hoc/UseTheme';
 import { myActionCart } from '../../redux/Cart/action';
 import { toggleTheme } from '../../redux/Theme/action';
 import { ReactComponent as Sunny } from '../../assets/sunny.svg';
 import { ReactComponent as NightLight } from '../../assets/nightlight.svg';
+import { ReactComponent as CartIcon } from '../../assets/icons/cartIcon.svg';
+import { ReactComponent as LogoutIcon } from '../../assets/icons/logoutIcon.svg';
+import { ReactComponent as AdminIcon } from '../../assets/icons/adminIcon.svg';
 
 const Style = {
   color: '#FFF',
@@ -70,7 +62,7 @@ export const Navbar = ({ open }) => {
   return (
     <ListNav>
       <Logo />
-      <NavBox style={{ margin: 'auto' }}>
+      <NavBox>
         <SearchInput
           value={value}
           type="text"
@@ -94,7 +86,7 @@ export const Navbar = ({ open }) => {
           Search
         </SearchButton>
       </NavBox>
-      <NavIcon style={{ width: '15%' }}>
+      <NavIcon style={{ justifyContent: 'flex-end' }}>
         <IConsContainer>
           {user.isAdmin ? (
             <Link
@@ -102,7 +94,7 @@ export const Navbar = ({ open }) => {
               style={{ textDecoration: 'none', fontFamily: 'mulish' }}
             >
               <IconList>
-                <FiSettings size="1.2em" style={Style} />
+                <AdminIcon />
                 Admin
               </IconList>
             </Link>
@@ -138,19 +130,20 @@ export const Navbar = ({ open }) => {
               ) : (
                 <Badge>0</Badge>
               )}
-              <BsFillCartFill size="5em" style={Style} />
+              <CartIcon />
               Cart
             </IconList>
           </Link>
-          <NavIcon onClick={toggleTheme_} aria-label="toggle-theme">
-            {theme === 'light' ? <Sunny /> : <NightLight />}
-          </NavIcon>
+
           {user?._id && (
             <IconList onClick={Logout}>
-              <BiLogOut size="2em" style={Style} />
+              <LogoutIcon />
               Logout
             </IconList>
           )}
+          <NavIcon onClick={toggleTheme_} aria-label="toggle-theme">
+            {theme === 'light' ? <Sunny /> : <NightLight />}
+          </NavIcon>
         </IConsContainer>
       </NavIcon>
     </ListNav>

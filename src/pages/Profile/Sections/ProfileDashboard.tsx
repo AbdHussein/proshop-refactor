@@ -41,13 +41,13 @@ const ProfileDashboard = ({ user, isActive }: IProfileDashboard) => {
       <DashImgContainer padding="1em">
         <Image
           src={user?.profileImage}
-          width="137px"
-          height="137px"
+          width="100px"
+          height="100px"
           variant="circle"
           border
           style={{ margin: '0' }}
         />
-        <Typography variant="h2" fontSize="2rem" margin="0.5em 0 0 0.5em">
+        <Typography variant="h5" fontSize="20px" margin="0.5em 0 0 0.5em">
           {`${user?.firstName}  ${user?.lastName}`}
         </Typography>
       </DashImgContainer>

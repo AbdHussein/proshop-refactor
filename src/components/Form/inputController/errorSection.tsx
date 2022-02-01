@@ -2,7 +2,6 @@ import { FormikErrors, FormikTouched } from 'formik';
 
 import { BiErrorAlt } from 'react-icons/bi';
 import { Row, Typography } from '../..';
-import { ErrorWrapper } from './style';
 
 interface Props {
   touched?:
@@ -16,7 +15,7 @@ interface Props {
 export const ErrorSection = ({ touched, errors }: Props) => {
   if (touched && errors) {
     return (
-      <Row JC="space-between" item="center">
+      <Row JC="space-between" item="center" style={{ marginTop: '5px' }}>
         <Typography
           variant="p"
           fontFamily="mulish"
@@ -25,7 +24,7 @@ export const ErrorSection = ({ touched, errors }: Props) => {
         >
           {errors}
         </Typography>
-        <BiErrorAlt />
+        <BiErrorAlt color="red" />
       </Row>
     );
   }
