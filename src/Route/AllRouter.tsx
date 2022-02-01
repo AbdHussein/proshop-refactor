@@ -1,5 +1,3 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-
 import React, { lazy } from 'react';
 import adminRoutes from './Admin';
 import userRoutes from './User';

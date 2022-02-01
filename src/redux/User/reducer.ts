@@ -29,6 +29,7 @@ export const UserReducer = (
       return {
         ...state,
         myProfile: {
+          ...state.myProfile,
           isLoading: true,
         },
       };
@@ -36,6 +37,7 @@ export const UserReducer = (
       return {
         ...state,
         myProfile: {
+          ...state.myProfile,
           isLoading: false,
           success: true,
           user: action.payload.user,
@@ -45,6 +47,7 @@ export const UserReducer = (
       return {
         ...state,
         myProfile: {
+          ...state.myProfile,
           error: action.payload.error,
           isLoading: false,
         },
@@ -55,6 +58,7 @@ export const UserReducer = (
       return {
         ...state,
         updatedProfile: {
+          ...state.updatedProfile,
           isLoading: true,
         },
       };
@@ -62,6 +66,7 @@ export const UserReducer = (
       return {
         ...state,
         updatedProfile: {
+          ...state.updatedProfile,
           isLoading: false,
           success: true,
           user: action.payload.user,
@@ -71,13 +76,13 @@ export const UserReducer = (
       return {
         ...state,
         updatedProfile: {
+          ...state.updatedProfile,
           error: action.payload.error,
           isLoading: false,
         },
       };
     /** * TOP PRODUCT */
-
     default:
-      return initialState;
+      return state;
   }
 };

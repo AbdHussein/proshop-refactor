@@ -31,12 +31,12 @@ export const getProfile = () => {
   };
 };
 
-interface InterfaceUpdateUser {
+export interface InterfaceUpdateUser {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
-  profileImage: File;
+  password?: string;
+  profileImage: string | File;
   isAdmin: boolean;
   dateOfBirth: string;
 }
@@ -88,3 +88,36 @@ export const updateUser = (data: InterfaceUpdateUser) => {
     }
   };
 };
+
+export const changeAvatar =
+  (data: InterfaceUpdateUser) => async (dispatch: Dispatch<TAllActionUser>) => {
+    try {
+      dispatch({
+        type: EnumUserAction.UPDATE_PROFILE_USER_START,
+      });
+      const formData = new FormData();
+      formData.append('image', data.profileImage);
+      const profileImage = await Api.post('/upload', formData);
+      const dataObj = {
+        ...data,
+        profileImage: profileImage.data,
+      };
+      const response = await Api.update<InterfaceUpdateUser>(
+        `/users/profile`,
+        dataObj,
+      );
+      dispatch({
+        type: EnumUserAction.GET_PROFILE_USER_SUCCESS,
+        payload: {
+          user: response.data,
+        },
+      });
+    } catch (error: any) {
+      dispatch({
+        type: EnumUserAction.UPDATE_PROFILE_USER_FILL,
+        payload: {
+          error: error?.response?.data?.message,
+        },
+      });
+    }
+  };

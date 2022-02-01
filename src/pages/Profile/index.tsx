@@ -13,11 +13,15 @@ import OrdersProduct from './Orders';
 const Profile = () => {
   const [active, setActive] = useState(false);
   const isActive = () => setActive(true);
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionUser>>();
+
+  const dispatch = useDispatch();
+
   const useProfile = useSelector((state: AppState) => state.user.myProfile);
+
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
+
   return useProfile.isLoading ? (
     <SpinnerContainer />
   ) : (
@@ -28,7 +32,7 @@ const Profile = () => {
       margin-top="129px"
     >
       <ProfileDashboard user={useProfile.user} isActive={isActive} />
-      {active ? <OrdersProduct /> : <ProfileInfo user={useProfile.user} />}
+      <ProfileInfo user={useProfile.user} />
     </ProfileContainer>
   );
 };

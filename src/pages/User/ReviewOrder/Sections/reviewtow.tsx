@@ -1,8 +1,8 @@
 // import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useStripe } from '@stripe/react-stripe-js';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -21,16 +21,11 @@ import {
   ProductContainer,
 } from './style';
 import { OrderDetails } from './orderDtails';
-import { Column, Row } from '../../../../components/Row';
-// @ts-ignore
-import logo from '../../../../assets/Images/card.png';
+import { Column } from '../../../../components/Row';
+
 import { AppState } from '../../../../redux/store';
-import { ActionOrderType, IMyOrder } from '../../../../redux/Order/type';
-import {
-  getMyOrder,
-  getOrderById,
-  getOrders,
-} from '../../../../redux/Order/action';
+import { ActionOrderType } from '../../../../redux/Order/type';
+import { getOrderById } from '../../../../redux/Order/action';
 import { SpinnerContainer } from '../../../../components';
 import { myActionCart } from '../../../../redux/Cart/action';
 
@@ -58,17 +53,11 @@ export const ReviewTow: React.FC<objectType> = ({
 
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
   const getOrder = useSelector((state: AppState) => state.order.orderById);
-  const createdorder = useSelector(
-    (state: AppState) => state.order.createOrder,
-  );
-  const cart = useSelector((state: AppState) => state.cart);
   useEffect(() => {
     dispatch(myActionCart());
     dispatch(getOrderById(orderId));
   }, [dispatch]);
-  console.log('order created', createdorder);
-  console.log('first--------.', createdorder?.orders?.shippingAddress);
-  console.log('this is id of order', getOrder);
+
   return (
     <OrderWrapper>
       {getOrder?.isLoading && !getOrder.orders ? (
@@ -88,7 +77,7 @@ export const ReviewTow: React.FC<objectType> = ({
                 <ShapeAddress style={{ marginTop: '5px' }}>
                   Order Details
                 </ShapeAddress>
-                <ChangeText to="/change">change</ChangeText>
+                <ChangeText to="/cart">change</ChangeText>
               </HeaderTitleRight>
               <Column style={{ width: '100%' }}>
                 <ProductContainer>

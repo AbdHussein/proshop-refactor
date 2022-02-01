@@ -60,6 +60,6 @@ export const AuthReducer = (
       return initialState;
 
     default:
-      return initialState;
+      return state;
   }
 };
