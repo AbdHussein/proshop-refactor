@@ -2,7 +2,7 @@ import {Navigate, Route, Routes} from 'react-router-dom';
 
 import React, {lazy} from 'react';
 import adminRoutes from './Admin';
-import {userRoutes} from './User';
+import userRoutes from './User';
 
 const Signup = lazy(() => import('../pages/Auth/Signup'));
 const Login = lazy(() => import('../pages/Auth/Login'));
@@ -37,5 +37,6 @@ export const AllRoutes = [
         path: 'search',
         component: <Search/>
     },
-    ...adminRoutes
+    ...adminRoutes,
+    ...userRoutes
 ];
