@@ -29,7 +29,13 @@ const ChangePasswordForm = ({ handleChangePassword }: IProps) => {
       }}
     >
       {() => (
-        <Form>
+        <Form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+          }}
+        >
           <InputController
             type="password"
             name="password"
@@ -40,7 +46,7 @@ const ChangePasswordForm = ({ handleChangePassword }: IProps) => {
             name="passwordConfirmation"
             label="Enter Password Confirmation"
           />
-          <Button>Update Password</Button>
+          <Button style={{ justifySelf: 'flex-end' }}>Update Password</Button>
         </Form>
       )}
     </Formik>

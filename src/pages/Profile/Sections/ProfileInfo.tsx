@@ -125,7 +125,7 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
           />
         </label>
       </ImageContainer>
-      <Dailog open={isOpen} onClose={handleClose}>
+      <Dailog open={isOpen} onClose={handleClose} title="Change Password">
         <ChangePasswordForm />
       </Dailog>
     </InfoContainer>
