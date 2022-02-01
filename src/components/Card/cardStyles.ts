@@ -23,18 +23,19 @@ export const MainCard = styled('div')<IstyleMainCard>(
     alignItems = 'baseline',
     alignContent = 'baseline',
     boxShadow = 'none',
-    width = '28.2%',
+    padding = ' 0 10px',
     margin = '20px auto',
-    padding = 'none',
+
     ...props
   }: IstyleMainCard) => ({
+    maxWidth: '450px',
+    width: '450px',
+    minWidth: '25%',
     position: 'relative',
     alignItems: `${alignItems}`,
     alignContent: `${alignContent}`,
     boxShadow: `${boxShadow}`,
     transition: '0.3s',
-    width: `${width}`,
-    minWidth: '300px',
     margin: `${margin}`,
     padding: `${padding}`,
     display: 'flex',

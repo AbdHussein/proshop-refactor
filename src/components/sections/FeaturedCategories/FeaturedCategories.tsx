@@ -64,8 +64,8 @@ export const FeaturedCategories = ({ data }: IProps) => {
       >
         <Container direction="column" width="85.4%">
           <Title>Featured Categories</Title>
-          <Divider width="12%" height="7px" color="#FCDD06" />
-          <Divider width="100%" height="0px" color="#707070" />
+          <Divider width="15%" height="7px" color="#FCDD06" />
+          <Divider width="100%" height=".1px" color="#707070" />
         </Container>
         <Container direction="row" width="90%">
           <SwipeableViews

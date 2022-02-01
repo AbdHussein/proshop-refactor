@@ -11,6 +11,7 @@ import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { FiSettings } from 'react-icons/fi';
+import { ReactComponent as PersonIcon } from '../../assets/icons/personIcon.svg';
 import { ListNavItem } from './ListNavItem';
 import {
   List,
@@ -67,20 +68,24 @@ export const Navbar = ({ open }) => {
     navigate('/login');
   };
   return (
-    <ListNav open={false}>
+    <ListNav>
       <Logo />
       <NavBox style={{ margin: 'auto' }}>
         <SearchInput
           value={value}
           type="text"
-          style={{ fontFamily: 'mulish' }}
-          placeholder="Iphone"
+          style={{ fontFamily: 'mulish', flexGrow: '55' }}
+          placeholder="search..."
           onChange={e => {
             setValue(e.target.value);
           }}
         />
         <SearchButton
-          style={{ fontFamily: 'mulish' }}
+          style={{
+            fontFamily: 'mulish',
+            fontWeight: 'bold',
+            minWidth: '125px',
+          }}
           onClick={() => {
             navigate(`/search${value ? `?keyword=${value}` : ''}`);
           }}
@@ -118,7 +123,7 @@ export const Navbar = ({ open }) => {
               style={{ textDecoration: 'none', fontFamily: 'mulish' }}
             >
               <IconList>
-                <FaUserAlt size="1.2em" style={Style} />
+                <PersonIcon width="20px" height="20px" style={Style} />
                 Login/Signup
               </IconList>
             </Link>

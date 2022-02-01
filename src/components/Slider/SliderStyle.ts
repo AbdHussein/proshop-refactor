@@ -1,14 +1,12 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Button } from '../Button/ButtonStyle';
 import { FlexBox, Row, Column } from '../Row';
 import { ContainerWrapper } from '../Container/style';
 import { Container, Image, Typography } from '..';
-import { IPropTypography } from '../Typography/interface';
 
 export const SectionSlider = styled(FlexBox)`
   background: #f2f2f2;
-  // height: 70%px;
 `;
 
 export const SliderSection = styled(ContainerWrapper)`
@@ -27,7 +25,6 @@ export const ShopeButton = styled(Button)`
   border-radius: 20px;
   color: #242424;
   height: 56px;
-  letter-spacing: 0.88px;
   opacity: 1;
   outline: none;
   font-family: mulish;
@@ -36,36 +33,31 @@ export const ShopeButton = styled(Button)`
 `;
 export const PriceText = styled<any>(Typography)`
   color: #242424;
-  font-size: 24px;
+  font-size: 2rem;
   margin-bottom: 10px;
-  letter-spacing: 1.28px;
   font-family: mulish;
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    letter-spacing: 1px;
-  }
+  font-weight: 400;
 `;
 
 export const DescriptionText = styled(PriceText)`
   color: #242424;
-  font-size: 20px;
+  font-size: 2rem;
   font-family: mulish;
   margin-bottom: 42px;
+  font-weight: 400;
 `;
 
 export const NameText = styled(PriceText)`
   color: #242424;
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 3.7rem;
+  font-weight: 900;
   margin-bottom: 10px;
 `;
 
 export const ImageSlider = styled(Image)`
-  width: 80%;
-  height: 80%;
-  object-fit: cover;
-  margin-top: 30px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 export const ButtonHero = styled(Link)`
@@ -90,10 +82,7 @@ export const ButtonHero = styled(Link)`
 
 export const WrapperImageHero = styled(Column)`
   max-width: 627px;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 10px 0;
 `;
 
 interface IDot {
@@ -133,37 +122,18 @@ export const RowArrowWrapper = styled(Row)`
 `;
 
 export const Arrow = styled('div')<IArrow>`
-  font-size: 35px;
-  font-weight: bold;
-  font-weight: 700;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
   width: 30px;
   height: 30px;
   cursor: pointer;
-  ${props =>
-    props.isLeft &&
-    css`
-      transform: rotate(0.5turn);
-    `}
 `;
 
 export const ContentContainer = styled(Container)`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  height: 90%;
+  width: 90%;
+  justify-content: space-between;
+  margin: 0 auto;
   @media (max-width: 768px) {
-    margin: auto;
     flex-direction: column-reverse;
-    height: 38rem;
-    justify-content: flex-end;
-    & > *:last-child {
-      width: 25rem;
-      margin-top: -2rem;
-    }
+    padding-bottom: 50px;
   }
 `;

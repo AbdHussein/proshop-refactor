@@ -1,14 +1,18 @@
 import styled from 'styled-components';
-import { Row } from '../Row';
 
-export const Column = styled(Row)`
-  display: flex;
-  flex-direction: column;
-  justify-content: ${props => props.JC};
-  justify-items: ${props => props.item};
+export const Column = styled.div`
+  padding-right: 60px;
+
+  align-items: center;
+  @media (max-width: 768px) {
+    padding-right: 0;
+    flex-direction: column-reverse;
+    & * {
+      text-align: center !important;
+      margin: 40px auto;
+    }
+    & button {
+      display: block;
+    }
+  }
 `;
-
-Column.defaultProps = {
-  JC: 'start',
-  item: 'start',
-};
