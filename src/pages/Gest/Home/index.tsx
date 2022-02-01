@@ -32,8 +32,6 @@ const Home: React.FC = () => {
     dispatch(getAlCategory());
     dispatch(getProducts());
   }, [dispatch]);
-
-  console.log('allCatogory', allCatogory);
   return (
     <Container width="100%" direction="column" justify-content="center">
       {topProducts.isLoading ? (

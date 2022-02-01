@@ -6,11 +6,19 @@ export default function Logo() {
   return (
     <LogoSt as={Link} to="/">
       <Typography
-        // color="#FCDD06"
-        variant="h3"
+        color="#FCDD06"
         font-family="mulish"
+        display="inline"
+        style={{ fontWeight: '900' }}
       >
-        ProShop
+        Pro
+        <Typography
+          color="#FFF"
+          font-family="mulish"
+          style={{ display: 'inline', fontWeight: '900' }}
+        >
+          Shop
+        </Typography>
       </Typography>
     </LogoSt>
   );

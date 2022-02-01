@@ -6,7 +6,7 @@ const Typography: React.FC<IPropTypography> = ({
   ...props
 }: IPropTypography) => {
   return (
-    <Wrapper variant={variant} {...(props as any)}>
+    <Wrapper variant={variant} {...props}>
       {props.children}
     </Wrapper>
   );
