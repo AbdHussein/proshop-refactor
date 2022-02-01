@@ -7,19 +7,26 @@ declare module 'styled-components' {
       white: string;
     };
     primary?: {
-      lightYallow: string;
-      darkYallow: string;
-      disCount: string;
+      main: string;
     };
     background?: {
-      grey: string;
-      lightGrey: string;
-      darkGrey: string;
-      border: string;
+      default: string;
+      paper: string;
     };
-
+    secondary?: {
+      main: string;
+    };
+    divider?: string;
+    text?: {
+      primary: string;
+      secondary: string;
+      disabled: string;
+    };
+    error?: {
+      main: string;
+      light: string;
+    };
     Typography?: {
-      color: string;
       fontFamily: string;
     };
   }

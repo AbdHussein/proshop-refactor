@@ -87,7 +87,7 @@ export const ButtonSuginup = styled('button')`
 export const ButtonLogin = styled('button')`
   width: 100%;
   min-height: 40px;
-  border: 3px solid ${props => props.theme?.primary?.lightYallow};
+  border: 3px solid ${props => props.theme?.primary?.main};
   border-radius: 20px;
   opacity: 1;
   font-size: 22px;

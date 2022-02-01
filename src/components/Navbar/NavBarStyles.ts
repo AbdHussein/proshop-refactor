@@ -16,7 +16,7 @@ export const InnerSection = styled(Column)`
   width: 100%;
 `;
 export const ListNav = styled(Container)<Props>`
-  background-color: ${props => props.theme.common?.black || '#242424'};
+  background-color: #121212;
   height: ${props => (props.open ? '100vh' : '70px')};
   z-index: 999;
   padding: 7px 5%;
@@ -187,7 +187,7 @@ export const List = styled('ul')`
   justify-content: space-between;
 `;
 export const ListItem = styled('li')`
-  color: ${props => props.theme.primary?.darkYallow};
+  color: ${props => props.theme.text?.primary};
   display: flex;
   flex-direction: column;
   justify-content: center;

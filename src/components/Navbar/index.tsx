@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import {
   BsFillBookmarkDashFill,
@@ -34,6 +34,9 @@ import { IUser } from '../../redux/Auth/type';
 import { logoutSuccess } from '../../redux/Auth/action';
 import useTheme from '../../Hoc/UseTheme';
 import { myActionCart } from '../../redux/Cart/action';
+import { toggleTheme } from '../../redux/Theme/action';
+import { ReactComponent as Sunny } from '../../assets/sunny.svg';
+import { ReactComponent as NightLight } from '../../assets/nightlight.svg';
 
 const Style = {
   color: '#FFF',
@@ -43,13 +46,17 @@ const Style = {
   lineHieght: '1px',
 };
 
-export const Navbar = ({ open, setToggle }) => {
+export const Navbar = ({ open }) => {
   const [value, setValue] = useState<string>('');
   const navigate = useNavigate();
   const user: IUser = useToken();
-  const { theme } = useTheme();
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const cart = useSelector((state: AppState) => state.cart);
+  const dispatch = useDispatch();
+  // const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const { cart, theme } = useSelector((state: AppState) => state);
+
+  const toggleTheme_ = useCallback(() => {
+    dispatch(toggleTheme(theme === 'light' ? 'dark' : 'light'));
+  }, [theme, dispatch]);
 
   useEffect(() => {
     dispatch(myActionCart());
@@ -130,6 +137,9 @@ export const Navbar = ({ open, setToggle }) => {
               Cart
             </IconList>
           </Link>
+          <NavIcon onClick={toggleTheme_} aria-label="toggle-theme">
+            {theme === 'light' ? <Sunny /> : <NightLight />}
+          </NavIcon>
           {user?._id && (
             <IconList onClick={Logout}>
               <BiLogOut size="2em" style={Style} />

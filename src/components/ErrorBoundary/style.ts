@@ -19,7 +19,7 @@ export const ErrorImageContainer = styled('div')<{ imageUrl: string }>`
 `;
 
 export const ErrorImageText = styled.h2`
-  color: #2f8e89;
+  color: ${props => props.theme.error?.main};
   font-size: 28px;
   margin-top: 40px;
 `;

@@ -18,7 +18,7 @@ const Divider = styled('hr')<IDividerProps>(
     margin: `${margin}`,
     width: `${width}`,
     height: `${thick}`,
-    backgroundColor: `${props.theme?.primary?.darkYallow}`,
+    backgroundColor: `${props.theme?.divider}`,
     borderRadius: '4px',
   }),
 );
