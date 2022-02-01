@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle<DefaultTheme>`
     padding:0;
     /* overflow: auto !important; */
     margin: 0;
-    background:${props => props.background?.default};   
+    background:${props => props.theme.background?.default};   
     transition: all 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
