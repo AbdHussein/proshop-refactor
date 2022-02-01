@@ -4,10 +4,10 @@ const Dashboard = lazy(() => import('../pages/DashBoard'));
 const AddNewProduct = lazy(() => import('../pages/NewProduct'));
 
 const role = Boolean(localStorage.getItem('role'));
-let adminRoutes;
+const adminRoutes: { path: string, component: React.ReactNode }[]=[];
 
 if (role) {
-    adminRoutes = [
+    adminRoutes.push(
         {
             path: "/dashboard",
             component: <Dashboard/>
@@ -20,6 +20,6 @@ if (role) {
             path: '/updateroduct/:id',
             component: <AddNewProduct/>
         },
-    ];
+    );
 }
 export default adminRoutes;
