@@ -29,10 +29,14 @@ import { getOrderById } from '../../../../redux/Order/action';
 import { SpinnerContainer } from '../../../../components';
 import { myActionCart } from '../../../../redux/Cart/action';
 
-export const ReviewTow: React.FC<objectType> = ({
+export const ReviewTow = ({
   paymentId,
   clientSec,
   orderId,
+}: {
+  paymentId: string;
+  clientSec: string;
+  orderId: string;
 }) => {
   const navigation = useNavigate();
   const stripe: any = useStripe();

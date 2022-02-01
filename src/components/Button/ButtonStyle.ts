@@ -47,3 +47,14 @@ export const Button = styled(ButtonStyle)`
     color: ${props => props.theme.text?.secondary};
   }
 `;
+
+export const AddReviewButton = styled(Button)`
+  background: transparent;
+  color: ${props => props.theme.text?.primary};
+  &:after {
+    content: ' ';
+    width: '100%';
+    height: '20px';
+    background: ${props => props.theme.text?.primary};
+  }
+`;

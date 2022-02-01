@@ -3,8 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import ProductOverview from './Sections/ProductOverview';
-import Specifications from './Sections/Specifications';
+// import ProductOverview from './Sections/ProductOverview/ProductOverview';
 import Review from './Sections/Review';
 import { Container, PathNavigate, SpinnerContainer } from '../../../components';
 import { getProductById } from '../../../redux/Product/action';
@@ -15,6 +14,7 @@ import { getProfile } from '../../../redux/User/action';
 import { TAllActionUser } from '../../../redux/User/type';
 import { upduteActionCart } from '../../../redux/Cart/action';
 import { Button } from '../../../components/Button/ButtonStyle';
+import ProductOverview from './Sections/ProductOverview';
 
 const ProductScreen: React.FC = () => {
   const navigation = useNavigate();
@@ -54,18 +54,7 @@ const ProductScreen: React.FC = () => {
         <>
           <PathNavigate name={product?.name} />
           <ProductOverview {...(product as IProducts)} />
-          <Specifications
-            data={[
-              {
-                key: 'Brand',
-                value: product?.brand,
-              },
-              {
-                key: 'Brand',
-                value: product?.brand,
-              },
-            ]}
-          />
+
           <Review reviews={product!.reviews || []} />
         </>
       )}
