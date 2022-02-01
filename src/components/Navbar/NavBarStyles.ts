@@ -12,28 +12,34 @@ export const InnerSection = styled(Column)`
   width: 100%;
 `;
 export const ListNav = styled(Container)`
-  background-color: #121212;
+  margin: 0;
+  background-color: ${props => props.theme.common?.black || '#242424'};
   height: auto;
   z-index: 999;
   padding: 0 5%;
+  width: 100%;
+  justify-content: space-between;
   @media (max-width: 900px) {
+    flex-wrap: wrap;
+    flex-grow: 99;
   }
   position: fixed;
   top: 0;
 `;
 export const Badge = styled('div')`
+  position: absolute;
   background: #fcdd06;
   border-radius: 50%;
   color: #242424;
-  text-align: center;
-  font-family: normal normal normal 10px/13px Muli;
-  height: 22px;
-  width: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15px;
+  width: 15px;
   z-index: 10;
-  right: 8px;
-  position: absolute;
-  top: -5px;
-  z-index: 1;
+  right: -3px;
+  top: -3px;
+  font-size: 10px;
 `;
 
 export const SearchButton = styled(FlexBox)`
@@ -57,16 +63,19 @@ export const NavBox = styled('div')`
   width: 36.7%;
   background: #fff;
   border-radius: 6px;
-  @media (max-width: 768px) {
-    display: none;
+  @media (max-width: 900px) {
+    order: 9;
+    width: 100%;
+    margin: 10px auto;
   }
 `;
 export const NavIcon = styled('div')`
   display: flex;
-  width: 36.7%;
-  border-radius: 6px;
   justify-content: center;
-  background: none;
+  align-items: flex-start;
+  @media (max-width: 920px) {
+    flex-grow: 9;
+  }
 `;
 
 export const CustomLink = styled(Link)`
@@ -84,7 +93,7 @@ export const Logo = styled('img')`
 export const IconList = styled('li')`
   cursor: pointer;
   display: inline;
-  margin-left: 2rem;
+  margin-right: 2vw;
   color: #fff;
   display: flex;
   text-decoration: none;
@@ -92,10 +101,10 @@ export const IconList = styled('li')`
   align-items: center;
   flex-direction: column;
   width: auto;
+  width: max-content;
   & svg {
     margin-bottom: 7px !important;
-    width: 25px;
-    height: 25px;
+
     border: none;
     outline: none;
   }
@@ -117,13 +126,6 @@ export const IconList = styled('li')`
     top: 10px;
     z-index: 1;
   }
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    width: 10rem;
-    justify-content: center;
-    font-size: 18px;
-  }
 `;
 export const Hamburger = styled.div`
   display: none;
@@ -137,12 +139,6 @@ export const Hamburger = styled.div`
     background: #7b7fda;
     margin-bottom: 4px;
     border-radius: 5px;
-  }
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    margin-right: auto;
-    top: auto;
   }
 `;
 export const SearchInput = styled.input`
@@ -202,12 +198,7 @@ export const IConsContainer = styled('div')`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 10px;
   margin-bottom: 10px;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 `;
