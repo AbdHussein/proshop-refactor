@@ -22,7 +22,6 @@ const ProductOverview: React.FC<IProducts> = props => {
   const { images, colors } = props;
   const [colorActive, setColorActive] = useState(colors?.[0] || '');
   const [currentImages, setImages] = useState<string[]>(images || []);
-  const [count, setCount] = useState<number>(1);
   const [counterValue, setcounterValue] = useState<number>(1);
 
   const handleCounter = (newValue: number) => {
@@ -36,12 +35,12 @@ const ProductOverview: React.FC<IProducts> = props => {
       upduteActionCart(
         {
           productId: id as string,
-          qty: count,
+          qty: counterValue,
         },
         () => navigation('/cart'),
       ),
     );
-  }, [dispatch, upduteActionCart, count]);
+  }, [dispatch, upduteActionCart, counterValue]);
 
   const handleImageClick = (index: number) => {
     setImages([
@@ -74,10 +73,10 @@ const ProductOverview: React.FC<IProducts> = props => {
       </Container>
       <Container direction="column" margin-left="2em">
         <Container justify-Content="space-between">
-          <Typography variant="h3" font-Size="1.2rem" bold>
+          <Typography variant="h3" color="text.primary" font-Size="35px" bold>
             {props?.name}
           </Typography>
-          <Typography bold variant="h2" font-Size="1.3rem">
+          <Typography variant="h2" color="black" fontWeight="900">
             {props?.price}$
           </Typography>
         </Container>
@@ -94,7 +93,7 @@ const ProductOverview: React.FC<IProducts> = props => {
           setColorActive={setColorActive}
         />
 
-        <div style={{ marginLeft: 'auto ', marginBlock: '20px' }}>
+        <div style={{ marginLeft: 'auto ', marginBlock: '30px' }}>
           <Button padding=".8em" width="15em" onClick={handleAddToCart}>
             Add To Cart
           </Button>

@@ -3,6 +3,8 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 // eslint-disable-next-line import/extensions
+import StarRatingComponent from 'react-star-rating-component';
+// eslint-disable-next-line import/extensions
 import { FormContiner, TextArea } from './Form.styled';
 import Typography from '../../../Typography';
 import { AddReviewButton } from '../../../Button/ButtonStyle';
@@ -27,7 +29,12 @@ export const MainForm = ({ handleSubmit }: { handleSubmit: Function }) => (
     {({ values, errors, touched, handleChange, setFieldValue }) => (
       <FormContiner>
         <label htmlFor="rating">Your rating: </label>
-
+        <StarRatingComponent
+          id="rating"
+          name="rating"
+          value={values.rating}
+          onChangeValue={(value: number) => setFieldValue('rating', value)}
+        />
         {errors.rating && touched.rating ? (
           <Typography color="red">{errors.rating}</Typography>
         ) : null}
