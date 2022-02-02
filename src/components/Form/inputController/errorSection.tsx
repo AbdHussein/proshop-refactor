@@ -21,11 +21,11 @@ export const ErrorSection = ({ touched, errors }: Props) => {
           variant="p"
           fontFamily="mulish"
           className="text-xs"
-          color="red"
+          style={{ color: '#f44336' }}
         >
           {errors}
         </Typography>
-        <BiError />
+        <BiError fill="#f44336" />
       </Row>
     );
   }
