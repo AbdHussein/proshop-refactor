@@ -35,7 +35,7 @@ const ComplexCard = ({ ...props }: IProducts) => {
       {props?.discount > 0 && (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
-            {`-${Math.floor(-100 * (props.discount / props.price - 1))}%`}
+            {`-${Math.floor((100 / +props.price) * props.discount)}%`}
           </Typography>
         </Discount>
       )}
@@ -82,26 +82,50 @@ const ComplexCard = ({ ...props }: IProducts) => {
         />
       </Content>
       <Content>
-        {props.discount && (
+        {props.discount ? (
           <Typography
             variant="h2"
             text-decoration={props.discount ? 'line-through' : 'none'}
             fontFamily="mulish"
             color="red"
             fontSize="30px"
-            style={{ marginRight: '11px', fontSize: '30px !important' }}
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+              color: '#FC4059',
+            }}
+          >
+            ${(+props.price - +props.discount).toFixed(2)}
+          </Typography>
+        ) : (
+          <Typography
+            variant="h2"
+            text-decoration={props.discount ? 'line-through' : 'none'}
+            fontFamily="mulish"
+            color="red"
+            fontSize="30px"
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+            }}
           >
             ${props.price}
           </Typography>
         )}
-        <Typography
-          variant="h2"
-          fontFamily="mulish"
-          fontSize="30px"
-          style={{ marginRight: '11px', fontSize: '30px !important' }}
-        >
-          ${props.discount}
-        </Typography>
+        {props.discount ? (
+          <Typography
+            variant="h2"
+            fontFamily="mulish"
+            fontSize="30px"
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+              textDecoration: 'line-through',
+            }}
+          >
+            ${props.price}
+          </Typography>
+        ) : null}
       </Content>
 
       <Container
