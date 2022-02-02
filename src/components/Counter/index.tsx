@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
+
 import { ReactComponent as Plus } from '../../assets/add.svg';
 import { ReactComponent as Minus } from '../../assets/remove.svg';
 
@@ -8,10 +9,11 @@ import { Button } from '../Button/ButtonStyle';
 // import { Count, Value } from './counter.styled';
 
 const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
+  const theme = useTheme();
   const handleChangeCounter = (name: string) => {
-    // eslint-disable-next-line no-unused-expressions
-    if (name === 'decrement') onChange?.(value - 1);
-    else {
+    if (name === 'decrement') {
+      onChange?.(value - 1);
+    } else {
       onChange?.(value + 1);
     }
   };
@@ -24,7 +26,7 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
   `;
 
   const Value = styled.div`
-    width: 4rem;
+    padding: 0 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,11 +40,9 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
       <Count style={{ width: '40%' }}>
         <Button
           width="3rem"
-          padding="auto"
-          height="50px"
           borderRadius="none"
-          border="1px solid #FCDD06"
-          background="#FFFFFF"
+          background="outline"
+          border={`1px solid ${theme.primary?.main}`}
           onClick={() => {
             handleChangeCounter('decrement');
           }}
@@ -54,10 +54,8 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
         <Button
           width="3rem"
           borderRadius="none"
-          border="1px solid #FCDD06"
-          background="#FFFFFF"
-          padding="auto"
-          height="50px"
+          border={`1px solid ${theme.primary?.main}`}
+          background="outline"
           onClick={() => {
             handleChangeCounter('increment');
           }}

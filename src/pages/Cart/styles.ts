@@ -37,7 +37,6 @@ export const ItemTitle = styled(Link)`
 `;
 
 export const WrapCounter = styled.div`
-  background: #fff;
   @media only screen and (max-width: 767px) {
     margin-bottom: 1em;
   }
