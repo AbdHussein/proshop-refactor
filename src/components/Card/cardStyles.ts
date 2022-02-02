@@ -18,19 +18,22 @@ export const AddCart = styled(Button)`
   margin: 0 5%;
 `;
 
-export const MainCard = styled('div')<IstyleMainCard>(
+const mainCard = styled.div`
+  background-color: ${props => props.theme.background?.default};
+`;
+export const MainCard = styled(mainCard)<IstyleMainCard>(
   ({
     alignItems = 'baseline',
     alignContent = 'baseline',
     boxShadow = 'none',
     padding = ' 0 10px',
     margin = '20px auto',
-
+    justifyContent = 'center',
     ...props
   }: IstyleMainCard) => ({
     maxWidth: '450px',
     width: '450px',
-    minWidth: '25%',
+    minWidth: '24%',
     position: 'relative',
     alignItems: `${alignItems}`,
     alignContent: `${alignContent}`,
@@ -41,7 +44,7 @@ export const MainCard = styled('div')<IstyleMainCard>(
     display: 'flex',
     flexDirection: `${(props.flexDirection as 'row') || ('column' as const)}`,
     borderRadius: `${props.borderRadius || '10px'}`,
-    backgroundColor: `${props.backgroundColor || 'white'}`,
+
     flexWrap: 'wrap',
   }),
 );
@@ -83,6 +86,7 @@ export const ContentAction = styled.div<CSSProperties>(
     border: ` ${border}`,
     margin: `${margin}`,
     cursor: 'pointer',
+    justifyContent: 'center',
   }),
 );
 

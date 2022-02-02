@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
+import { useTheme } from 'styled-components';
 import { Container, SpinnerContainer, Typography } from '../../../components';
 import ComplexCard from '../../../components/Card/productCard';
 import { DeviderTitle } from '../../../components/DeviderTitle/deviderTitle';
@@ -12,6 +13,7 @@ import { CardsBox } from './style';
 
 const SerachPage = () => {
   const { search } = useLocation();
+  const theme = useTheme();
   const keyword = (
     new URLSearchParams(search).get('keyword')
       ? new URLSearchParams(search).get('keyword')
@@ -34,6 +36,7 @@ const SerachPage = () => {
       direction="column"
       align-items="center"
       width="100%"
+      backgroundColor={theme.background?.paper}
     >
       <Container
         direction="row"

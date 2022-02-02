@@ -1,16 +1,19 @@
+import { useTheme } from 'styled-components';
 import { Image } from '..';
 import { IGetAllCategory } from '../../redux/Product/type';
 import Typography from '../Typography';
 import { Content, ContentAction, MainCard } from './cardStyles';
 
 const CategoryCard = ({ image, name }: IGetAllCategory) => {
+  const theme = useTheme();
   return (
-    <MainCard minWidth="25%" margin="0 5px" boxShadow="none">
+    <MainCard minWidth="24%" margin="0 5px" boxShadow="none">
       <ContentAction
         height="350px"
         padding="5px"
         margin="none"
         borderRadius="16px"
+        justifyContent="center"
         boxShadow="0 4px 8px 0 rgba(0, 0, 0, 0.2)"
       >
         <div
@@ -31,7 +34,9 @@ const CategoryCard = ({ image, name }: IGetAllCategory) => {
         </div>
       </ContentAction>
       <Content margin="16px auto">
-        <h2 style={{ textAlign: 'center' }}>{name}</h2>
+        <h2 style={{ textAlign: 'center', color: `${theme.text?.primary}` }}>
+          {name}
+        </h2>
       </Content>
     </MainCard>
   );

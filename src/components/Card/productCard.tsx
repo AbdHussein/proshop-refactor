@@ -3,6 +3,7 @@ import ReactStars from 'react-rating-stars-component';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from 'styled-components';
 import { Button } from '../Button/ButtonStyle';
 import Typography from '../Typography';
 import { Content, ContentAction, Discount, MainCard } from './cardStyles';
@@ -24,21 +25,22 @@ export interface IProducts {
 const ComplexCard = ({ ...props }: IProducts) => {
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const navigate = useNavigate();
-
+  const theme = useTheme();
+  console.log(theme);
   const handelAddCart = () => {
     dispatch(upduteActionCart({ productId: props._id, qty: 1 }));
   };
   return (
-    <MainCard width="450px">
+    <MainCard width="450px" justifyContent="center">
       {props?.discount > 0 && (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
-            {`-${Math.floor(-100 * (props.discount / props.price - 1))}%`}
+            {`-${Math.floor((100 / +props.price) * props.discount)}%`}
           </Typography>
         </Discount>
       )}
 
-      <ContentAction>
+      <ContentAction onClick={() => navigate(`/product/${props._id}`)}>
         <Image
           src={props.image}
           variant="square"
@@ -80,26 +82,50 @@ const ComplexCard = ({ ...props }: IProducts) => {
         />
       </Content>
       <Content>
-        {props.discount && (
+        {props.discount ? (
           <Typography
             variant="h2"
             text-decoration={props.discount ? 'line-through' : 'none'}
             fontFamily="mulish"
             color="red"
             fontSize="30px"
-            style={{ marginRight: '11px', fontSize: '30px !important' }}
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+              color: '#FC4059',
+            }}
+          >
+            ${(+props.price - +props.discount).toFixed(2)}
+          </Typography>
+        ) : (
+          <Typography
+            variant="h2"
+            text-decoration={props.discount ? 'line-through' : 'none'}
+            fontFamily="mulish"
+            color="red"
+            fontSize="30px"
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+            }}
           >
             ${props.price}
           </Typography>
         )}
-        <Typography
-          variant="h2"
-          fontFamily="mulish"
-          fontSize="30px"
-          style={{ marginRight: '11px', fontSize: '30px !important' }}
-        >
-          ${props.discount}
-        </Typography>
+        {props.discount ? (
+          <Typography
+            variant="h2"
+            fontFamily="mulish"
+            fontSize="30px"
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+              textDecoration: 'line-through',
+            }}
+          >
+            ${props.price}
+          </Typography>
+        ) : null}
       </Content>
 
       <Container
