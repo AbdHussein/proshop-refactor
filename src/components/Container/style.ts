@@ -10,7 +10,7 @@ export const ContainerWrapper = styled.div<any>`
   box-sizing: border-box;
   height: 100%;
   padding: ${props => props.padding || '0'};
-
+  gap: ${props => props.gap};
   ${props =>
     Object.keys(props)
       .map((key: any) => `${key}: ${props?.[key]};`)

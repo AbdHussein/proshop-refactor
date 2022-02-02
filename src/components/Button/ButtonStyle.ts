@@ -31,20 +31,29 @@ export const ButtonStyle = styled.button<IStyleButton>(
       (brand ? props.theme.primary?.main : props.theme.secondary?.main)
     }`,
 
-    color: `${color}`,
+    color: `${color || '#242424'}`,
     fontSize: `${fontSize}`,
     cursor: `${cursor}`,
     letterSpacing: `${letterSpace}`,
-    alignItems: 'baseline',
+    alignItems: 'center',
     margin: `${margin}`,
+    textDecoration: 'none',
+    display: 'flex',
+    justifyContent: 'center',
   }),
 );
 
 export const Button = styled(ButtonStyle)`
-  background: ${props => props.theme.primary?.main};
-  color: ${props => props.theme.text?.primary};
+  background: ${props =>
+    props.background === 'outline'
+      ? 'none'
+      : props.background === 'secondary'
+      ? props.theme.secondary?.main
+      : props.theme.primary?.main};
+  color: '#242424';
   &:hover {
-    color: ${props => props.theme.text?.secondary};
+    background: ${props => props.theme.primary?.main};
+    opacity: 0.9;
   }
 `;
 
