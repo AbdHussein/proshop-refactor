@@ -1,6 +1,5 @@
 // import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { useEffect } from 'react';
-import { ThunkDispatch } from 'redux-thunk';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStripe } from '@stripe/react-stripe-js';
 import { toast } from 'react-toastify';
@@ -21,12 +20,11 @@ import {
   ProductContainer,
 } from './style';
 import { OrderDetails } from './orderDtails';
-import { Column } from '../../../../components/Row';
+import { Column, Row, SpinnerContainer } from '../../../../components';
 
 import { AppState } from '../../../../redux/store';
-import { ActionOrderType } from '../../../../redux/Order/type';
 import { getOrderById } from '../../../../redux/Order/action';
-import { SpinnerContainer } from '../../../../components';
+
 import { myActionCart } from '../../../../redux/Cart/action';
 
 export const ReviewTow = ({
@@ -40,22 +38,26 @@ export const ReviewTow = ({
 }) => {
   const navigation = useNavigate();
   const stripe: any = useStripe();
+  const [loading, setLoading] = useState<boolean>(false);
   const pay = async () => {
+    setLoading(true);
     try {
       const { error } = await stripe.confirmCardPayment(clientSec, {
         payment_method: paymentId,
       });
+      setLoading(false);
       if (error) throw new Error(error.message);
       toast('Payment Successful', {
         type: 'success',
       });
-      navigation(`/paymentSuccess`);
+
+      navigation(`/payment-success`);
     } catch (error: any) {
       toast(error.message, { type: 'error' });
     }
   };
 
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionOrderType>>();
+  const dispatch = useDispatch();
   const getOrder = useSelector((state: AppState) => state.order.orderById);
   useEffect(() => {
     dispatch(myActionCart());
@@ -121,11 +123,11 @@ export const ReviewTow = ({
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter>Tax</TextFooter>
-                <TextFooter>0 $</TextFooter>
+                <TextFooter>{getOrder.orders?.taxPrice}$</TextFooter>
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter>Shipping</TextFooter>
-                <TextFooter>0 $</TextFooter>
+                <TextFooter>{getOrder.orders?.shippingPrice} $</TextFooter>
               </FooterTitleRight>
               <FooterTitleRight>
                 <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
@@ -134,7 +136,11 @@ export const ReviewTow = ({
                 </TextFooter>
               </FooterTitleRight>
             </Column>
-            <RevieworderButton onClick={pay}>Review order</RevieworderButton>
+            <Row style={{ margin: '30px 0 10px' }} JC="center">
+              <RevieworderButton onClick={pay}>
+                {loading ? 'loading...' : 'Review order'}
+              </RevieworderButton>
+            </Row>
           </RightSectionPlace>
         </>
       )}

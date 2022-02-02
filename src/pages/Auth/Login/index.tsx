@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import { useFormik, FormikHelpers } from 'formik';
+import { useFormik } from 'formik';
 import { AiOutlineMail } from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { toast } from 'react-toastify';
+import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   LoginText,
@@ -17,23 +14,18 @@ import {
   ContainerLogin,
   FormContainer,
 } from './style';
-import {
-  IschemaValidationLogin,
-  schemaValidationLogin as validationSchema,
-} from '../../../utils/helper/validation';
+import { schemaValidationLogin as validationSchema } from '../../../utils/helper/validation';
 import LoginImage from '../../../assets/Images/login.png';
-import { InnerColSection, Row } from '../../../components/Row';
+import { InnerColSection } from '../../../components/Row';
 import Divider from '../../../components/Divider';
 import { CheckBox } from '../../../components/Form/checkBox';
 import { InputController } from '../../../components/Form/inputController';
 import { Container, Image } from '../../../components';
 import { AppState } from '../../../redux/store';
-import { TAllActionAuth } from '../../../redux/Auth/type';
 import { AuthActions } from '../../../redux/Auth/action';
 import { Column } from '../../../components/Col';
 
 const Login = () => {
-  const [checked, setChecked] = useState<boolean>(true);
   const initialValues = {
     email: '',
     password: '',
@@ -44,7 +36,8 @@ const Login = () => {
   // };
   const navigate = useNavigate();
 
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
+  const dispatch = useDispatch();
+  const { auth } = useSelector((state: AppState) => state);
 
   const formik = useFormik({
     initialValues,
@@ -108,11 +101,11 @@ const Login = () => {
                     value={formik.values.password}
                   />
                   <ButtonLogin
-                    disabled={!formik.isValid}
+                    disabled={!formik.isValid || auth.isLoading}
                     type="submit"
                     style={{ padding: '5px 0', marginBottom: '20px' }}
                   >
-                    Login
+                    {auth.isLoading ? 'loading' : 'Login'}
                   </ButtonLogin>
                   <Column>
                     <CheckBox label="Remember me" name="Remember me" />

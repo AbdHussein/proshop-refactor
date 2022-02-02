@@ -2,7 +2,13 @@ import { CSSProperties } from 'react';
 
 export interface IPropTypography extends CSSProperties {
   color?: string;
-  children: string | JSX.Element | JSX.Element[] | React.ReactNode | undefined;
+  children:
+    | string
+    | JSX.Element
+    | JSX.Element[]
+    | React.ReactNode
+    | undefined
+    | number;
   variant?: variantMapping;
   fontSize?: string;
   style?: CSSProperties;

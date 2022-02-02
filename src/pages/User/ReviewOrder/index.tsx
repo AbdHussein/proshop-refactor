@@ -46,6 +46,7 @@ const initialValues: IShippingSchema = {
 const ReviewOrder = () => {
   const [stepperNumber, setstepperNumber] = useState(0);
   const [checkoutError, setCheckoutError] = useState();
+  const [loading, setLoading] = useState(false);
   const [paymentId, setPaymentId] = useState<string>('');
   const stripe: any = useStripe();
   const elements = useElements();
@@ -68,6 +69,7 @@ const ReviewOrder = () => {
         postalCode: values.zip,
       };
       try {
+        setLoading(true);
         dispatch(createOrder(billingDetails));
         const paymentElement = elements?.getElement(CardElement);
         const paymentMethodReq = await stripe.createPaymentMethod({
@@ -77,6 +79,7 @@ const ReviewOrder = () => {
         });
         if (paymentMethodReq?.error) throw paymentMethodReq.error;
         setPaymentId(paymentMethodReq?.paymentMethod?.id);
+        setLoading(false);
         setstepperNumber(1);
       } catch (error: any) {
         toast(JSON.stringify(error.message), {
@@ -108,7 +111,7 @@ const ReviewOrder = () => {
   return (
     <OrfferSection>
       <InnerSection>
-        <Typography variant="h2" font-Family="Mulish">
+        <Typography variant="h2" fontSize="1.5rem">
           Review Order
         </Typography>
         <WrapperReviewRow>
@@ -144,7 +147,6 @@ const ReviewOrder = () => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.country}
-                        style={{ fontFamily: 'mulish' }}
                       />
                       <InputController
                         name="city"
@@ -157,7 +159,6 @@ const ReviewOrder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.city}
                         marginLeft="10%"
-                        style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
                     <WrapperRowInput>
@@ -171,7 +172,6 @@ const ReviewOrder = () => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.zip}
-                        style={{ fontFamily: 'mulish' }}
                       />
                       {/*
                         47%
@@ -187,7 +187,6 @@ const ReviewOrder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.address}
                         marginLeft="10%"
-                        style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
                     <ShapeAddress>Payment Details</ShapeAddress>
@@ -201,65 +200,62 @@ const ReviewOrder = () => {
                         {checkoutError}
                       </Typography>
                     )}
-                    <Row JC="flex-end">
-                      <RevieworderButton
-                        style={{ fontFamily: 'mulish' }}
-                        type="submit"
-                      >
-                        Review order
-                      </RevieworderButton>
-                    </Row>
                   </Column>
                 </form>
               </LeftSection>
 
               <RightSection>
-                <HeaderTitleRight>
-                  <ShapeAddress style={{ fontFamily: 'mulish' }}>
-                    Order Details
-                  </ShapeAddress>
-                  <ChangeText style={{ fontFamily: 'mulish' }} to="/cahnge">
-                    change
-                  </ChangeText>
-                </HeaderTitleRight>
-                <Column>
-                  <InnerOverFlow>
-                    {cart.isLoading ? (
-                      <SpinnerContainer />
-                    ) : (
-                      <>
-                        {cart?.cart?.items?.map(x => (
-                          <OrderDetails
-                            title={x.product?.name}
-                            image={x.product?.images[0]}
-                            priceItem={x.product.price}
-                            countItem={x.qty}
-                            isHr
-                          />
-                        ))}
-                      </>
-                    )}
-                  </InnerOverFlow>
-                </Column>
+                <form onSubmit={formik.handleSubmit}>
+                  <HeaderTitleRight>
+                    <ShapeAddress>Order Details</ShapeAddress>
+                    <ChangeText to="/cahnge">change</ChangeText>
+                  </HeaderTitleRight>
+                  <Column>
+                    <InnerOverFlow>
+                      {cart.isLoading ? (
+                        <SpinnerContainer />
+                      ) : (
+                        <>
+                          {cart?.cart?.items?.map(x => (
+                            <OrderDetails
+                              title={x.product?.name}
+                              image={x.product?.images[0]}
+                              priceItem={x.product.price}
+                              countItem={x.qty}
+                              isHr
+                            />
+                          ))}
+                        </>
+                      )}
+                    </InnerOverFlow>
+                  </Column>
 
-                <FooterTitleRight>
-                  <TextFooter>Subtotal</TextFooter>
-                  <TextFooter>{price} $</TextFooter>
-                </FooterTitleRight>
-                <FooterTitleRight>
-                  <TextFooter>Tax</TextFooter>
-                  <TextFooter>0 $</TextFooter>
-                </FooterTitleRight>
-                <FooterTitleRight>
-                  <TextFooter>Shipping</TextFooter>
-                  <TextFooter>0 $</TextFooter>
-                </FooterTitleRight>
-                <FooterTitleRight>
-                  <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
-                  <TextFooter style={{ fontWeight: 'bold' }}>
-                    {price} $
-                  </TextFooter>
-                </FooterTitleRight>
+                  <FooterTitleRight>
+                    <TextFooter>Subtotal</TextFooter>
+                    <TextFooter>{price} $</TextFooter>
+                  </FooterTitleRight>
+                  <FooterTitleRight>
+                    <TextFooter>Tax</TextFooter>
+                    <TextFooter>0 $</TextFooter>
+                  </FooterTitleRight>
+                  <FooterTitleRight>
+                    <TextFooter>Shipping</TextFooter>
+                    <TextFooter>0 $</TextFooter>
+                  </FooterTitleRight>
+                  <FooterTitleRight>
+                    <TextFooter style={{ fontWeight: 'bold' }}>
+                      Total
+                    </TextFooter>
+                    <TextFooter style={{ fontWeight: 'bold' }}>
+                      {price} $
+                    </TextFooter>
+                  </FooterTitleRight>
+                  <Row style={{ margin: '30px 0 10px' }} JC="center">
+                    <RevieworderButton type="submit">
+                      {loading ? 'loading...' : 'Review order'}
+                    </RevieworderButton>
+                  </Row>
+                </form>
               </RightSection>
             </WrapperCard>
           </Column>
@@ -280,8 +276,8 @@ export default ReviewOrder;
 
 const iframeStyles = {
   base: {
-    iconColor: '#0F1112',
-    color: '#0F1112',
+    iconColor: '#4D4D4D',
+    color: '#979797',
     fontWeight: '500',
     fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
     fontSize: '16px',
@@ -291,11 +287,11 @@ const iframeStyles = {
       color: '#fce883',
     },
     '::placeholder': {
-      color: '#4D4D4D',
+      color: '#979797',
     },
     '::-webkit-input-placeholder': {
-      color: '#4D4D4D',
-      border: '1px solid #4D4D4D',
+      color: '#979797',
+      border: '1px solid #979797',
     },
   },
 };

@@ -1,15 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
 import { Counter, Image, Typography } from '../../../components';
 import { deleteActionCart, upduteActionCart } from '../../../redux/Cart/action';
 import { ReactComponent as Clear } from '../../../assets/clear.svg';
-import { ActionCartType } from '../../../redux/Cart/type';
-import { AppState } from '../../../redux/store';
 import { IItemCart } from '../../../redux/User/type';
 import {
   CloseIcon,
-  OldPrice,
   ItemTitle,
   WrapCounter,
   ItemContainer,
@@ -21,27 +17,23 @@ interface IProps {
 }
 
 const CartList = ({ data }: IProps) => {
-  const { product, qty, itemTotalPrice } = data;
+  const { product, qty } = data;
   const [count, setCount] = useState<number>(qty);
   const dispatch = useDispatch();
-  // const handleRemoveFormCart = (id: string) => {
-  // };
 
   const removeFromCart = useCallback(() => {
     dispatch(deleteActionCart(product._id));
-    // dispatch(upduteActionCart({ productId: product._id, qty: 0 }));
-    setCount(0);
   }, [count]);
 
-  const handleIncress = useCallback(() => {
-    dispatch(upduteActionCart({ productId: product._id, qty: count + 1 }));
-    setCount(prev => prev + 1);
-  }, [count]);
-
-  const handleDecress = useCallback(() => {
-    dispatch(upduteActionCart({ productId: product._id, qty: count - 1 }));
-    setCount(prev => prev - 1);
-  }, [count]);
+  const handleChange = useCallback(
+    (id, value) => {
+      dispatch(upduteActionCart({ productId: id, qty: value }));
+    },
+    [dispatch],
+  );
+  useEffect(() => {
+    setCount(qty);
+  }, [qty]);
 
   return (
     <ItemContainer
@@ -73,7 +65,12 @@ const CartList = ({ data }: IProps) => {
         </ItemTitle>
       </ImgContainer>
       <WrapCounter>
-        <Counter max={product?.countInStock} min={1} value={count} />
+        <Counter
+          max={product?.countInStock}
+          min={1}
+          value={count}
+          onChange={(value: number) => handleChange(product._id, value)}
+        />
       </WrapCounter>
       <div>
         {product.discount ? (
@@ -85,15 +82,18 @@ const CartList = ({ data }: IProps) => {
           >
             {product.price}
           </Typography>
-        ) : null}
+        ) : (
+          ''
+        )}
         <Typography
-          children={String(`${product.discount}`)}
           variant="h2"
           fontSize="32px"
           fontWeight="bold"
           width="auto"
           text-align="right"
-        />
+        >
+          {(((product.price - product.discount) as number) * count)?.toFixed(2)}
+        </Typography>
       </div>
     </ItemContainer>
   );

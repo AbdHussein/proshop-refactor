@@ -71,7 +71,7 @@ export const ForgotPassword = styled(Typography)`
 export const ButtonSuginup = styled('button')`
   width: 200px;
   height: 56px;
-  border: 3px solid #fcdd06;
+  border: 3px solid ${props => props.theme.primary?.main};
   border-radius: 20px;
   font-size: 22px;
   display: flex;
@@ -87,18 +87,17 @@ export const ButtonSuginup = styled('button')`
 export const ButtonLogin = styled('button')`
   width: 100%;
   min-height: 40px;
-  border: 3px solid ${props => props.theme?.primary?.main};
-  border-radius: 20px;
+  /* border: 3px solid ${props => props.theme?.primary?.main}; */
   opacity: 1;
   font-size: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: none;
   letter-spacing: 0.88px;
+  border: none;
   color: #242424;
   outline: none;
-  background: ${props => props.theme.primary} 0% 0% no-repeat padding-box;
+  background: ${props => props.theme.primary?.main} 0% 0% no-repeat padding-box;
   border-radius: 6px;
 `;
 

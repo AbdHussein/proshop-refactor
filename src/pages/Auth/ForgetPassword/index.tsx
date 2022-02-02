@@ -2,7 +2,6 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Divider, Image, Typography } from '../../../components';
-import { Wrapper } from '../Login/style';
 import { Container, FormWrapper } from './ForgetPassword.styled';
 import Forgetpassword from '../../../assets/Images/ForgetPassword.png';
 import { formSchema } from './ForgetPassword.validation';
