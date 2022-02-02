@@ -19,7 +19,6 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
   };
 
   const Count = styled.div`
-    width: 8rem;
     height: 1.8rem;
     display: flex;
     flex-direction: row;
@@ -30,13 +29,14 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #eeeeee;
+    border-bottom: 0.1px solid ${props => props.theme.divider};
+    border-top: 0.1px solid ${props => props.theme.divider};
     color: ${props => props.theme.text?.primary};
   `;
 
   return (
     <>
-      <Count style={{ width: '40%' }}>
+      <Count>
         <Button
           width="3rem"
           borderRadius="none"

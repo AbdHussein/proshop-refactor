@@ -1,11 +1,7 @@
 import { Dispatch } from 'redux';
 import { toast } from 'react-toastify';
 import { ICart } from '../User/type';
-
-import { AppState } from '../store';
-
 import { ActionCartType } from './type';
-
 import { EnumCartAction } from './constant';
 import Api from '../../utils/Api/axios';
 
@@ -25,16 +21,11 @@ export const upduteActionCart = (data: AddItemPayload, fun?: Function) => {
     });
 
     try {
-      // const oldNumber = getState().user.myProfile;
-      // const oldNumber = getState();
-
       const response = await Api.update<AddItemPayload>(
         '/users/profile/cart',
         data,
       );
 
-      console.log('response data', response.data);
-      // if (response.status === 200) {
       dispatch({
         type: EnumCartAction.UPDATE_ITEM_SUCCESS,
         payload: {

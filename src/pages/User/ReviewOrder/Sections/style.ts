@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import { Column, Container, Divider, Typography } from '../../../../components';
 
 export const ReviewText = styled(Typography)`
-  font-family: normal normal 900 32px/15px Mulish;
   letter-spacing: 1.28px;
 `;
 export const OrderDetailsText = styled(ReviewText)`
-  font-family: normal normal 900 32px/15px mulish;
   letter-spacing: 1.28px;
   font-size: 2rem;
   font-weight: bold;
@@ -24,7 +22,6 @@ export const ChangeText = styled(Link)`
   color: #707070;
   opacity: 1;
   text-decoration: underline;
-  font-family: mulish;
 `;
 
 interface IBoxNumber {
@@ -48,10 +45,10 @@ export const BoxNumber = styled('div')<IBoxNumber>`
 
 export const TextActive = styled(Typography)<IBoxNumber>`
   font-size: 1.1rem;
-  font-family: normal normal bold 22px/15px Mulish;
   letter-spacing: 0.88px;
   width: auto;
-  color: ${props => (props.isActive ? '#242424' : '#707070')};
+  color: ${props =>
+    props.isActive ? props.theme.primary?.main : props.theme.text?.secondary};
 `;
 
 export const WrapperReviewRow = styled('div')`
@@ -63,15 +60,14 @@ export const WrapperReviewRow = styled('div')`
 export const InnerSection = styled(Column)`
   align-items: start;
   justify-content: start;
-  margin: 0 auto;
   width: 100%;
-  margin-top: 1.5rem;
+  gap: 10px;
 `;
 
 export const DividerTop = styled(Divider)`
   width: 100px;
   color: #f2f2f2;
-  margin: 0 40px;
+  margin: 0 30px;
 `;
 
 export const DividerFull = styled(Divider)`
@@ -115,10 +111,10 @@ export const OrderWrapper = styled(WrapperCard)`
   }
 `;
 export const OrfferSection = styled(Column)`
-  width: 90%;
+  /* width: 90%; */
   height: 700px;
   // overflow: auto;
-  margin: 50px auto;
+  padding: 40px 7%;
   justify-content: space-between;
   @media (max-width: 768px) {
     width: 90%;
@@ -126,11 +122,12 @@ export const OrfferSection = styled(Column)`
   }
 `;
 export const LeftSection = styled('div')`
-  background: #f2f2f2;
+  background: ${props => props.theme.background?.paper};
   border-radius: 16px;
   opacity: 1;
   padding: 25px 17px;
   width: 100%;
+
   @media (max-width: 768px) {
     width: 100%;
     padding: 30px;
@@ -179,13 +176,9 @@ export const ShapeAddress = styled(Typography)`
   font-size: 1.2rem;
   margin-bottom: 2rem;
   font-weight: bold;
-  letter-spacing: 0.88px;
-  letter-spacing: 1.28px;
-  color: #242424;
   opacity: 1;
-  font-family: mulish;
   letter-spacing: 1.28px;
-  color: #242424;
+  color: ${props => props.theme.text?.primary};
 `;
 
 export const ColumWrapper = styled('div')`
@@ -286,7 +279,6 @@ export const TextTitle = styled(Typography)`
   letter-spacing: 0.44px;
   opacity: 1;
   margin-left: 10px;
-  font-family: mulish;
   color: ${({ theme }) => theme.text?.primary};
 `;
 
@@ -295,14 +287,12 @@ export const PriceText = styled(Typography)`
   letter-spacing: 0.44px;
   color: ${props => props.theme?.text?.primary};
   padding-left: 10px;
-  font-family: mulish;
 `;
 export const TotalPriceText = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
   color: ${props => props.theme?.text?.primary};
   opacity: 1;
-  font-family: mulish;
   padding-left: 10px;
 `;
 export const CountText = styled(Typography)`
@@ -329,9 +319,7 @@ export const RevieworderButton = styled.button`
   align-items: center;
   font-size: 24px;
   float: right;
-  position: absolute;
-  bottom: 1.8rem;
-  right: 6rem;
+  cursor: pointer;
 `;
 
 export const LeftOrderSection = styled(LeftSection)`

@@ -1,7 +1,11 @@
 import React from 'react';
+import { useTheme } from 'styled-components';
 import { Container, Typography } from '../../../components';
-import { Button } from '../../../components/Button/ButtonStyle';
-import { ButtonHero } from '../../../components/Slider/SliderStyle';
+import {
+  DataValue,
+  InfoDetailsContainer,
+  SpanTitle,
+} from '../../Profile/style';
 import { ButtonKeep } from './style';
 
 interface IDetailProps {
@@ -11,15 +15,16 @@ interface IDetailProps {
 }
 
 const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
+  const theme = useTheme();
   return (
     <>
       <Container
         direction="row"
-        background-color="#F2F2F2"
         height="372px"
         border-radius="16px"
         width="85.4%"
         margin="44px auto"
+        background={`${theme.background?.paper}`}
       >
         <Container
           direction="column"
@@ -35,12 +40,37 @@ const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
           >
             Payment Success !
           </Typography>
-          {/* <Typography variant="h3" bold fontFamily="mulish">
-            Order number
-          </Typography>
-          <Typography variant="h3" bold fontFamily="mulish">
-            Shipping address
-          </Typography> */}
+          <InfoDetailsContainer margin-top="0.5em">
+            <Container
+              direction="column"
+              align-items="flex-start"
+              justify-content="space-between"
+              min-height="150px"
+              max-width="50%"
+              height="fit-content !important"
+            >
+              <SpanTitle>Order number</SpanTitle>
+              <SpanTitle>Shipping Address</SpanTitle>
+              <SpanTitle>Order Items</SpanTitle>
+            </Container>
+            <Container
+              direction="column"
+              align-items="flex-start"
+              justify-content="space-between"
+              min-height="150px"
+              max-width="60%"
+              height="fit-content !important"
+            >
+              <DataValue>65AS1D56ASD156DS</DataValue>
+              <DataValue>
+                56051 Jones Falls, Philippines, Turkey - 62502
+              </DataValue>
+              <DataValue>
+                1x iPhone 11 Pro 256GB Memory ,1x Apple Airpods Wireless
+                Bluetooth Headset
+              </DataValue>
+            </Container>
+          </InfoDetailsContainer>
           <Typography
             variant="p"
             width="50%"
@@ -56,14 +86,7 @@ const Detail = ({ orderNumber, shippingAddress, orderItem }: IDetailProps) => {
           justify-content="space-between"
           height="115px"
           margin-top="65px"
-        >
-          {/* <Typography variant="p" font-size="16px" fontFamily="mulish">
-            61f5b5562d7c5e0004f10ec3
-          </Typography>
-          <Typography variant="p" font-size="16px" fontFamily="mulish">
-            Palestine - Gaza
-          </Typography> */}
-        </Container>
+        />
       </Container>
       <Container padding="0" width="14%" float="right" margin-right="7.5%">
         <ButtonKeep to="/">

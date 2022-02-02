@@ -45,7 +45,7 @@ export const MainForm = ({ handleSubmit }: { handleSubmit: Function }) => (
             edit
             value={values.rating}
             size={40}
-            onChangeValue={(value: number) => setFieldValue('rating', value)}
+            onChange={(value: number) => setFieldValue('rating', value)}
           />
         </Container>
         {errors.rating && touched.rating ? (

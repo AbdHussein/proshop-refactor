@@ -1,5 +1,4 @@
 import { ICart } from '../User/type';
-import { IUser } from '../Auth/type';
 import { EnumCartAction } from './constant';
 import { ActionCartType, ICartState } from './type';
 
@@ -55,10 +54,7 @@ export const CartReducer = (
       return { ...state, error: action.payload.error };
 
     case EnumCartAction.DELETE_ITEM_START:
-      return {
-        ...state,
-        isLoading: true,
-      };
+      return state;
     /* eslint no-case-declarations: "error" */
 
     case EnumCartAction.DELETE_ITEM_SUCCESS:
@@ -66,6 +62,12 @@ export const CartReducer = (
         ...state,
         isLoading: false,
         success: true,
+        cart: {
+          ...state.cart,
+          items: state.cart.items.filter(
+            item => item.product._id !== action.payload._id,
+          ),
+        },
       };
     case EnumCartAction.DELETE_ITEM_FILL:
       return {

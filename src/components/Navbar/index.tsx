@@ -84,7 +84,7 @@ export const Navbar = ({ open }) => {
       </NavBox>
       <NavIcon style={{ justifyContent: 'flex-end' }}>
         <IConsContainer>
-          {user.isAdmin ? (
+          {user.isAdmin && (
             <Link
               to="/dashboard"
               style={{ textDecoration: 'none', fontFamily: 'mulish' }}
@@ -94,7 +94,7 @@ export const Navbar = ({ open }) => {
                 Admin
               </IconList>
             </Link>
-          ) : null}
+          )}
           {user?._id ? (
             <Link
               to="/profile"
@@ -116,21 +116,18 @@ export const Navbar = ({ open }) => {
               </IconList>
             </Link>
           )}
-          <Link
-            to="/cart"
-            style={{ textDecoration: 'none', fontFamily: 'mulish' }}
-          >
-            <IconList style={{ position: 'relative' }}>
-              {!cart.isLoading && cart.success ? (
-                <Badge>{cart?.cart?.items.length}</Badge>
-              ) : (
-                <Badge>0</Badge>
-              )}
-              <CartIcon />
-              Cart
-            </IconList>
-          </Link>
-
+          {user.isAdmin && (
+            <Link
+              to="/cart"
+              style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+            >
+              <IconList style={{ position: 'relative' }}>
+                {cart.success && <Badge>{cart?.cart?.items.length}</Badge>}
+                <CartIcon />
+                Cart
+              </IconList>
+            </Link>
+          )}
           {user?._id && (
             <IconList onClick={Logout}>
               <LogoutIcon />

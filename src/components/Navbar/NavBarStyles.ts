@@ -198,7 +198,7 @@ export const IConsContainer = styled('div')`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
 `;
