@@ -1,13 +1,17 @@
+/* eslint-disable react/jsx-no-undef */
+/* eslint-disable no-bitwise */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 // eslint-disable-next-line import/extensions
-import StarRatingComponent from 'react-star-rating-component';
+// eslint-disable-next-line import/extensions
+import ReactStars from 'react-rating-stars-component';
 // eslint-disable-next-line import/extensions
 import { FormContiner, TextArea } from './Form.styled';
 import Typography from '../../../Typography';
 import { AddReviewButton } from '../../../Button/ButtonStyle';
+import { Container } from '../../../Container';
 
 const SignupSchema = Yup.object().shape({
   rating: Yup.string().required('Rating is Required').nullable(),
@@ -28,17 +32,31 @@ export const MainForm = ({ handleSubmit }: { handleSubmit: Function }) => (
   >
     {({ values, errors, touched, handleChange, setFieldValue }) => (
       <FormContiner>
-        <label htmlFor="rating">Your rating: </label>
-        <StarRatingComponent
-          id="rating"
-          name="rating"
-          value={values.rating}
-          onChangeValue={(value: number) => setFieldValue('rating', value)}
-        />
+        <label htmlFor="rating">
+          <Typography bold variant="h3" margin="0 1em">
+            Your rating:
+          </Typography>
+        </label>
+        <Container margin-left="10px">
+          <ReactStars
+            isHalf
+            name="rating"
+            edit
+            value={values.rating}
+            size={40}
+            onChangeValue={(value: number) => setFieldValue('rating', value)}
+          />
+        </Container>
         {errors.rating && touched.rating ? (
-          <Typography color="red">{errors.rating}</Typography>
+          <Typography color="red" style={{ fontSize: 'small' }}>
+            {errors.rating}
+          </Typography>
         ) : null}
-        <label htmlFor="comment">Your comment: </label>
+        <label htmlFor="comment">
+          <Typography bold variant="h3" margin="0 1em">
+            Your comment:
+          </Typography>
+        </label>
         <TextArea
           id="comment"
           name="comment"
@@ -46,7 +64,9 @@ export const MainForm = ({ handleSubmit }: { handleSubmit: Function }) => (
           onChange={handleChange}
         />
         {errors.comment && touched.comment ? (
-          <Typography color="red">{errors.comment}</Typography>
+          <Typography color="red" style={{ fontSize: 'small' }}>
+            {errors.comment}
+          </Typography>
         ) : null}
         <AddReviewButton type="submit">Add Review</AddReviewButton>
       </FormContiner>

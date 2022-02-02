@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import styled from 'styled-components';
 import { Form } from 'formik';
 
@@ -8,6 +9,7 @@ export const FormContiner = styled(Form)`
   width: 100%;
   padding: 10px 20px;
   font-family: 'Mulish';
+  padding: 20px 40px;
 `;
 
 export const AddReviewButton = styled.button`
@@ -21,11 +23,10 @@ export const AddReviewButton = styled.button`
 `;
 
 export const TextArea = styled.textarea`
-  height: ' 123px';
-  padding: '16px';
+  height: 123px;
+  padding: 16px;
   resize: 'vertical';
-  fontsize: '1rem';
-  fontfamily: 'Mulish';
-  outline: 'none';
-  background: 'none';
+  outline: none;
+  background: none;
+  color: ${props => props.theme.text?.primary};
 `;

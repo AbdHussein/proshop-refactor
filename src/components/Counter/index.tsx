@@ -16,13 +16,14 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
 
   return (
     <>
-      <Count>
+      <Count style={{ width: '40%' }}>
         <Button
-          width="2rem"
+          width="3rem"
+          padding="auto"
+          height="50px"
           borderRadius="none"
           border="1px solid #FCDD06"
           background="#FFFFFF"
-          padding="none"
           onClick={() => {
             handleChangeCounter('decrement');
           }}
@@ -32,11 +33,12 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
         </Button>
         <Value>{value}</Value>
         <Button
-          width="2rem"
+          width="3rem"
           borderRadius="none"
           border="1px solid #FCDD06"
           background="#FFFFFF"
-          padding="none"
+          padding="auto"
+          height="50px"
           onClick={() => {
             handleChangeCounter('increment');
           }}

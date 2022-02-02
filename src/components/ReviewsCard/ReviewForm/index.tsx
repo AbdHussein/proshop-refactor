@@ -38,7 +38,7 @@ export default function ReviewForm({
     [dispatch, getProductById, auth],
   );
   return (
-    <Dailog open={isDisplay} onClose={handleClose}>
+    <Dailog open={isDisplay} onClose={handleClose} title="add review">
       <MainForm handleSubmit={handleSubmit} />
     </Dailog>
   );

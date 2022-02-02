@@ -52,8 +52,8 @@ const ProductOverview: React.FC<IProducts> = props => {
   return (
     <Container align-Items="flex-start" justify-ontent="space-between">
       <Container direction="column" max-width="23rem">
-        <Container padding="2em" width="80%" height="300px">
-          <ProductImage size="md" src={currentImages?.[0]} />
+        <Container width="100%" height="300px">
+          <ProductImage size="xl" src={currentImages?.[0]} />
         </Container>
         <Container direction="row" margin=".1em 0">
           {currentImages?.map(
@@ -73,10 +73,10 @@ const ProductOverview: React.FC<IProducts> = props => {
       </Container>
       <Container direction="column" margin-left="2em">
         <Container justify-Content="space-between">
-          <Typography variant="h3" color="text.primary" font-Size="35px" bold>
+          <Typography variant="h3" margin="0 1em" fontWeight="9000px">
             {props?.name}
           </Typography>
-          <Typography variant="h2" color="black" fontWeight="900">
+          <Typography bold variant="h1" margin="0 1em">
             {props?.price}$
           </Typography>
         </Container>
@@ -93,8 +93,13 @@ const ProductOverview: React.FC<IProducts> = props => {
           setColorActive={setColorActive}
         />
 
-        <div style={{ marginLeft: 'auto ', marginBlock: '30px' }}>
-          <Button padding=".8em" width="15em" onClick={handleAddToCart}>
+        <div style={{ marginLeft: 'auto ', marginBottom: ' 70px' }}>
+          <Button
+            padding="1.2em"
+            width="24em"
+            font-size="20px"
+            onClick={handleAddToCart}
+          >
             Add To Cart
           </Button>
         </div>

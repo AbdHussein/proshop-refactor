@@ -50,11 +50,9 @@ export const Button = styled(ButtonStyle)`
 
 export const AddReviewButton = styled(Button)`
   background: transparent;
-  color: ${props => props.theme.text?.primary};
-  &:after {
-    content: ' ';
-    width: '100%';
-    height: '20px';
-    background: ${props => props.theme.text?.primary};
+  color: ${props => props.theme.primary?.main};
+  text-decoration: underline;
+  &:hover {
+    color: ${props => props.theme.primary?.main};
   }
 `;

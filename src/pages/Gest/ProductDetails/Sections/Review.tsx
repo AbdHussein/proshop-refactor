@@ -23,7 +23,7 @@ const ReviewSection = ({ reviews }: IProps) => {
       <div
         style={{ display: 'flex', alignItems: 'center', position: 'relative' }}
       >
-        <Typography variant="h2" fontSize="30px" color="text.primary">
+        <Typography bold variant="h3" margin="0 1em">
           Reviews
         </Typography>
         <AddReviewButton onClick={handleDisplayADDReview}>
@@ -41,7 +41,7 @@ const ReviewSection = ({ reviews }: IProps) => {
         box-Sizing="border-box"
       >
         {reviews.map((Review, index) => (
-          <ReviewsCard Review={Review} index={index.toString()} />
+          <ReviewsCard Review={Review} key={index.toString()} />
         ))}
       </Container>
     </Container>
