@@ -285,11 +285,10 @@ export const OrderPriceWrapper = styled('div')`
 export const TextTitle = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
-  color: #707070;
   opacity: 1;
   margin-left: 10px;
   font-family: mulish;
-  color: #707070;
+  color: ${({ theme }) => theme.text?.primary};
 `;
 
 export const PriceText = styled(Typography)`
@@ -302,7 +301,7 @@ export const PriceText = styled(Typography)`
 export const TotalPriceText = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
-  color: #242424;
+  color: ${props => props.theme?.text?.primary};
   opacity: 1;
   font-family: mulish;
   padding-left: 10px;
@@ -310,7 +309,7 @@ export const TotalPriceText = styled(Typography)`
 export const CountText = styled(Typography)`
   font-size: 1rem;
   letter-spacing: 0.44px;
-  color: #707070;
+  color: ${props => props.theme?.text?.secondary};
   opacity: 1;
   display: flex;
   justify-content: center;

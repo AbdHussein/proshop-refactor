@@ -34,10 +34,10 @@ export const OrderDetails = ({
           <TextTitle>{title}</TextTitle>
           <OrderPriceWrapper>
             <Row JC="start" item="center">
-              <PriceText>{priceItem} $</PriceText>
-              <CountText>*{countItem}</CountText>
+              <PriceText>${priceItem}</PriceText>
+              <CountText>&times;{countItem}</CountText>
             </Row>
-            <TotalPriceText>{priceItem * countItem}$</TotalPriceText>
+            <TotalPriceText>${priceItem * countItem}</TotalPriceText>
           </OrderPriceWrapper>
         </Column>
       </OrderItemsWrapper>

@@ -2,7 +2,7 @@
 import { ICellRendererParams } from 'ag-grid-community';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 import { ReactComponent as Check } from '../../../assets/check.svg';
 import { ReactComponent as Close } from '../../../assets/close.svg';
 import { ReactComponent as Eye } from '../../../assets/eye.svg';
@@ -13,7 +13,6 @@ import {
   getOrderById,
   getOrders,
 } from '../../../redux/Order/action';
-import { IOrders } from '../../../redux/Order/type';
 import { AppState } from '../../../redux/store';
 import { notify } from '../../../utils/helper/notification';
 import { OrderDetails } from '../../User/ReviewOrder/Sections/orderDtails';
