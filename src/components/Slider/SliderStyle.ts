@@ -5,16 +5,16 @@ import { FlexBox, Row, Column } from '../Row';
 import { ContainerWrapper } from '../Container/style';
 import { Container, Image, Typography } from '..';
 
-export const SectionSlider = styled(FlexBox)`
-  background: #f2f2f2;
-`;
+export const SectionSlider = styled(FlexBox)``;
 
 export const SliderSection = styled(ContainerWrapper)`
+  /* background-color: ${props => props.theme.background.dufault}; */
   margin: 0 auto;
   overflow: hidden;
   flex-wrap: wrap;
-  padding-top: 60px;
+  padding-top: 80px;
   padding-bottom: 30px;
+
   @media (max-width: 900px) {
     flex-direction: column;
     margin: auto;
@@ -133,6 +133,7 @@ export const ContentContainer = styled(Container)`
   width: 90%;
   justify-content: space-between;
   margin: 0 auto;
+  background: transparent;
   @media (max-width: 900px) {
     flex-direction: column-reverse;
     padding-bottom: 50px;
