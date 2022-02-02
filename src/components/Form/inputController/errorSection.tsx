@@ -1,6 +1,7 @@
 import { FormikErrors, FormikTouched } from 'formik';
 
-import { BiErrorAlt } from 'react-icons/bi';
+// import { BiErrorAlt } from 'react-icons/bi';
+import { ReactComponent as BiError } from '../../../assets/report.svg';
 import { Row, Typography } from '../..';
 
 interface Props {
@@ -24,7 +25,7 @@ export const ErrorSection = ({ touched, errors }: Props) => {
         >
           {errors}
         </Typography>
-        <BiErrorAlt color="red" />
+        <BiError />
       </Row>
     );
   }

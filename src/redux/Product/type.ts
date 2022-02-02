@@ -28,7 +28,7 @@ export interface IProducts {
   __v: number;
   createdAt: string;
   updatedAt: string;
-  size: string;
+  sizes?: string | string[];
 }
 
 export interface IGetAllProduct {

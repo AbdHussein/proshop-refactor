@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 import { AllRoutes } from './Route/AllRouter';
-import { Container, Navbar } from './components';
+import { Navbar } from './components';
 import ErrorBoundary from './components/ErrorBoundary';
-import Burger from './components/Navbar/Burger';
+// import Burger from './components/Navbar/Burger';
 import { SpinnerContainer } from './components/SpinnerContainer';
 import { AppState } from './redux/store';
 import { darkTheme, GlobalStyle, lightTheme } from './theme';
@@ -36,7 +36,7 @@ const App: React.FC = () => {
                 ))}
               </Routes>
             </ErrorBoundary>
-          </Suspense>{' '}
+          </Suspense>
         </ThemeProvider>
       </HelmetProvider>
     </Elements>

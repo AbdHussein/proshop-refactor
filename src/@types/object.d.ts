@@ -1,3 +1,6 @@
 interface objectType {
-  [key: string]: any;
+  max?: number;
+  min?: number;
+  value: number;
+  onChange?: (value: number) => void;
 }

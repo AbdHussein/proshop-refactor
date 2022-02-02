@@ -3,7 +3,7 @@ import { Typography } from '..';
 import { Column } from '../Row/index';
 
 export const Title = styled(Typography)`
-  color: #242424;
+  color: ${props => props.theme.text?.primary};
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 15px;
@@ -24,7 +24,7 @@ export const Divider = styled('div')<IDivider>`
   margin: 0px;
   min-width: 200px;
   width: ${props => props.width};
-  height: ${props => props.height || '.1px'};
+  height: ${props => props.height || '0.1px'};
   color: ${props => props.color};
 `;
 

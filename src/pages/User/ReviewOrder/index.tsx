@@ -46,7 +46,7 @@ const initialValues: IShippingSchema = {
 const ReviewOrder = () => {
   const [stepperNumber, setstepperNumber] = useState(0);
   const [checkoutError, setCheckoutError] = useState();
-  const [paymentId, setPaymentId] = useState(null);
+  const [paymentId, setPaymentId] = useState<string>('');
   const stripe: any = useStripe();
   const elements = useElements();
 
@@ -266,9 +266,9 @@ const ReviewOrder = () => {
         )}
         {stepperNumber === 1 && (
           <ReviewTow
-            paymentId={paymentId}
-            clientSec={myOrder?.orders?.clientSecret}
-            orderId={myOrder?.orders?._id}
+            paymentId={paymentId as string}
+            clientSec={myOrder?.orders?.clientSecret as string}
+            orderId={myOrder?.orders?._id as string}
           />
         )}
       </InnerSection>

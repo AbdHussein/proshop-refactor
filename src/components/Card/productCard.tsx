@@ -1,5 +1,5 @@
 import ReactStars from 'react-rating-stars-component';
-import { BsBookmark } from 'react-icons/bs';
+// import { BsBookmark } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { useNavigate } from 'react-router-dom';
@@ -35,11 +35,7 @@ const ComplexCard = ({ ...props }: IProducts) => {
   const navigate = useNavigate();
 
   const handelAddCart = () => {
-    dispatch(
-      upduteActionCart({ productId: props._id, qty: 1 }, () => {
-        navigate('/cart');
-      }),
-    );
+    dispatch(upduteActionCart({ productId: props._id, qty: 1 }));
   };
   return (
     <MainCard width="450px">
@@ -115,16 +111,12 @@ const ComplexCard = ({ ...props }: IProducts) => {
         </Typography>
       </Content>
 
-      <Container direction="row" margin="0 auto" padding="15px">
-        <Button
-          height="62px"
-          background="#F2F2F2"
-          width="25%"
-          padding="none"
-          margin-left="0 6%"
-        >
-          <BsBookmark size="24px" />
-        </Button>
+      <Container
+        justifyContent="center"
+        direction="row"
+        margin="0 auto"
+        padding="15px"
+      >
         <Button
           height="62px"
           width="65.3%"
