@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Divider, Image, Typography } from '../../../components';
