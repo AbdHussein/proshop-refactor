@@ -81,7 +81,7 @@ const ProductOverview: React.FC<IProducts> = props => {
           </Typography>
         </Container>
 
-        <Container margin="1em 0">
+        <Container margin-block="30px">
           <Counter onChange={handleCounter} value={counterValue} />
         </Container>
 

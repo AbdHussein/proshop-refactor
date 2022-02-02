@@ -30,10 +30,8 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid #eeeeee;
     color: ${props => props.theme.text?.primary};
-    /* background: #e1e1e1; */
-    border-top: 0.3px solid ${props => props.theme.text?.secondary};
-    border-bottom: 0.3px solid ${props => props.theme.text?.secondary};
   `;
 
   return (

@@ -117,10 +117,11 @@ const Login = () => {
                   </ButtonLogin>
                   <Column>
                     <CheckBox label="Remember me" name="Remember me" />
+
                     <ForgotPassword
                       style={{ marginTop: '15px', marginBottom: '15px' }}
                     >
-                      Forgot your password?
+                      <Link to="/forgetpassword">Forgot your password?</Link>
                     </ForgotPassword>
                   </Column>
                   <Divider thick="2px" width="100%" />
