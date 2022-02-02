@@ -15,7 +15,7 @@ export const DeviderTitle = ({ title, position }: ILabelName) => {
         }}
       >
         <Title>{title}</Title>
-        <Divider width="200px" height="5px" color="#FCDD06" />
+        <Divider width="200px" height="5px" color="#edc298" />
       </Column>
 
       <Divider width="100%" height="1px" color="#707070" />
