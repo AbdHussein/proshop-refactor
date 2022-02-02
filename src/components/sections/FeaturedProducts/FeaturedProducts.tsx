@@ -61,11 +61,7 @@ export const FeaturedProduct = ({ data }: IProps) => {
       return i;
     });
     return chunks.map((i: any, inx: number) => (
-      <Container
-        backgroundColor={theme.background?.paper}
-        key={inx}
-        flex-wrap="wrap"
-      >
+      <Container key={inx} flex-wrap="wrap">
         {i.map((item: IProducts) => (
           <ComplexCard key={item._id} {...item} image={item.images[0]} />
         ))}
@@ -78,7 +74,7 @@ export const FeaturedProduct = ({ data }: IProps) => {
       direction="column"
       align-items="center"
       width="100%"
-      backgroundColor={theme.background?.paper}
+      background={theme.background?.paper}
     >
       <Container direction="column" width="85.4%">
         <DeviderTitle title="Featured Product" position="center" />
