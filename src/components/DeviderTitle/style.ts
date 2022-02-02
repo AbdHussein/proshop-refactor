@@ -24,7 +24,7 @@ export const Divider = styled('div')<IDivider>`
   margin: 0px;
   min-width: 200px;
   width: ${props => props.width};
-  height: ${props => props.height || '.1px'};
+  height: ${props => props.height || '0.1px'};
   color: ${props => props.color};
 `;
 

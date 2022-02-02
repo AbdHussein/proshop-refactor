@@ -29,14 +29,12 @@ const row = (PRODUCTID, PRODUCTNAME, PRODUCTPRICE, CATEGORY, ACTION) => ({
 });
 
 const Table = ({ data }: IProps) => {
-  console.log('data of table', data);
   const getRowData = () => {
     return (
       data &&
       data.length &&
       data?.map(e => {
         return row(
-          // eslint-disable-next-line no-underscore-dangle
           e?._id,
           e?.brand,
           e?.price,
@@ -52,7 +50,6 @@ const Table = ({ data }: IProps) => {
       })
     );
   };
-  console.log('data of table 455', data);
 
   return (
     <>

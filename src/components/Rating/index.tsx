@@ -1,10 +1,11 @@
-import React from 'react';
-import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
+// import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
+import { ReactComponent as BsStarFill } from '../../assets/star.svg';
+import { ReactComponent as BsStarHalf } from '../../assets/halfStar.svg';
+import { ReactComponent as BsStar } from '../../assets/emptyStar.svg';
 import StarIcon from './styles';
 
 export interface IProps {
   value: number;
-  color?: string;
 }
 
 const Rating = ({ value }: IProps) => {

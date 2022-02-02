@@ -4,8 +4,6 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { json } from 'stream/consumers';
-import logo from '../../../assets/Images/card.png';
 import { Column, Row, SpinnerContainer, Typography } from '../../../components';
 import {
   IShippingSchema,
@@ -35,10 +33,7 @@ import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
 import { ReviewTow } from './Sections/reviewtow';
 import { AppState } from '../../../redux/store';
-import { ActionOrderType } from '../../../redux/Order/type';
 import { createOrder } from '../../../redux/Order/action';
-import { getProfile } from '../../../redux/User/action';
-import { ActionCartType } from '../../../redux/Cart/type';
 import { myActionCart } from '../../../redux/Cart/action';
 
 const initialValues: IShippingSchema = {
@@ -51,7 +46,7 @@ const initialValues: IShippingSchema = {
 const ReviewOrder = () => {
   const [stepperNumber, setstepperNumber] = useState(0);
   const [checkoutError, setCheckoutError] = useState();
-  const [paymentId, setPaymentId] = useState(null);
+  const [paymentId, setPaymentId] = useState<string>('');
   const stripe: any = useStripe();
   const elements = useElements();
 
@@ -271,9 +266,9 @@ const ReviewOrder = () => {
         )}
         {stepperNumber === 1 && (
           <ReviewTow
-            paymentId={paymentId}
-            clientSec={myOrder?.orders?.clientSecret}
-            orderId={myOrder?.orders?._id}
+            paymentId={paymentId as string}
+            clientSec={myOrder?.orders?.clientSecret as string}
+            orderId={myOrder?.orders?._id as string}
           />
         )}
       </InnerSection>

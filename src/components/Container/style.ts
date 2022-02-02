@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Typography } from '..';
 
 export const ContainerWrapper = styled.div<any>`
   display: flex;
@@ -12,6 +11,7 @@ export const ContainerWrapper = styled.div<any>`
   height: 100%;
   background: ${props => props.background || 'transperant'};
   padding: ${props => props.padding || '0'};
+  gap: ${props => props.gap};
   ${props =>
     Object.keys(props)
       .map((key: any) => `${key}: ${props?.[key]};`)
@@ -23,6 +23,7 @@ export const ContainerWrapper = styled.div<any>`
     flex-wrap: wrap;
     margin-top: 1em;
     width: 98%;
+
     & > button {
       margin: 1.5em 0.2em;
     }

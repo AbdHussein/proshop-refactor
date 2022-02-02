@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { ReactComponent as Search } from '../../assets/search.svg';
 import { Column } from '../Col';
 import { FlexBox } from '../Row';
 import { Container } from '..';
@@ -23,7 +23,7 @@ export const ListNav = styled(Container)`
     flex-wrap: wrap;
     flex-grow: 99;
   }
-  position: fixed;
+  position: sticky;
   top: 0;
 `;
 export const Badge = styled('div')`
@@ -52,7 +52,7 @@ export const SearchButton = styled(FlexBox)`
   justify-content: center;
   width: 21.5%;
 `;
-export const StyledSearchIcon = styled(AiOutlineSearch)`
+export const StyledSearchIcon = styled(Search)`
   font-size: 18;
   margin-right: 10px;
 `;
