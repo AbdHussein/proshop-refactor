@@ -70,9 +70,7 @@ const ChangePasswordForm = ({ handleSubmitPassword }: IProps) => {
               setFieldTouched('passwordConfirmation', true);
             }}
           />
-          <Button type="submit" style={{ justifySelf: 'flex-end' }}>
-            Update Password
-          </Button>
+          <Button type="submit">Update Password</Button>
         </Form>
       )}
     </Formik>
