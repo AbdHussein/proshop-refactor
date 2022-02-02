@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 // eslint-disable-next-line import/extensions
 import ReactStars from 'react-rating-stars-component';
 // eslint-disable-next-line import/extensions
+// eslint-disable-next-line import/extensions
 import { FormContiner, TextArea } from './Form.styled';
 import Typography from '../../../Typography';
 import { AddReviewButton } from '../../../Button/ButtonStyle';

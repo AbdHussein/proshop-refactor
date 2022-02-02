@@ -9,7 +9,6 @@ export const FormContiner = styled(Form)`
   width: 100%;
   padding: 10px 20px;
   font-family: 'Mulish';
-  padding: 20px 40px;
 `;
 
 export const AddReviewButton = styled.button`
