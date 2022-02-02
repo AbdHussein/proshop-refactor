@@ -3,7 +3,9 @@ import React, { lazy } from 'react';
 const Dashboard = lazy(() => import('../pages/DashBoard'));
 const AddNewProduct = lazy(() => import('../pages/NewProduct'));
 const Orders = lazy(() => import('../pages/Orders'));
-const OrderDetails = lazy(() => import('../pages/Orders/OrderDetails'));
+const Users = lazy(() => import('../pages/Users'));
+const UserDetails = lazy(() => import('../pages/Users/UserDetails'));
+
 const role = Boolean(localStorage.getItem('role'));
 const adminRoutes: { path: string; component: React.ReactNode }[] = [];
 
@@ -25,9 +27,14 @@ if (role) {
       path: '/orders',
       component: <Orders />,
     },
+
     {
-      path: '/orders/:id',
-      component: <OrderDetails />,
+      path: '/users',
+      component: <Users />,
+    },
+    {
+      path: '/users/:id',
+      component: <UserDetails />,
     },
   );
 }

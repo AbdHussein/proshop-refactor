@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import Api from '../../utils/Api/axios';
+import { IUser } from '../Auth/type';
 import { EnumUserAction } from './constant';
 import { TAllActionUser } from './type';
 
@@ -41,7 +42,57 @@ export interface InterfaceUpdateUser {
   dateOfBirth: string;
 }
 
-export const updateUser = (data: InterfaceUpdateUser) => {
+export const getAllUsers = () => async (dispatch: Dispatch<TAllActionUser>) => {
+  try {
+    dispatch({
+      type: EnumUserAction.GET_ALL_USERS_START,
+    });
+
+    const response = await Api.get(`/users`);
+    if (response.status === 200) {
+      dispatch({
+        type: EnumUserAction.GET_ALL_USERS_SUCCESS,
+        payload: {
+          users: response.data.users,
+        },
+      });
+    }
+  } catch (error: any) {
+    dispatch({
+      type: EnumUserAction.GET_ALL_USERS_FAIL,
+      payload: {
+        error: error?.response?.data?.message,
+      },
+    });
+  }
+};
+
+export const getUserById =
+  (id: string) => async (dispatch: Dispatch<TAllActionUser>) => {
+    try {
+      dispatch({
+        type: EnumUserAction.GET_USER_BY_ID_START,
+      });
+      const response = await Api.get(`/users/${id}`);
+      if (response.status === 200) {
+        dispatch({
+          type: EnumUserAction.GET_USER_BY_ID_SUCCESS,
+          payload: {
+            data: response.data,
+          },
+        });
+      }
+    } catch (error: any) {
+      dispatch({
+        type: EnumUserAction.GET_USER_BY_ID_FAIL,
+        payload: {
+          error: error?.response?.data?.message,
+        },
+      });
+    }
+  };
+
+export const updateUser = (id: string, data: InterfaceUpdateUser) => {
   return async (dispatch: Dispatch<TAllActionUser>) => {
     dispatch({
       type: EnumUserAction.UPDATE_PROFILE_USER_START,
@@ -53,7 +104,7 @@ export const updateUser = (data: InterfaceUpdateUser) => {
       };
 
       const response = await Api.update<InterfaceUpdateUser>(
-        `/users/profile`,
+        `/users/${id}`,
         dataObj,
       );
 

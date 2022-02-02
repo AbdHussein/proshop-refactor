@@ -13,6 +13,8 @@ export const loginAction = (userData: LoginPayload, fun?: Function) => {
     try {
       const response = await Api.post('/users/login', userData);
       localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('token', JSON.stringify(response.data.token));
+      localStorage.setItem('role', JSON.stringify(response.data.isAdmin));
 
       dispatch({
         type: EnumAuthAction.USER_LOGIN_SUCCESS,
@@ -34,13 +36,15 @@ export const loginAction = (userData: LoginPayload, fun?: Function) => {
 
 export const singUpSuccess = (data: ISignupPayload, fun?: Function) => {
   return async (dispatch: Dispatch<TAllActionAuth>) => {
-    dispatch({
-      type: EnumAuthAction.USER_SIGHUP_START,
-    });
-
     try {
+      dispatch({
+        type: EnumAuthAction.USER_SIGHUP_START,
+      });
+
       const response = await Api.post('/users/signup', data);
-      localStorage.setItem('user-data', JSON.stringify(response.data));
+      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('token', JSON.stringify(response.data.token));
+      localStorage.setItem('role', JSON.stringify(response.data.isAdmin));
 
       dispatch({
         type: EnumAuthAction.USER_SIGHUP_SUCCESS,

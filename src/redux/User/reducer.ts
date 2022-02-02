@@ -15,6 +15,18 @@ const initialState: IStateUser = {
     error: '',
     user: {} as IUser,
   },
+  allUsers: {
+    success: false,
+    isLoading: false,
+    error: '',
+    users: [] as IUser[],
+  },
+  user: {
+    success: false,
+    isLoading: false,
+    error: '',
+    data: {} as IUser,
+  },
 };
 
 export const UserReducer = (
@@ -81,6 +93,63 @@ export const UserReducer = (
           isLoading: false,
         },
       };
+
+    case EnumUserAction.GET_ALL_USERS_START:
+      return {
+        ...state,
+        allUsers: {
+          ...state.allUsers,
+          isLoading: true,
+        },
+      };
+    case EnumUserAction.GET_ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        allUsers: {
+          ...state.allUsers,
+          isLoading: false,
+          success: true,
+          users: action.payload.users,
+        },
+      };
+    case EnumUserAction.GET_ALL_USERS_FAIL:
+      return {
+        ...state,
+        allUsers: {
+          ...state.allUsers,
+          isLoading: false,
+          error: action.payload.error,
+        },
+      };
+
+    case EnumUserAction.GET_USER_BY_ID_START:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          isLoading: true,
+        },
+      };
+    case EnumUserAction.GET_USER_BY_ID_SUCCESS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          isLoading: false,
+          success: true,
+          data: action.payload.data,
+        },
+      };
+    case EnumUserAction.GET_USER_BY_ID_FAIL:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          isLoading: false,
+          error: action.payload.error,
+        },
+      };
+
     /** * TOP PRODUCT */
     default:
       return state;

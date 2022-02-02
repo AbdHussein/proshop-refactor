@@ -10,7 +10,9 @@ import { formSchema } from './ForgetPassword.validation';
 import { Form, Formik } from 'formik';
 
 export default function ForgetPassword() {
-  const handleSubmit = useCallback(values => {}, []);
+  const handleSubmit = useCallback(values => {
+    console.log(values);
+  }, []);
 
   return (
     <Container>
@@ -32,7 +34,7 @@ export default function ForgetPassword() {
           {() => (
             <Form style={{ minWidth: '20vw' }}>
               <input name="email" placeholder="name@example.com" />
-              <Button type="submit" onClick={() => {}}>
+              <Button type="submit">
                 <Typography
                   variant="h6"
                   color="#000"
