@@ -63,5 +63,6 @@ export const AddReviewButton = styled(Button)`
   text-decoration: underline;
   &:hover {
     color: ${props => props.theme.primary?.main};
+    background: transparent;
   }
 `;
