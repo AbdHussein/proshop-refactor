@@ -3,7 +3,7 @@ import { RiLockPasswordFill } from 'react-icons/ri';
 import { useFormik, FormikHelpers } from 'formik';
 import { AiOutlineMail } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { toast } from 'react-toastify';
 
@@ -44,7 +44,8 @@ const Login = () => {
   // };
   const navigate = useNavigate();
 
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
+  const dispatch = useDispatch();
+  const { auth } = useSelector((state: AppState) => state);
 
   const formik = useFormik({
     initialValues,
@@ -108,11 +109,11 @@ const Login = () => {
                     value={formik.values.password}
                   />
                   <ButtonLogin
-                    disabled={!formik.isValid}
+                    disabled={!formik.isValid || auth.isLoading}
                     type="submit"
                     style={{ padding: '5px 0', marginBottom: '20px' }}
                   >
-                    Login
+                    {auth.isLoading ? 'loading' : 'Login'}
                   </ButtonLogin>
                   <Column>
                     <CheckBox label="Remember me" name="Remember me" />
