@@ -20,7 +20,7 @@ const getTypographySize = (variant: string) => {
 };
 
 const Wrapper = styled('p')<any>`
-  font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 750 : 500)};
+  font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 700 : 500)};
   color: ${props =>
     props.color === 'disabled'
       ? props.theme.text.disabled

@@ -25,7 +25,7 @@ export const CartReducer = (
     case EnumCartAction.UPDATE_ITEM_START:
       return {
         ...state,
-        isLoading: true,
+        // isLoading: true,
       };
     case EnumCartAction.UPDATE_ITEM_SUCCESS:
       return {

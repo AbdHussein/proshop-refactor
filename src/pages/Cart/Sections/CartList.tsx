@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import { GrFormClose } from 'react-icons/gr';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Counter, Image, Typography } from '../../../components';
 import { deleteActionCart, upduteActionCart } from '../../../redux/Cart/action';
+import { ReactComponent as Clear } from '../../../assets/clear.svg';
 import { ActionCartType } from '../../../redux/Cart/type';
 import { AppState } from '../../../redux/store';
 import { IItemCart } from '../../../redux/User/type';
@@ -20,27 +20,10 @@ interface IProps {
   data: IItemCart;
 }
 
-/**
- * 
- *    const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const handleAddToCart = useCallback(() => {
-    dispatch(
-      upduteActionCart(
-        {
-          productId: id as string,
-          qty: count,
-        },
-        () => navigation('/cart'),
-      ),
-    );
-    console.log('count', count);
-  }, [dispatch, upduteActionCart, count]);
- *  
- */
 const CartList = ({ data }: IProps) => {
   const { product, qty, itemTotalPrice } = data;
   const [count, setCount] = useState<number>(qty);
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
+  const dispatch = useDispatch();
   // const handleRemoveFormCart = (id: string) => {
   // };
 
@@ -62,31 +45,17 @@ const CartList = ({ data }: IProps) => {
 
   return (
     <ItemContainer
-      background-color="#F2F2F2"
       height="180px"
       border-radius="16px"
       position="relative"
       padding="1em"
       margin-bottom="30px"
       justify-content="space-between"
-      display={count.toString()}
     >
       <CloseIcon onClick={removeFromCart}>
-        <GrFormClose />
+        <Clear />
       </CloseIcon>
-      {product.discount ? (
-        <OldPrice>
-          <Typography
-            variant="span"
-            color="#707070"
-            fontSize="24px"
-            letter-spacing="0.48px"
-            text-decoration="line-through"
-          >
-            {product.price}
-          </Typography>
-        </OldPrice>
-      ) : null}
+
       <ImgContainer
         width="60%"
         align-items="start"
@@ -113,13 +82,26 @@ const CartList = ({ data }: IProps) => {
           handleDecrease={handleDecress}
         />
       </WrapCounter>
-      <Typography
-        children={String(`${product.discount}`)}
-        variant="h2"
-        fontSize="38px"
-        width="auto"
-        text-align="right"
-      />
+      <div>
+        {product.discount ? (
+          <Typography
+            fontSize="20px"
+            letter-spacing="0.48px"
+            color="secondary"
+            style={{ textDecoration: 'line-through' }}
+          >
+            {product.price}
+          </Typography>
+        ) : null}
+        <Typography
+          children={String(`${product.discount}`)}
+          variant="h2"
+          fontSize="32px"
+          fontWeight="bold"
+          width="auto"
+          text-align="right"
+        />
+      </div>
     </ItemContainer>
   );
 };
