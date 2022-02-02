@@ -40,7 +40,7 @@ const ComplexCard = ({ ...props }: IProducts) => {
         </Discount>
       )}
 
-      <ContentAction>
+      <ContentAction onClick={() => navigate(`/product/${props._id}`)}>
         <Image
           src={props.image}
           variant="square"
