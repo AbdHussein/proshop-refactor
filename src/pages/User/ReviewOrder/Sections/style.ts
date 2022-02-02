@@ -162,7 +162,6 @@ export const InnerOverFlow = styled.div`
   max-height: 15em;
   overflow-x: hidden;
   border-radius: 15px;
-  box-size: border-box;
   width: 100%;
 `;
 export const RightSectionPlace = styled(RightSectionTowReview)`

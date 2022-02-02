@@ -13,7 +13,7 @@ export const InnerSection = styled(Column)`
 `;
 export const ListNav = styled(Container)`
   margin: 0;
-  background-color: ${props => props.theme.common?.black || '#242424'};
+  background-color: #242424;
   height: auto;
   z-index: 999;
   padding: 0 5%;
@@ -28,7 +28,7 @@ export const ListNav = styled(Container)`
 `;
 export const Badge = styled('div')`
   position: absolute;
-  background: #fcdd06;
+  background: #edc298;
   border-radius: 50%;
   color: #242424;
   display: flex;

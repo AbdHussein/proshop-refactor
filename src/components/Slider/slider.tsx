@@ -11,7 +11,6 @@ import { IProducts } from '../../redux/Product/type';
 const cssStyle: CSSProperties = {
   position: 'relative',
   width: '100%',
-  backgroundColor: '#f2f2f2',
 };
 
 interface ProductItem {
@@ -52,12 +51,7 @@ export const Slider = ({ data }: IProps) => {
     ));
 
   return (
-    <Container
-      direction="column"
-      background="#F2F2F2"
-      overflow="hidden"
-      position="relative"
-    >
+    <Container direction="column" overflow="hidden" position="relative">
       <SliderSection>
         <SwipeableViews
           index={sliderIndex}

@@ -5,7 +5,7 @@ import { Content, ContentAction, MainCard } from './cardStyles';
 
 const CategoryCard = ({ image, name }: IGetAllCategory) => {
   return (
-    <MainCard minWidth="25%" boxShadow="none">
+    <MainCard minWidth="25%" margin="0 5px" boxShadow="none">
       <ContentAction
         height="350px"
         padding="5px"
