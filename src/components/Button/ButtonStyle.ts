@@ -55,6 +55,9 @@ export const Button = styled(ButtonStyle)`
     background: ${props => props.theme.primary?.main};
     opacity: 0.9;
   }
+  & svg {
+    fill: ${props => props.theme.text?.primary};
+  }
 `;
 
 export const AddReviewButton = styled(Button)`

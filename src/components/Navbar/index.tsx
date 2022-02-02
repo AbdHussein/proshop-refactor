@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { FaUserAlt } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReactComponent as PersonIcon } from '../../assets/icons/personIcon.svg';
@@ -26,6 +25,7 @@ import { ReactComponent as NightLight } from '../../assets/nightlight.svg';
 import { ReactComponent as CartIcon } from '../../assets/icons/cartIcon.svg';
 import { ReactComponent as LogoutIcon } from '../../assets/icons/logoutIcon.svg';
 import { ReactComponent as AdminIcon } from '../../assets/icons/adminIcon.svg';
+import { ReactComponent as Person } from '../../assets/icons/person.svg';
 
 const Style = {
   color: '#FFF',
@@ -101,7 +101,7 @@ export const Navbar = ({ open }) => {
               style={{ textDecoration: 'none', fontFamily: 'mulish' }}
             >
               <IconList>
-                <FaUserAlt size="1.5em" style={Style} />
+                <Person style={Style} />
                 {`${user.firstName} ${user.lastName}`}
               </IconList>
             </Link>
