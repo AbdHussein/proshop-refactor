@@ -56,3 +56,12 @@ export const Button = styled(ButtonStyle)`
     opacity: 0.9;
   }
 `;
+
+export const AddReviewButton = styled(Button)`
+  background: transparent;
+  color: ${props => props.theme.primary?.main};
+  text-decoration: underline;
+  &:hover {
+    color: ${props => props.theme.primary?.main};
+  }
+`;

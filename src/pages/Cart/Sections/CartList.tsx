@@ -73,14 +73,7 @@ const CartList = ({ data }: IProps) => {
         </ItemTitle>
       </ImgContainer>
       <WrapCounter>
-        <Counter
-          max={product?.countInStock}
-          min={1}
-          onFinish={setCount}
-          value={count}
-          handleIncrease={handleIncress}
-          handleDecrease={handleDecress}
-        />
+        <Counter max={product?.countInStock} min={1} value={count} />
       </WrapCounter>
       <div>
         {product.discount ? (

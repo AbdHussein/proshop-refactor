@@ -1,10 +1,8 @@
-import React from 'react';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import StarIcon from './styles';
 
 export interface IProps {
   value: number;
-  color?: string;
 }
 
 const Rating = ({ value }: IProps) => {
