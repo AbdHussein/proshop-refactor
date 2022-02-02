@@ -29,6 +29,8 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
     justify-content: center;
     align-items: center;
     border: 1px solid #eeeeee;
+    height: 50px;
+    color: ${props => props.theme.text?.primary};
   `;
 
   return (
