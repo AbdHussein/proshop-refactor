@@ -1,13 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { BiLogOut } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { FiSettings } from 'react-icons/fi';
 import { ReactComponent as PersonIcon } from '../../assets/icons/personIcon.svg';
 import {
-  List,
-  StyleObj,
   NavBox,
   StyledSearchIcon,
   SearchButton,

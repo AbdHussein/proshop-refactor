@@ -8,7 +8,6 @@ import { Route, Routes } from 'react-router-dom';
 import { AllRoutes } from './Route/AllRouter';
 import { Navbar } from './components';
 import ErrorBoundary from './components/ErrorBoundary';
-// import Burger from './components/Navbar/Burger';
 import { SpinnerContainer } from './components/SpinnerContainer';
 import { AppState } from './redux/store';
 import { darkTheme, GlobalStyle, lightTheme } from './theme';
@@ -16,7 +15,7 @@ import { darkTheme, GlobalStyle, lightTheme } from './theme';
 const stripePromise = loadStripe('pk_test_kvaWWuoOUKU8FfTgtn5U2LVC00If7nyUo0');
 
 const App: React.FC = () => {
-  const [open, setstate] = useState(false);
+  const [open] = useState(false);
   const { theme } = useSelector((state: AppState) => state);
   return (
     <Elements stripe={stripePromise}>

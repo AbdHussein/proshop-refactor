@@ -4,17 +4,8 @@ import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button/ButtonStyle';
-import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
-import {
-  Actions,
-  AddCart,
-  Content,
-  ContentAction,
-  Discount,
-  MainCard,
-  SaveBtn,
-} from './cardStyles';
+import { Content, ContentAction, Discount, MainCard } from './cardStyles';
 import { Container, Image } from '..';
 import { AppState } from '../../redux/store';
 import { ActionCartType } from '../../redux/Cart/type';

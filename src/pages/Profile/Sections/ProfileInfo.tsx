@@ -13,7 +13,7 @@ import {
   ActionsWrapper,
 } from '../style';
 import { IUser } from '../../../redux/Auth/type';
-import { formatDate, formatDate_ } from '../../../utils/helper/formatDay';
+import { formatDate_ } from '../../../utils/helper/formatDay';
 import {
   changeAvatar,
   changePassword,
