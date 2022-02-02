@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import { Navigate } from 'react-router-dom';
 import adminRoutes from './Admin';
 import userRoutes from './User';
 
@@ -12,6 +13,7 @@ const Dashboard = lazy(() => import('../pages/DashBoard'));
 const AddNewProduct = lazy(() => import('../pages/NewProduct'));
 const ProductDetails = lazy(() => import('../pages/Gest/ProductDetails'));
 const PaymentSuccess = lazy(() => import('../pages/PaymentSuccess'));
+const NotFound = lazy(() => import('../pages/NotFound'));
 
 export const AllRoutes = [
   {
@@ -36,4 +38,8 @@ export const AllRoutes = [
   },
   ...adminRoutes,
   ...userRoutes,
+  {
+    path: '*',
+    component: <NotFound />,
+  },
 ];
