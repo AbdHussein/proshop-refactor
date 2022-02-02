@@ -100,7 +100,7 @@ export const ProductContainer = styled.div`
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   @media (max-width: 768px) {
     width: 100%;
   }

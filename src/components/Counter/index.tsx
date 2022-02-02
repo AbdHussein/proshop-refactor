@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Plus } from '../../assets/add.svg';
 import { ReactComponent as Minus } from '../../assets/remove.svg';
-  
+
 import { Button } from '../Button/ButtonStyle';
 // eslint-disable-next-line import/extensions
-import { Count, Value } from './counter.styled';
+// import { Count, Value } from './counter.styled';
 
 const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
   const handleChangeCounter = (name: string) => {
@@ -15,21 +15,21 @@ const Counter: React.FC<objectType> = ({ max, min = 1, value, onChange }) => {
       onChange?.(value + 1);
     }
   };
-    
- const Count = styled.div`
-  width: 8rem;
-  height: 1.8rem;
-  display: flex;
-  flex-direction: row;
-`;
 
-const Value = styled.div`
-  width: 4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #eeeeee;
-`;
+  const Count = styled.div`
+    width: 8rem;
+    height: 1.8rem;
+    display: flex;
+    flex-direction: row;
+  `;
+
+  const Value = styled.div`
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eeeeee;
+  `;
 
   return (
     <>
