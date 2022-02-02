@@ -10,6 +10,7 @@ export const ContainerWrapper = styled.div<any>`
   width: 100%;
   box-sizing: border-box;
   height: 100%;
+  background: ${props => props.background || 'transperant'};
   padding: ${props => props.padding || '0'};
   ${props =>
     Object.keys(props)

@@ -11,7 +11,6 @@ import { IProducts } from '../../redux/Product/type';
 const cssStyle: CSSProperties = {
   position: 'relative',
   width: '100%',
-  backgroundColor: '#f2f2f2',
 };
 
 interface ProductItem {

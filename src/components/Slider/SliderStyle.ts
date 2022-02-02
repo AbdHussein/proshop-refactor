@@ -8,7 +8,7 @@ import { Container, Image, Typography } from '..';
 export const SectionSlider = styled(FlexBox)``;
 
 export const SliderSection = styled(ContainerWrapper)`
-  /* background-color: ${props => props.theme.background.dufault}; */
+  background-color: ${props => props.theme.background.paper};
   margin: 0 auto;
   overflow: hidden;
   flex-wrap: wrap;
@@ -33,7 +33,7 @@ export const ShopeButton = styled(Button)`
   width: 220px;
 `;
 export const PriceText = styled<any>(Typography)`
-  color: #242424;
+  color: ${props => props.theme.text.primary};
   font-size: 2rem;
   margin-bottom: 10px;
   font-family: mulish;
@@ -41,7 +41,8 @@ export const PriceText = styled<any>(Typography)`
 `;
 
 export const DescriptionText = styled(PriceText)`
-  color: #242424;
+  color: ${props => props.theme.text.primary};
+
   font-size: 2rem;
   font-family: mulish;
   margin-bottom: 42px;
@@ -49,9 +50,9 @@ export const DescriptionText = styled(PriceText)`
 `;
 
 export const NameText = styled(PriceText)`
-  color: #242424;
   font-size: 3.7rem;
   font-weight: 900;
+  color: ${props => props.theme.text.primary};
   margin-bottom: 10px;
 `;
 
@@ -63,7 +64,7 @@ export const ImageSlider = styled(Image)`
 
 export const ButtonHero = styled(Link)`
   color: #242424;
-  background: #fcdd06;
+  background: #edc298;
   font-size: 22px;
   height: 56px;
   outline: none;
@@ -92,7 +93,7 @@ interface IDot {
 }
 
 export const Dot = styled('div')<IDot>`
-  background: ${props => (props.isGrey ? '#70707030' : '#FCDD06 ')};
+  background: ${props => (props.isGrey ? '#70707030' : '#edc298')};
   border-radius: 50%;
   width: ${props => props.width};
   height: ${props => props.width};
