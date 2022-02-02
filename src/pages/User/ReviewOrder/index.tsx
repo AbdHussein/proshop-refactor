@@ -4,8 +4,6 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { json } from 'stream/consumers';
-import logo from '../../../assets/Images/card.png';
 import { Column, Row, SpinnerContainer, Typography } from '../../../components';
 import {
   IShippingSchema,
@@ -35,10 +33,7 @@ import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
 import { ReviewTow } from './Sections/reviewtow';
 import { AppState } from '../../../redux/store';
-import { ActionOrderType } from '../../../redux/Order/type';
 import { createOrder } from '../../../redux/Order/action';
-import { getProfile } from '../../../redux/User/action';
-import { ActionCartType } from '../../../redux/Cart/type';
 import { myActionCart } from '../../../redux/Cart/action';
 
 const initialValues: IShippingSchema = {

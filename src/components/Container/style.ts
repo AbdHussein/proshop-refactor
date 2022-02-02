@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Typography } from '..';
 
 export const ContainerWrapper = styled.div<any>`
   display: flex;

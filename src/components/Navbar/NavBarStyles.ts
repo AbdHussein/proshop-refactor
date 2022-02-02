@@ -23,7 +23,7 @@ export const ListNav = styled(Container)`
     flex-wrap: wrap;
     flex-grow: 99;
   }
-  position: fixed;
+  position: sticky;
   top: 0;
 `;
 export const Badge = styled('div')`
