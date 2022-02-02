@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { useFormik, FormikHelpers } from 'formik';
 import { AiOutlineMail } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { toast } from 'react-toastify';
@@ -116,10 +116,11 @@ const Login = () => {
                   </ButtonLogin>
                   <Column>
                     <CheckBox label="Remember me" name="Remember me" />
+
                     <ForgotPassword
                       style={{ marginTop: '15px', marginBottom: '15px' }}
                     >
-                      Forgot your password?
+                      <Link to="/forgetpassword">Forgot your password?</Link>
                     </ForgotPassword>
                   </Column>
                   <Divider thick="2px" width="100%" />

@@ -5,6 +5,8 @@ import userRoutes from './User';
 
 const Signup = lazy(() => import('../pages/Auth/Signup'));
 const Login = lazy(() => import('../pages/Auth/Login'));
+const ForgetPassword = lazy(() => import('../pages/Auth/ForgetPassword'));
+
 const ReviewOrder = lazy(() => import('../pages/User/ReviewOrder'));
 const Home = lazy(() => import('../pages/Gest/Home'));
 const Search = lazy(() => import('../pages/Gest/Search'));
@@ -27,6 +29,10 @@ export const AllRoutes = [
   {
     path: 'Signup',
     component: <Signup />,
+  },
+  {
+    path: 'forgetpassword',
+    component: <ForgetPassword />,
   },
   {
     path: '/product/:id',
