@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
-import { Icon } from '..';
+import { ReactComponent as Plus } from '../../assets/add.svg';
+import { ReactComponent as Minus } from '../../assets/remove.svg';
 import { Button } from '../Button/ButtonStyle';
 
 const Count = styled.div`
@@ -29,9 +29,6 @@ const Counter: React.FC<objectType> = ({
 }) => {
   const [number, setNumber] = useState(value);
   const increase = () => {
-    if (number > max && number > 1) {
-      return;
-    }
     setNumber(prev => {
       onFinish(prev + 1);
       return prev + 1;
@@ -40,9 +37,6 @@ const Counter: React.FC<objectType> = ({
   };
 
   const decrease = () => {
-    if (number > max && number < 1) {
-      return;
-    }
     setNumber(prev => {
       onFinish(prev - 1);
       return prev - 1;
@@ -62,7 +56,7 @@ const Counter: React.FC<objectType> = ({
           onClick={decrease}
           disabled={number === min}
         >
-          <Icon icon={<AiOutlineMinus />} />
+          <Minus />
         </Button>
         <Value>{number}</Value>
         <Button
@@ -74,7 +68,7 @@ const Counter: React.FC<objectType> = ({
           onClick={increase}
           disabled={number === max}
         >
-          <Icon icon={<AiOutlinePlus />} />
+          <Plus />
         </Button>
       </Count>
     </>

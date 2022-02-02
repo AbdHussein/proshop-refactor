@@ -6,6 +6,7 @@ const EmptyCart = () => {
   return (
     <>
       <Container flex-direction="column">
+        <Image src={url} size="lg" />
         <Typography
           variant="h3"
           fontSize="2em"
@@ -17,7 +18,6 @@ const EmptyCart = () => {
         >
           Your shopping cart is empty
         </Typography>
-        <Image src={url} size="lg" />
       </Container>
     </>
   );

@@ -20,10 +20,13 @@ const getTypographySize = (variant: string) => {
 };
 
 const Wrapper = styled('p')<any>`
-  /* color: ${props => props.color || 'black'}; */
-
-  font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 750 : 500)};
-  color: ${props => props.color || props.theme.text?.primary};
+  font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 700 : 500)};
+  color: ${props =>
+    props.color === 'disabled'
+      ? props.theme.text.disabled
+      : props.color === 'secondary'
+      ? props.theme.text.secondary
+      : props.theme.text?.primary};
   font-size: ${props =>
     props?.fontSize || getTypographySize(props?.variant || '')};
   line-height: ${props => (props?.bold ? 1.1 : 1.25)};
