@@ -78,7 +78,7 @@ export const FeaturedProduct = ({ data }: IProps) => {
         <DeviderTitle title="Featured Product" position="center" />
       </Container>
 
-      <Container direction="row" width="85.4%" justify-content="space-between">
+      <Container direction="row" justify-content="space-between">
         <SwipeableViews
           enableMouseEvents
           index={sliderIndex}
@@ -105,7 +105,7 @@ export const FeaturedProduct = ({ data }: IProps) => {
             />
           ))}
       </Container>
-      <Container height="20px" />
+      {/* <Container height="20px" /> */}
     </Container>
   );
 };
