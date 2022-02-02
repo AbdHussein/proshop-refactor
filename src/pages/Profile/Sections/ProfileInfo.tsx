@@ -59,7 +59,7 @@ const ProfileInfo = ({ user }: IProfileDashboard) => {
   const handleSubmitProfile = useCallback((values: IProfile) => {
     // Update Profile
     dispatch(
-      updateUser({
+      updateUser(user?._id as string, {
         ...(user as IUser),
         ...values,
       }),
