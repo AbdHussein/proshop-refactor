@@ -1,10 +1,8 @@
 import { EnumAuthAction } from './constant';
 import { IStateAuth, IUser, TAllActionAuth } from './type';
 
-const temp = localStorage.getItem('user');
-const user = temp ? JSON.parse(temp) : {};
 const initialState: IStateAuth = {
-  user: user as IUser,
+  user: (JSON.parse(localStorage.getItem('user') || '') || {}) as IUser,
   success: false,
   isLoading: false,
   error: '',

@@ -26,6 +26,8 @@ import { ReactComponent as CartIcon } from '../../assets/icons/cartIcon.svg';
 import { ReactComponent as LogoutIcon } from '../../assets/icons/logoutIcon.svg';
 import { ReactComponent as AdminIcon } from '../../assets/icons/adminIcon.svg';
 import { ReactComponent as Person } from '../../assets/icons/person.svg';
+import { ReactComponent as Users } from '../../assets/people.svg';
+import { ReactComponent as Orders } from '../../assets/list.svg';
 
 const Style = {
   color: '#FFF',
@@ -85,15 +87,35 @@ export const Navbar = ({ open }) => {
       <NavIcon style={{ justifyContent: 'flex-end' }}>
         <IConsContainer>
           {user.isAdmin && (
-            <Link
-              to="/dashboard"
-              style={{ textDecoration: 'none', fontFamily: 'mulish' }}
-            >
-              <IconList>
-                <AdminIcon />
-                Admin
-              </IconList>
-            </Link>
+            <>
+              <Link
+                to="/dashboard"
+                style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+              >
+                <IconList>
+                  <AdminIcon />
+                  Admin
+                </IconList>
+              </Link>
+              <Link
+                to="/users"
+                style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+              >
+                <IconList>
+                  <Users />
+                  users
+                </IconList>
+              </Link>{' '}
+              <Link
+                to="/orders"
+                style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+              >
+                <IconList>
+                  <Orders />
+                  orders
+                </IconList>
+              </Link>
+            </>
           )}
           {user?._id ? (
             <Link
