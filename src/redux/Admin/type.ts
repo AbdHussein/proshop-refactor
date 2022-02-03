@@ -251,12 +251,12 @@ export type TAllActionAdmin =
   | IDeleteProductFilled;
 
 export interface ICreateProduct {
-  images: File[];
-  colors: Array<string>;
-  categories: Array<string>;
-  price: number;
-  discount: number;
-  countInStock: number;
+  images: File[] | string[];
+  colors?: string[];
+  categories: string | string[];
+  price: string | number;
+  discount:string | number;
+  countInStock: string | number;
   name: string;
   description: string;
   brand: string;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Container, Typography, InputController } from '../../../components';
-// import { ErrorSection } from '../../../components/Form/inputController/errorSection';
+import {Container, Typography, InputController, Row} from '../../../components';
+import { ErrorSection } from '../../../components/Form/inputController/errorSection';
 import {
   FiledWrapper,
   Label,
@@ -18,7 +18,7 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
     category: !product,
     color: !product,
   });
-
+  console.log(formik,'formik', formik.errors.name)
   useEffect(() => {
     if (product?.categories?.length > 0) {
       setSelected({
@@ -70,8 +70,9 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
             isRequired
             value={formik.values.name}
             onChange={formik.handleChange}
-            // errors={formik.errors.name}
+            errors={formik.errors.name}
           />
+
           <InputController
             name="brand"
             label="Product Brand"
@@ -79,11 +80,28 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
             isRequired
             value={formik.values.brand}
             onChange={formik.handleChange}
-            // errors={formik.errors.brand}
+            errors={formik.errors.brand}
             marginLeft="0.5em"
           />
         </InputsContainer>
-
+        <InputsContainer>
+          {formik.errors.name &&
+          <Typography
+              variant="p"
+              color="red"
+          >
+            {formik.errors.name}
+          </Typography>
+          }
+          {formik.errors.brand &&
+          <Typography
+              variant="p"
+              color="red"
+          >
+            {formik.errors.brand}
+          </Typography>
+          }
+        </InputsContainer>
         <InputsContainer justify-Content="space-between">
           {formik.values.id.length ? (
             <InputController
@@ -124,7 +142,14 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
                 />
               )}
             </InputWrapper>
-            {/* <ErrorSection errors={formik.errors.colors} /> */}
+            {formik.errors.colors &&
+            <Typography
+                variant="p"
+                color="red"
+            >
+              {formik.errors.colors}
+            </Typography>
+            }
           </FiledWrapper>
 
           <FiledWrapper style={{ marginLeft: '0.5em' }}>
@@ -150,7 +175,14 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
                 />
               )}
             </InputWrapper>
-            {/* <ErrorSection errors={formik.errors.categories} /> */}
+            {formik.errors.category &&
+            <Typography
+                variant="p"
+                color="red"
+            >
+              {formik.errors.category}
+            </Typography>
+            }
           </FiledWrapper>
         </InputsContainer>
 
@@ -166,7 +198,14 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
                 onChange={formik.handleChange}
               />
             </InputWrapper>
-            {/* <ErrorSection errors={formik.errors.description} /> */}
+            {formik.errors.description &&
+            <Typography
+                variant="p"
+                color="red"
+            >
+              {formik.errors.description}
+            </Typography>
+            }
           </FiledWrapper>
         </Container>
 
@@ -178,7 +217,7 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
             isRequired
             value={formik.values.countInStock}
             onChange={formik.handleChange}
-            // errors={formik.errors.countInStock}
+            errors={formik.errors.countInStock}
           />
           <InputController
             name="price"
@@ -187,9 +226,27 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
             isRequired
             value={formik.values.price}
             onChange={formik.handleChange}
-            // errors={formik.errors.price}
+            errors={formik.errors.price}
             marginLeft="0.5em"
           />
+        </InputsContainer>
+        <InputsContainer>
+          {formik.errors.countInStock &&
+          <Typography
+              variant="p"
+              color="red"
+          >
+            {formik.errors.countInStock}
+          </Typography>
+          }
+          {formik.errors.price &&
+          <Typography
+              variant="p"
+              color="red"
+          >
+            {formik.errors.price}
+          </Typography>
+          }
         </InputsContainer>
       </Container>
     </FormContainer>

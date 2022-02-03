@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useCallback, useEffect} from 'react';
 import { useFormik } from 'formik';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Container, PathNavigate } from '../../components';
 import { ProductContainer } from './style';
 import {
-  AddProductSchema as validationSchema,
+  AddProductSchema,
   IAddProductSchema,
 } from '../../utils/helper/validation';
 import ProductImages from './Sections/ProductImages';
@@ -36,63 +36,55 @@ function NewProduct() {
     }
   }, []);
 
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const initialValues: IAddProductSchema = {
     id: product.product?._id || '',
     images: product.product?.images || [],
     name: product.product?.name || '',
     brand: product.product?.brand || '',
-    categories: categories || [],
+    categories:  product.product?.categories || [],
     description: product.product?.description || '',
-    countInStock: product.product?.countInStock || 0,
-    price: product.product?.price || 0,
+    countInStock: product.product?.countInStock as number || 0,
+    price: product.product?.price as number  || 0,
+    discount: product.product?.discount as number  || 0  ,
     colors: product.product?.colors || [],
   };
-
+    
   const formik = useFormik<IAddProductSchema>({
     initialValues,
-    // validationSchema,
+    validationSchema : AddProductSchema,
     enableReinitialize: true,
-    onSubmit: async values => {
-      console.log('test valies', values);
-      if (id) {
-        dispatch(
-          updateProduct(
-            id,
-            {
-              brand: values.brand,
-              images: values.images as File[],
-              colors: values.colors,
-              categories: values.categories,
-              price: values.price,
-              discount: 0,
-              countInStock: values.countInStock,
-              name: values.name,
-              description: values.description,
-            },
-            () => navigation(`/product/${id}`),
-          ),
-        );
-      }
+    onSubmit: async (values: IAddProductSchema, errors) => {
+        console.log(errors, 'values', values, );
+        if (id) {
+            // Update Product
+            dispatch(
+                updateProduct(id as string, values, () => {
+                    navigate("/dashboard");
+                })
+            );
+        }
+    }
 
-      dispatch(
-        addProduct(
-          {
-            brand: values.brand,
-            images: values.images as File[],
-            colors: values.colors,
-            categories: values.categories,
-            price: values.price,
-            discount: 0,
-            countInStock: values.countInStock,
-            name: values.name,
-            description: values.description,
-          },
-          () => navigation(`/`),
-        ),
-      );
-    },
+
+      // dispatch(
+      //   addProduct(
+      //     {
+      //       brand: values.brand,
+      //       images: values.images as File[],
+      //       colors: values.colors,
+      //       categories: values.categories,
+      //       price: values.price,
+      //       discount: 0,
+      //       countInStock: values.countInStock,
+      //       name: values.name,
+      //       description: values.description,
+      //     },
+      //     () => navigation(`/`),
+      //   ),
+      // );
+    // },
   });
 
   return (

@@ -86,33 +86,33 @@ export const ShippingSchema = (): Yup.SchemaOf<IShippingSchema> => {
 
 export interface IAddProductSchema {
   id?: string;
-  images: Array<string | Object>;
+  images: File[] | string[];
+  categories: string | string[];
   name: string;
   brand: string;
-  categories: Array<any>;
+  countInStock: string | number;
   description: string;
-  countInStock: number;
-  price: number;
-  colors: Array<string>;
+  price: string | number;
+  discount:string | number;
+  colors?: string[];
 }
 
-export const AddProductSchema = (): Yup.SchemaOf<IAddProductSchema> => {
-  return Yup.object().shape({
+export const AddProductSchema =
+    Yup.object().shape({
     id: Yup.string().optional(),
     images: Yup.array()
-      .of(Yup.mixed().oneOf([Yup.string(), Yup.object()]))
-      .required(),
+        .of(Yup.string())
+        .nullable()
+        .length(1, "At least one Image is required"),
     name: Yup.string().required('Please enter product name'),
     brand: Yup.string().required('Please enter product brand'),
     description: Yup.string()
-      .required('Please enter product description')
-      .max(200, 'Max 200 Char'),
-    countInStock: Yup.number()
-      .required('Please enter product count In Stock')
-      .positive()
-      .integer(),
-    price: Yup.number().required('Please enter product price').positive(),
+        .required('Please enter product description'),
+        // .max(200, 'Max 200 Char'),
+    countInStock: Yup.string()
+        .required('Please enter product count In Stock'),
+    price: Yup.string().required('Please enter product price'),
     colors: Yup.array().required('Please enter product colors'),
     categories: Yup.array().required('Please enter product categories'),
   });
-};
+
