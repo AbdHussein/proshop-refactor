@@ -1,20 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
-import { FaUserAlt } from 'react-icons/fa';
-import {
-  BsFillBookmarkDashFill,
-  BsFillCartFill,
-  BsToggleOff,
-  BsToggleOn,
-} from 'react-icons/bs';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { BiLogOut } from 'react-icons/bi';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { FiSettings } from 'react-icons/fi';
-import { ListNavItem } from './ListNavItem';
+import { ReactComponent as PersonIcon } from '../../assets/icons/personIcon.svg';
 import {
-  List,
-  StyleObj,
   NavBox,
   StyledSearchIcon,
   SearchButton,
@@ -22,21 +10,22 @@ import {
   ListNav,
   IconList,
   NavIcon,
-  Hamburger,
   Badge,
   IConsContainer,
 } from './NavBarStyles';
 import Logo from './Logo/Logo';
 import { useToken } from '../../utils/helper/useToken';
 import { AppState } from '../../redux/store';
-import { ActionCartType } from '../../redux/Cart/type';
 import { IUser } from '../../redux/Auth/type';
 import { logoutSuccess } from '../../redux/Auth/action';
-import useTheme from '../../Hoc/UseTheme';
 import { myActionCart } from '../../redux/Cart/action';
 import { toggleTheme } from '../../redux/Theme/action';
 import { ReactComponent as Sunny } from '../../assets/sunny.svg';
 import { ReactComponent as NightLight } from '../../assets/nightlight.svg';
+import { ReactComponent as CartIcon } from '../../assets/icons/cartIcon.svg';
+import { ReactComponent as LogoutIcon } from '../../assets/icons/logoutIcon.svg';
+import { ReactComponent as AdminIcon } from '../../assets/icons/adminIcon.svg';
+import { ReactComponent as Person } from '../../assets/icons/person.svg';
 
 const Style = {
   color: '#FFF',
@@ -67,20 +56,24 @@ export const Navbar = ({ open }) => {
     navigate('/login');
   };
   return (
-    <ListNav open={false}>
+    <ListNav>
       <Logo />
-      <NavBox style={{ margin: 'auto' }}>
+      <NavBox>
         <SearchInput
           value={value}
           type="text"
-          style={{ fontFamily: 'mulish' }}
-          placeholder="Iphone"
+          style={{ fontFamily: 'mulish', flexGrow: '55' }}
+          placeholder="search..."
           onChange={e => {
             setValue(e.target.value);
           }}
         />
         <SearchButton
-          style={{ fontFamily: 'mulish' }}
+          style={{
+            fontFamily: 'mulish',
+            fontWeight: 'bold',
+            minWidth: '125px',
+          }}
           onClick={() => {
             navigate(`/search${value ? `?keyword=${value}` : ''}`);
           }}
@@ -89,26 +82,26 @@ export const Navbar = ({ open }) => {
           Search
         </SearchButton>
       </NavBox>
-      <NavIcon style={{ width: '15%' }}>
+      <NavIcon style={{ justifyContent: 'flex-end' }}>
         <IConsContainer>
-          {user.isAdmin ? (
+          {user.isAdmin && (
             <Link
               to="/dashboard"
               style={{ textDecoration: 'none', fontFamily: 'mulish' }}
             >
               <IconList>
-                <FiSettings size="1.2em" style={Style} />
+                <AdminIcon />
                 Admin
               </IconList>
             </Link>
-          ) : null}
+          )}
           {user?._id ? (
             <Link
               to="/profile"
               style={{ textDecoration: 'none', fontFamily: 'mulish' }}
             >
               <IconList>
-                <FaUserAlt size="1.5em" style={Style} />
+                <Person style={Style} />
                 {`${user.firstName} ${user.lastName}`}
               </IconList>
             </Link>
@@ -118,34 +111,32 @@ export const Navbar = ({ open }) => {
               style={{ textDecoration: 'none', fontFamily: 'mulish' }}
             >
               <IconList>
-                <FaUserAlt size="1.2em" style={Style} />
+                <PersonIcon width="20px" height="20px" style={Style} />
                 Login/Signup
               </IconList>
             </Link>
           )}
-          <Link
-            to="/cart"
-            style={{ textDecoration: 'none', fontFamily: 'mulish' }}
-          >
-            <IconList style={{ position: 'relative' }}>
-              {!cart.isLoading && cart.success ? (
-                <Badge>{cart?.cart?.items.length}</Badge>
-              ) : (
-                <Badge>0</Badge>
-              )}
-              <BsFillCartFill size="5em" style={Style} />
-              Cart
-            </IconList>
-          </Link>
-          <NavIcon onClick={toggleTheme_} aria-label="toggle-theme">
-            {theme === 'light' ? <Sunny /> : <NightLight />}
-          </NavIcon>
+          {user.isAdmin && (
+            <Link
+              to="/cart"
+              style={{ textDecoration: 'none', fontFamily: 'mulish' }}
+            >
+              <IconList style={{ position: 'relative' }}>
+                {cart.success && <Badge>{cart?.cart?.items.length}</Badge>}
+                <CartIcon />
+                Cart
+              </IconList>
+            </Link>
+          )}
           {user?._id && (
             <IconList onClick={Logout}>
-              <BiLogOut size="2em" style={Style} />
+              <LogoutIcon />
               Logout
             </IconList>
           )}
+          <NavIcon onClick={toggleTheme_} aria-label="toggle-theme">
+            {theme === 'light' ? <Sunny /> : <NightLight />}
+          </NavIcon>
         </IConsContainer>
       </NavIcon>
     </ListNav>

@@ -18,4 +18,5 @@ export interface IStyleButton {
   margin?: string;
   brand?: boolean;
   type?: string;
+  loading?: boolean;
 }

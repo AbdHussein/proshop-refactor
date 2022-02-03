@@ -1,15 +1,11 @@
-import React, { useCallback, useState } from 'react';
-import { GrFormClose } from 'react-icons/gr';
-import { useDispatch, useSelector } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Counter, Image, Typography } from '../../../components';
 import { deleteActionCart, upduteActionCart } from '../../../redux/Cart/action';
-import { ActionCartType } from '../../../redux/Cart/type';
-import { AppState } from '../../../redux/store';
+import { ReactComponent as Clear } from '../../../assets/clear.svg';
 import { IItemCart } from '../../../redux/User/type';
 import {
   CloseIcon,
-  OldPrice,
   ItemTitle,
   WrapCounter,
   ItemContainer,
@@ -20,73 +16,38 @@ interface IProps {
   data: IItemCart;
 }
 
-/**
- * 
- *    const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  const handleAddToCart = useCallback(() => {
-    dispatch(
-      upduteActionCart(
-        {
-          productId: id as string,
-          qty: count,
-        },
-        () => navigation('/cart'),
-      ),
-    );
-    console.log('count', count);
-  }, [dispatch, upduteActionCart, count]);
- *  
- */
 const CartList = ({ data }: IProps) => {
-  const { product, qty, itemTotalPrice } = data;
+  const { product, qty } = data;
   const [count, setCount] = useState<number>(qty);
-  const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
-  // const handleRemoveFormCart = (id: string) => {
-  // };
+  const dispatch = useDispatch();
 
   const removeFromCart = useCallback(() => {
     dispatch(deleteActionCart(product._id));
-    // dispatch(upduteActionCart({ productId: product._id, qty: 0 }));
-    setCount(0);
   }, [count]);
 
-  const handleIncress = useCallback(() => {
-    dispatch(upduteActionCart({ productId: product._id, qty: count + 1 }));
-    setCount(prev => prev + 1);
-  }, [count]);
-
-  const handleDecress = useCallback(() => {
-    dispatch(upduteActionCart({ productId: product._id, qty: count - 1 }));
-    setCount(prev => prev - 1);
-  }, [count]);
+  const handleChange = useCallback(
+    (id, value) => {
+      dispatch(upduteActionCart({ productId: id, qty: value }));
+    },
+    [dispatch],
+  );
+  useEffect(() => {
+    setCount(qty);
+  }, [qty]);
 
   return (
     <ItemContainer
-      background-color="#F2F2F2"
       height="180px"
       border-radius="16px"
       position="relative"
       padding="1em"
       margin-bottom="30px"
       justify-content="space-between"
-      display={count.toString()}
     >
       <CloseIcon onClick={removeFromCart}>
-        <GrFormClose />
+        <Clear />
       </CloseIcon>
-      {product.discount ? (
-        <OldPrice>
-          <Typography
-            variant="span"
-            color="#707070"
-            fontSize="24px"
-            letter-spacing="0.48px"
-            text-decoration="line-through"
-          >
-            {product.price}
-          </Typography>
-        </OldPrice>
-      ) : null}
+
       <ImgContainer
         width="60%"
         align-items="start"
@@ -107,19 +68,33 @@ const CartList = ({ data }: IProps) => {
         <Counter
           max={product?.countInStock}
           min={1}
-          onFinish={setCount}
           value={count}
-          handleIncrease={handleIncress}
-          handleDecrease={handleDecress}
+          onChange={(value: number) => handleChange(product._id, value)}
         />
       </WrapCounter>
-      <Typography
-        children={String(`${product.discount}`)}
-        variant="h2"
-        fontSize="38px"
-        width="auto"
-        text-align="right"
-      />
+      <div>
+        {product.discount ? (
+          <Typography
+            fontSize="20px"
+            letter-spacing="0.48px"
+            color="secondary"
+            style={{ textDecoration: 'line-through' }}
+          >
+            {product.price}
+          </Typography>
+        ) : (
+          ''
+        )}
+        <Typography
+          variant="h2"
+          fontSize="32px"
+          fontWeight="bold"
+          width="auto"
+          text-align="right"
+        >
+          {(((product.price - product.discount) as number) * count)?.toFixed(2)}
+        </Typography>
+      </div>
     </ItemContainer>
   );
 };

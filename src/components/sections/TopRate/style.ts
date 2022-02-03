@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { Column, Container, InnerSection, Row } from '../..';
 
 export const RowWithRadius = styled(Container)`
-  border: 1px solid #fcdd06;
-  border-radius: 16px solid #fcdd06;
+  border-radius: 16px;
+  border: 1px solid #edc298;
   border-radius: 16px;
   height: 700px;
   margin-bottom: 197px;

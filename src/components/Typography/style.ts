@@ -20,20 +20,18 @@ const getTypographySize = (variant: string) => {
 };
 
 const Wrapper = styled('p')<any>`
-  /* color: ${props => props.color || 'black'}; */
-  font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 750 : 500)};
+  font-weight: ${props => (props?.bold || props?.variant === 'h2' ? 700 : 500)};
   color: ${props =>
-    props
-      ? props.color
-      : props.theme
-      ? props.theme.Typography.color
-      : '#242424'};
+    props.color === 'disabled'
+      ? props.theme.text.disabled
+      : props.color === 'secondary'
+      ? props.theme.text.secondary
+      : props.theme.text?.primary};
   font-size: ${props =>
     props?.fontSize || getTypographySize(props?.variant || '')};
   line-height: ${props => (props?.bold ? 1.1 : 1.25)};
-  font-family: ${props => props?.['font-family'] || 'roboto'};
-  font-size: ${props =>
-    props?.['font-Size'] || getTypographySize(props?.variant || '')};
+  font-family: ${props => props?.['font-family'] || ' mulish'};
+
   text-align: ${props => props?.['text-align'] || 'left'};
 `;
 

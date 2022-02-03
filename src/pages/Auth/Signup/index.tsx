@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable import/extensions */
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { useFormik, FormikHelpers } from 'formik';
@@ -36,6 +37,7 @@ import {
   Divider,
   Container,
   Image,
+  Typography,
 } from '../../../components';
 import { AuthActions } from '../../../redux/Auth/action';
 import { AppState } from '../../../redux/store';
@@ -58,13 +60,14 @@ const Signup = () => {
     validateOnChange: validateAfterSubmit,
     enableReinitialize: true,
     onSubmit: async values => {
+      console.log(values);
       dispatch(
         AuthActions.singUpSuccess(
           {
             email: values.email,
             password: values.password,
             firstName: values.name.split(' ')[0],
-            lastName: values.name.split(' ')[1],
+            lastName: values.name.split(' ')[1] || '',
             passwordConfirmation: values.passwordConfirmation,
           },
           () => {
@@ -117,6 +120,11 @@ const Signup = () => {
                     icon={<AiOutlineMail />}
                     value={formik.values.email}
                   />
+                  {formik.errors.email && formik.errors.email ? (
+                    <Typography color="red" style={{ fontSize: 'small' }}>
+                      {formik.errors.password}
+                    </Typography>
+                  ) : null}
                   <InputController
                     name="password"
                     label="Enter your password"
@@ -127,6 +135,11 @@ const Signup = () => {
                     icon={<RiLockPasswordFill />}
                     value={formik.values.password}
                   />
+                  {formik.errors.password && formik.errors.password ? (
+                    <Typography color="red" style={{ fontSize: 'small' }}>
+                      {formik.errors.password}
+                    </Typography>
+                  ) : null}
                   <InputController
                     name="passwordConfirmation"
                     label="Confirm your password"

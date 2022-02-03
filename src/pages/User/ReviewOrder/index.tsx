@@ -1,11 +1,9 @@
 import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { json } from 'stream/consumers';
-import logo from '../../../assets/Images/card.png';
 import { Column, Row, SpinnerContainer, Typography } from '../../../components';
 import {
   IShippingSchema,
@@ -35,10 +33,7 @@ import { OrderDetails } from './Sections/orderDtails';
 import { InputController } from '../../../components/Form';
 import { ReviewTow } from './Sections/reviewtow';
 import { AppState } from '../../../redux/store';
-import { ActionOrderType } from '../../../redux/Order/type';
 import { createOrder } from '../../../redux/Order/action';
-import { getProfile } from '../../../redux/User/action';
-import { ActionCartType } from '../../../redux/Cart/type';
 import { myActionCart } from '../../../redux/Cart/action';
 
 const initialValues: IShippingSchema = {
@@ -51,7 +46,8 @@ const initialValues: IShippingSchema = {
 const ReviewOrder = () => {
   const [stepperNumber, setstepperNumber] = useState(0);
   const [checkoutError, setCheckoutError] = useState();
-  const [paymentId, setPaymentId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [paymentId, setPaymentId] = useState<string>('');
   const stripe: any = useStripe();
   const elements = useElements();
 
@@ -73,8 +69,8 @@ const ReviewOrder = () => {
         postalCode: values.zip,
       };
       try {
+        setLoading(true);
         dispatch(createOrder(billingDetails));
-        console.log('myOrder', myOrder);
         const paymentElement = elements?.getElement(CardElement);
         const paymentMethodReq = await stripe.createPaymentMethod({
           type: 'card',
@@ -83,6 +79,7 @@ const ReviewOrder = () => {
         });
         if (paymentMethodReq?.error) throw paymentMethodReq.error;
         setPaymentId(paymentMethodReq?.paymentMethod?.id);
+        setLoading(false);
         setstepperNumber(1);
       } catch (error: any) {
         toast(JSON.stringify(error.message), {
@@ -103,10 +100,18 @@ const ReviewOrder = () => {
     else setCheckoutError(undefined);
   };
 
+  const price = useMemo(
+    () =>
+      cart?.cart?.items
+        .reduce((acc, item) => acc + item?.product?.price * item?.qty, 0)
+        .toFixed(2),
+    [cart],
+  );
+
   return (
     <OrfferSection>
       <InnerSection>
-        <Typography variant="h2" font-Family="Mulish">
+        <Typography variant="h2" fontSize="1.5rem">
           Review Order
         </Typography>
         <WrapperReviewRow>
@@ -131,7 +136,6 @@ const ReviewOrder = () => {
                     }}
                   >
                     <ShapeAddress>Shipping Address</ShapeAddress>
-
                     <WrapperRowInput>
                       <InputController
                         name="country"
@@ -143,7 +147,6 @@ const ReviewOrder = () => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.country}
-                        style={{ fontFamily: 'mulish' }}
                       />
                       <InputController
                         name="city"
@@ -156,7 +159,6 @@ const ReviewOrder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.city}
                         marginLeft="10%"
-                        style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
                     <WrapperRowInput>
@@ -170,7 +172,6 @@ const ReviewOrder = () => {
                         onBlur={formik.handleBlur}
                         onChange={formik.handleChange}
                         value={formik.values.zip}
-                        style={{ fontFamily: 'mulish' }}
                       />
                       {/*
                         47%
@@ -186,10 +187,9 @@ const ReviewOrder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.address}
                         marginLeft="10%"
-                        style={{ fontFamily: 'mulish' }}
                       />
                     </WrapperRowInput>
-                    {/* {/* <ShapeAddress>Payment Details</ShapeAddress> */}
+                    <ShapeAddress>Payment Details</ShapeAddress>
 
                     <CardElement
                       options={cardElementOpts as any}
@@ -200,88 +200,71 @@ const ReviewOrder = () => {
                         {checkoutError}
                       </Typography>
                     )}
-                    <Row JC="flex-end">
-                      <RevieworderButton
-                        style={{ fontFamily: 'mulish' }}
-                        type="submit"
-                      >
-                        Review order
-                      </RevieworderButton>
-                    </Row>
                   </Column>
                 </form>
               </LeftSection>
 
               <RightSection>
-                <HeaderTitleRight>
-                  <ShapeAddress style={{ fontFamily: 'mulish' }}>
-                    Order Details
-                  </ShapeAddress>
-                  <ChangeText style={{ fontFamily: 'mulish' }} to="/cahnge">
-                    change
-                  </ChangeText>
-                </HeaderTitleRight>
-                <Column>
-                  <InnerOverFlow>
-                    {cart.isLoading ? (
-                      <SpinnerContainer />
-                    ) : (
-                      <>
-                        {cart?.cart?.items?.map(x => (
-                          <OrderDetails
-                            title={x.product?.name}
-                            image={x.product?.images[0]}
-                            priceItem={x.product.price}
-                            countItem={x.qty}
-                            isHr
-                          />
-                        ))}
-                      </>
-                    )}
-                  </InnerOverFlow>
-                </Column>
+                <form onSubmit={formik.handleSubmit}>
+                  <HeaderTitleRight>
+                    <ShapeAddress>Order Details</ShapeAddress>
+                    <ChangeText to="/cahnge">change</ChangeText>
+                  </HeaderTitleRight>
+                  <Column>
+                    <InnerOverFlow>
+                      {cart.isLoading ? (
+                        <SpinnerContainer />
+                      ) : (
+                        <>
+                          {cart?.cart?.items?.map(x => (
+                            <OrderDetails
+                              title={x.product?.name}
+                              image={x.product?.images[0]}
+                              priceItem={x.product.price}
+                              countItem={x.qty}
+                              isHr
+                            />
+                          ))}
+                        </>
+                      )}
+                    </InnerOverFlow>
+                  </Column>
 
-                <FooterTitleRight>
-                  <TextFooter>Subtotal</TextFooter>
-                  <TextFooter>
-                    {cart?.cart?.items
-                      .reduce(
-                        (acc, item) => acc + item?.product?.price * item?.qty,
-                        0,
-                      )
-                      .toFixed(2)}{' '}
-                    $
-                  </TextFooter>
-                </FooterTitleRight>
-                <FooterTitleRight>
-                  <TextFooter>Tax</TextFooter>
-                  <TextFooter>0 $</TextFooter>
-                </FooterTitleRight>
-                <FooterTitleRight>
-                  <TextFooter>Shipping</TextFooter>
-                  <TextFooter>0 $</TextFooter>
-                </FooterTitleRight>
-                <FooterTitleRight>
-                  <TextFooter style={{ fontWeight: 'bold' }}>Total</TextFooter>
-                  <TextFooter style={{ fontWeight: 'bold' }}>
-                    {cart?.cart?.items
-                      .reduce(
-                        (acc, item) => acc + item?.product?.price * item?.qty,
-                        0,
-                      )
-                      .toFixed(2)}{' '}
-                    $
-                  </TextFooter>
-                </FooterTitleRight>
+                  <FooterTitleRight>
+                    <TextFooter>Subtotal</TextFooter>
+                    <TextFooter>{price} $</TextFooter>
+                  </FooterTitleRight>
+                  <FooterTitleRight>
+                    <TextFooter>Tax</TextFooter>
+                    <TextFooter>0 $</TextFooter>
+                  </FooterTitleRight>
+                  <FooterTitleRight>
+                    <TextFooter>Shipping</TextFooter>
+                    <TextFooter>0 $</TextFooter>
+                  </FooterTitleRight>
+                  <FooterTitleRight>
+                    <TextFooter style={{ fontWeight: 'bold' }}>
+                      Total
+                    </TextFooter>
+                    <TextFooter style={{ fontWeight: 'bold' }}>
+                      {price} $
+                    </TextFooter>
+                  </FooterTitleRight>
+                  <Row style={{ margin: '30px 0 10px' }} JC="center">
+                    <RevieworderButton type="submit">
+                      {loading ? 'loading...' : 'Review order'}
+                    </RevieworderButton>
+                  </Row>
+                </form>
               </RightSection>
             </WrapperCard>
           </Column>
         )}
         {stepperNumber === 1 && (
           <ReviewTow
-            paymentId={paymentId}
-            clientSec={myOrder?.orders?.clientSecret}
-            orderId={myOrder?.orders?._id}
+            paymentId={paymentId as string}
+            clientSec={myOrder?.orders?.clientSecret as string}
+            orderId={myOrder?.orders?._id as string}
           />
         )}
       </InnerSection>
@@ -293,8 +276,8 @@ export default ReviewOrder;
 
 const iframeStyles = {
   base: {
-    iconColor: '#0F1112',
-    color: '#0F1112',
+    iconColor: '#4D4D4D',
+    color: '#979797',
     fontWeight: '500',
     fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
     fontSize: '16px',
@@ -304,11 +287,11 @@ const iframeStyles = {
       color: '#fce883',
     },
     '::placeholder': {
-      color: '#4D4D4D',
+      color: '#979797',
     },
     '::-webkit-input-placeholder': {
-      color: '#4D4D4D',
-      border: '1px solid #4D4D4D',
+      color: '#979797',
+      border: '1px solid #979797',
     },
   },
 };

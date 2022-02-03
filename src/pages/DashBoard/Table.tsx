@@ -35,7 +35,6 @@ const Table = ({ data }: IProps) => {
       data &&
       data?.map(e => {
         return row(
-          // eslint-disable-next-line no-underscore-dangle
           e?._id,
           e?.name,
           e?.price,
@@ -54,6 +53,7 @@ const Table = ({ data }: IProps) => {
       })
     );
   };
+
   return (
     <>
       <ContainAgGrid className="ag-theme-balham">

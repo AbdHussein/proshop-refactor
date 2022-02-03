@@ -4,8 +4,9 @@ interface IProps {
   color?: string;
 }
 
-const StarIcon = styled.i<IProps>(({ color = '#f8e825', ...props }) => ({
-  color: `${color}`,
+const StarIcon = styled.i<IProps>(props => ({
+  color: `${props.theme.primary?.main}`,
+  fontSize: `2rem`,
 }));
 
 export default StarIcon;

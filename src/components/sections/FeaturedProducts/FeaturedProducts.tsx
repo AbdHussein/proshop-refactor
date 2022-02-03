@@ -3,6 +3,7 @@
 /* eslint-disable no-underscore-dangle */
 import { useState, CSSProperties } from 'react';
 import SwipeableViews from 'react-swipeable-views';
+import { useTheme } from 'styled-components';
 import { RowInnerSlider } from './styles';
 import { Container } from '../..';
 import ComplexCard from '../../Card/productCard';
@@ -36,6 +37,7 @@ interface IProps {
 export const FeaturedProduct = ({ data }: IProps) => {
   const [sliderIndex, setSliderIndex] = useState<number>(0);
   const [width, setWidth] = useState(window.innerWidth);
+  const theme = useTheme();
   const handleSize = () => {
     setWidth(window.innerWidth);
     setSliderIndex(0);
@@ -71,14 +73,14 @@ export const FeaturedProduct = ({ data }: IProps) => {
     <Container
       direction="column"
       align-items="center"
-      background="#F7F8FC"
       width="100%"
+      background={theme.background?.paper}
     >
       <Container direction="column" width="85.4%">
         <DeviderTitle title="Featured Product" position="center" />
       </Container>
 
-      <Container direction="row" width="85.4%" justify-content="space-between">
+      <Container direction="row" justify-content="space-between">
         <SwipeableViews
           enableMouseEvents
           index={sliderIndex}
@@ -88,12 +90,7 @@ export const FeaturedProduct = ({ data }: IProps) => {
           {getSlider()}
         </SwipeableViews>
       </Container>
-      <Container
-        flexDirection="row"
-        background="#F7F8FC"
-        padding="1em"
-        width="auto"
-      >
+      <Container flexDirection="row" padding="1em" width="auto">
         {Array(getSlider().length)
           .fill(0)
           .map((x, i) => (
@@ -105,7 +102,7 @@ export const FeaturedProduct = ({ data }: IProps) => {
             />
           ))}
       </Container>
-      <Container height="20px" />
+      {/* <Container height="20px" /> */}
     </Container>
   );
 };

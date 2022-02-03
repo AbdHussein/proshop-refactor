@@ -1,71 +1,58 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { CSSProperties } from 'react';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { ReactComponent as Search } from '../../assets/search.svg';
 import { Column } from '../Col';
 import { FlexBox } from '../Row';
 import { Container } from '..';
-
-interface Props {
-  open: boolean;
-}
 
 export const InnerSection = styled(Column)`
   margin: 0 auto;
   max-width: 1640px;
   width: 100%;
 `;
-export const ListNav = styled(Container)<Props>`
-  background-color: #121212;
-  height: ${props => (props.open ? '100vh' : '70px')};
+export const ListNav = styled(Container)`
+  margin: 0;
+  background-color: #242424;
+  height: auto;
   z-index: 999;
-  padding: 7px 5%;
-  @media (max-width: 768px) {
-    flex-flow: column wrap;
-    background-color: #242424;
-    position: fixed;
-    transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
-    top: 0;
-    right: 0;
-    height: 100vh;
-    z-index: 10;
-    list-style: none;
-    display: flex;
-    width: 100%;
-    padding-top: 3.5rem;
-    transition: transform 0.3s ease-in-out;
-    align-items: center;
-    flex-direction: column;
+  padding: 0 5%;
+  width: 100%;
+  justify-content: space-between;
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+    flex-grow: 99;
   }
-  position: fixed;
+  position: sticky;
   top: 0;
 `;
 export const Badge = styled('div')`
-  background: #fcdd06;
+  position: absolute;
+  background: #edc298;
   border-radius: 50%;
   color: #242424;
-  text-align: center;
-  font-family: normal normal normal 10px/13px Muli;
-  height: 22px;
-  width: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15px;
+  width: 15px;
   z-index: 10;
-  right: 8px;
-  position: absolute;
-  top: -5px;
-  z-index: 1;
+  right: -3px;
+  top: -3px;
+  font-size: 10px;
 `;
 
 export const SearchButton = styled(FlexBox)`
   cursor: pointer;
   align-items: center;
-  background: #fcdd06;
+  background: ${props => props.theme.primary?.main};
   border-radius: 6px;
   display: flex;
   height: 42px;
   justify-content: center;
   width: 21.5%;
 `;
-export const StyledSearchIcon = styled(AiOutlineSearch)`
+export const StyledSearchIcon = styled(Search)`
   font-size: 18;
   margin-right: 10px;
 `;
@@ -76,16 +63,19 @@ export const NavBox = styled('div')`
   width: 36.7%;
   background: #fff;
   border-radius: 6px;
-  @media (max-width: 768px) {
-    display: none;
+  @media (max-width: 900px) {
+    order: 9;
+    width: 100%;
+    margin: 10px auto;
   }
 `;
 export const NavIcon = styled('div')`
   display: flex;
-  width: 36.7%;
-  border-radius: 6px;
   justify-content: center;
-  background: none;
+  align-items: flex-start;
+  @media (max-width: 920px) {
+    flex-grow: 9;
+  }
 `;
 
 export const CustomLink = styled(Link)`
@@ -103,16 +93,21 @@ export const Logo = styled('img')`
 export const IconList = styled('li')`
   cursor: pointer;
   display: inline;
-  margin-left: 2rem;
+  margin-right: 2vw;
   color: #fff;
   display: flex;
   text-decoration: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 50px;
-  width: 50px;
-  margin: auto 0 auto 32px;
+  width: auto;
+  width: max-content;
+  & svg {
+    margin-bottom: 7px !important;
+
+    border: none;
+    outline: none;
+  }
   span {
     color: #000;
     background: #06aefc;
@@ -131,13 +126,6 @@ export const IconList = styled('li')`
     top: 10px;
     z-index: 1;
   }
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    width: 10rem;
-    justify-content: center;
-    font-size: 18px;
-  }
 `;
 export const Hamburger = styled.div`
   display: none;
@@ -152,12 +140,6 @@ export const Hamburger = styled.div`
     margin-bottom: 4px;
     border-radius: 5px;
   }
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    margin-right: auto;
-    top: auto;
-  }
 `;
 export const SearchInput = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -170,13 +152,13 @@ export const SearchInput = styled.input`
     border: none;
     outline: none;
   }
-  ::placeholder,
+  /* ::placeholder,
   ::-webkit-input-placeholder {
     color: black;
   }
   :-ms-input-placeholder {
     color: black;
-  }
+  }*/
 `;
 export const List = styled('ul')`
   text-decoration: none;
@@ -219,9 +201,4 @@ export const IConsContainer = styled('div')`
   align-items: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  @media (max-width: 768px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 `;

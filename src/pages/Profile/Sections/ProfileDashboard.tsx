@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
@@ -22,13 +21,15 @@ interface IProfileDashboard {
 const ProfileDashboard = ({ user, isActive }: IProfileDashboard) => {
   const navigation = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<AppState, any, TAllActionAuth>>();
-  const handleLoagout = () => {
+
+  const handleLogout = () => {
     dispatch(
       AuthActions.logoutSuccess(() => {
         navigation('/login');
       }),
     );
   };
+
   return (
     <DashboardContainer
       direction="column"
@@ -38,36 +39,40 @@ const ProfileDashboard = ({ user, isActive }: IProfileDashboard) => {
       background="#F2F2F2"
       border-radius="16px"
     >
-      <DashImgContainer padding="1em">
+      <DashImgContainer padding="1em" height="30% !important">
         <Image
           src={user?.profileImage}
-          width="137px"
-          height="137px"
+          width="100px"
+          height="100px"
           variant="circle"
           border
           style={{ margin: '0' }}
         />
-        <Typography variant="h2" fontSize="2rem" margin="0.5em 0 0 0.5em">
+        <Typography variant="h5" fontSize="20px" margin="0.5em 0 0 0.5em">
           {`${user?.firstName}  ${user?.lastName}`}
         </Typography>
       </DashImgContainer>
       <Container
         direction="column"
         align-items="flex-start"
-        justify-content="space-between"
         margin-bottom="1em"
-        min-height="150px"
+        min-height="20px"
         padding="1em"
       >
         <NavLink to="#" onClick={isActive}>
           My Orders
         </NavLink>
-        <NavLink to="#">Wishlist</NavLink>
-        <NavLink to="#">Notifications</NavLink>
-        <NavLink to="#">Settings</NavLink>
       </Container>
       <Divider color="#707070" />
-      <OutLink to="#" onClick={handleLoagout}>
+      <OutLink
+        as="button"
+        onClick={handleLogout}
+        style={{
+          border: 'none',
+          backgroundColor: 'transparent',
+          cursor: 'pointer',
+        }}
+      >
         Logout
       </OutLink>
     </DashboardContainer>

@@ -40,6 +40,18 @@ export interface IStateUser {
     isLoading: boolean;
     error?: string;
   };
+  allUsers: {
+    users?: IUser[];
+    success?: boolean;
+    isLoading?: boolean;
+    error?: string;
+  };
+  user: {
+    success?: boolean;
+    isLoading?: boolean;
+    error?: string;
+    data?: IUser;
+  };
 }
 
 /**
@@ -81,10 +93,48 @@ export interface IUpdateProfileFilled extends Action<string> {
   };
 }
 
+export interface IGetAllUsersStart extends Action<string> {
+  type: EnumUserAction.GET_ALL_USERS_START;
+}
+export interface IGetAllUsersSuccess extends Action<string> {
+  type: EnumUserAction.GET_ALL_USERS_SUCCESS;
+  payload: {
+    users: Array<IUser>;
+  };
+}
+export interface IGetAllUsersFail extends Action<string> {
+  type: EnumUserAction.GET_ALL_USERS_FAIL;
+  payload: {
+    error: string;
+  };
+}
+
+export interface IGetUserByIDStart extends Action<string> {
+  type: EnumUserAction.GET_USER_BY_ID_START;
+}
+export interface IGetUserByIDSuccess extends Action<string> {
+  type: EnumUserAction.GET_USER_BY_ID_SUCCESS;
+  payload: {
+    data: IUser;
+  };
+}
+export interface IGetUserByIDFail extends Action<string> {
+  type: EnumUserAction.GET_USER_BY_ID_FAIL;
+  payload: {
+    error: string;
+  };
+}
+
 export type TAllActionUser =
   | IGetProfileUserStart
   | IGetProfileUserSuccess
   | IGetProfileUserFilled
   | IUpdateProfileStart
   | IUpdateProfileSuccess
-  | IUpdateProfileFilled;
+  | IUpdateProfileFilled
+  | IGetAllUsersStart
+  | IGetAllUsersSuccess
+  | IGetAllUsersFail
+  | IGetUserByIDStart
+  | IGetUserByIDSuccess
+  | IGetUserByIDFail;

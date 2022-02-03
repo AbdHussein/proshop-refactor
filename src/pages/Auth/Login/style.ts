@@ -12,14 +12,14 @@ export const WrapperRemmber = styled('div')`
 export const LoginText = styled(Typography)`
   font-size: 35px;
   font-weight: bold;
-  color: #242424;
+  color: ${props => props.theme.text?.primary};
   margin-bottom: 25px;
   font-family: mulish;
 `;
 export const LoginSubText = styled('p')`
   font-size: 25px;
   width: 35rem;
-  color: #70707070;
+  color: ${props => props.theme.text?.primary};
   font-family: mulish;
   margin-bottom: 30px;
 `;
@@ -55,23 +55,27 @@ export const Wrapper = styled('div')`
 export const Remmber = styled('p')`
   font-size: 22px;
   letter-spacing: 0.88px;
-  color: #707070;
+  color: ${props => props.theme.text?.primary};
   opacity: 0.7;
   margin-left: 13px;
 `;
 export const ForgotPassword = styled(Typography)`
   font-size: 18px;
   letter-spacing: 0.88px;
-  color: #242424;
+  color: ${props => props.theme.text?.primary};
   text-align: center;
   font-family: mulish;
   margin-bottom: 1rem auto;
+  & a {
+    color: ${props => props.theme.text?.primary};
+    text-decoration: none;
+  }
 `;
 
 export const ButtonSuginup = styled('button')`
   width: 200px;
   height: 56px;
-  border: 3px solid #fcdd06;
+  border: 3px solid ${props => props.theme.primary?.main};
   border-radius: 20px;
   font-size: 22px;
   display: flex;
@@ -79,7 +83,7 @@ export const ButtonSuginup = styled('button')`
   align-items: center;
   background: none;
   letter-spacing: 0.88px;
-  color: #242424;
+  color: ${props => props.theme.text?.primary};
   outline: none;
   align-self: center;
   margin-top: 1rem;
@@ -87,18 +91,17 @@ export const ButtonSuginup = styled('button')`
 export const ButtonLogin = styled('button')`
   width: 100%;
   min-height: 40px;
-  border: 3px solid ${props => props.theme?.primary?.main};
-  border-radius: 20px;
+  /* border: 3px solid ${props => props.theme?.primary?.main}; */
   opacity: 1;
   font-size: 22px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: none;
   letter-spacing: 0.88px;
+  border: none;
   color: #242424;
   outline: none;
-  background: #fcdd06 0% 0% no-repeat padding-box;
+  background: ${props => props.theme.primary?.main} 0% 0% no-repeat padding-box;
   border-radius: 6px;
 `;
 

@@ -1,20 +1,12 @@
 import ReactStars from 'react-rating-stars-component';
-import { BsBookmark } from 'react-icons/bs';
+// import { BsBookmark } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from 'styled-components';
 import { Button } from '../Button/ButtonStyle';
-import img from '../../assets/tow.jpg';
 import Typography from '../Typography';
-import {
-  Actions,
-  AddCart,
-  Content,
-  ContentAction,
-  Discount,
-  MainCard,
-  SaveBtn,
-} from './cardStyles';
+import { Content, ContentAction, Discount, MainCard } from './cardStyles';
 import { Container, Image } from '..';
 import { AppState } from '../../redux/store';
 import { ActionCartType } from '../../redux/Cart/type';
@@ -33,32 +25,31 @@ export interface IProducts {
 const ComplexCard = ({ ...props }: IProducts) => {
   const dispatch = useDispatch<ThunkDispatch<AppState, any, ActionCartType>>();
   const navigate = useNavigate();
-
+  const theme = useTheme();
+  console.log(theme);
   const handelAddCart = () => {
-    dispatch(
-      upduteActionCart({ productId: props._id, qty: 1 }, () => {
-        navigate('/cart');
-      }),
-    );
+    dispatch(upduteActionCart({ productId: props._id, qty: 1 }));
   };
   return (
-    <MainCard>
+    <MainCard width="450px" justifyContent="center">
       {props?.discount > 0 && (
         <Discount>
           <Typography width="none" color="white" fontSize="24px">
-            {`-${Math.floor(-100 * (props.discount / props.price - 1))}%`}
+            {`-${Math.floor((100 / +props.price) * props.discount)}%`}
           </Typography>
         </Discount>
       )}
+
       <ContentAction onClick={() => navigate(`/product/${props._id}`)}>
         <Image
           src={props.image}
           variant="square"
           size="lg"
           style={{
+            padding: '25px 0',
             flexShrink: 0,
             minWidth: '100%',
-            maxHeight: '18rem',
+            maxHeight: '350px',
           }}
         />
       </ContentAction>
@@ -67,10 +58,15 @@ const ComplexCard = ({ ...props }: IProducts) => {
         style={{ textAlign: 'center' }}
       >
         <Typography
+          style={{
+            height: '70px ',
+            maxWidth: '95%',
+            fontSize: '24px',
+            width: '80%',
+            textAlign: 'center',
+          }}
           variant="h2"
-          font-size="30px"
           font-family="mulish"
-          width="80%"
           margin="20px auto"
         >
           {props.name}
@@ -86,37 +82,63 @@ const ComplexCard = ({ ...props }: IProducts) => {
         />
       </Content>
       <Content>
-        {props.discount && (
+        {props.discount ? (
           <Typography
             variant="h2"
             text-decoration={props.discount ? 'line-through' : 'none'}
             fontFamily="mulish"
             color="red"
-            marginRight="20px"
+            fontSize="30px"
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+              color: '#FC4059',
+            }}
+          >
+            ${(+props.price - +props.discount).toFixed(2)}
+          </Typography>
+        ) : (
+          <Typography
+            variant="h2"
+            text-decoration={props.discount ? 'line-through' : 'none'}
+            fontFamily="mulish"
+            color="red"
+            fontSize="30px"
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+            }}
           >
             ${props.price}
           </Typography>
         )}
-        <Typography variant="h2" fontFamily="mulish">
-          ${props.discount}
-        </Typography>
+        {props.discount ? (
+          <Typography
+            variant="h2"
+            fontFamily="mulish"
+            fontSize="30px"
+            style={{
+              marginRight: '11px',
+              fontSize: '30px !important',
+              textDecoration: 'line-through',
+            }}
+          >
+            ${props.price}
+          </Typography>
+        ) : null}
       </Content>
 
-      <Container direction="row" margin="0 auto" padding="15px">
-        <Button
-          height="62px"
-          background="#F2F2F2"
-          width="25%"
-          padding="none"
-          margin-left="0 6%"
-        >
-          <BsBookmark size="24px" />
-        </Button>
+      <Container
+        justifyContent="center"
+        direction="row"
+        margin="0 auto"
+        padding="15px"
+      >
         <Button
           height="62px"
           width="65.3%"
           background="#F2F2F2"
-          fontSize="15px"
+          fontSize="24px"
           margin="0 5%"
           onClick={handelAddCart}
         >
