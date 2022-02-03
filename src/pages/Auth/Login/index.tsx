@@ -107,7 +107,13 @@ const Login = () => {
                   >
                     {auth.isLoading ? 'loading' : 'Login'}
                   </ButtonLogin>
-                  <Column>
+                  <Column
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      margin: 'auto',
+                    }}
+                  >
                     <CheckBox label="Remember me" name="Remember me" />
 
                     <ForgotPassword

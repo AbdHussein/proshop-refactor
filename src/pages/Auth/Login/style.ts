@@ -66,6 +66,10 @@ export const ForgotPassword = styled(Typography)`
   text-align: center;
   font-family: mulish;
   margin-bottom: 1rem auto;
+  & a {
+    color: ${props => props.theme.text?.primary};
+    text-decoration: none;
+  }
 `;
 
 export const ButtonSuginup = styled('button')`
