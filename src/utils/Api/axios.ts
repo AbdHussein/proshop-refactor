@@ -5,8 +5,8 @@ import { EnumAuthAction } from '../../redux/Auth/constant';
 import Store from '../../redux/store';
 
 export const useToken = () => {
-  const token: string = JSON.parse(localStorage.getItem('token') || '') || '';
-  return token;
+  const token: string | null = localStorage.getItem('token');
+  return token || '';
 };
 
 const API_URL = 'https://prohop-express.herokuapp.com/api';
@@ -16,7 +16,7 @@ const axiosInstance = axios.create({
   baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: token ? `Bearer ${useToken()}` : '',
+    Authorization: token ? `Bearer ${useToken().replaceAll('"', '')}` : '',
   },
 });
 
