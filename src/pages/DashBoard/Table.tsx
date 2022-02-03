@@ -9,7 +9,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AgGridColumn } from 'ag-grid-react/lib/shared/agGridColumn';
 import { columnDefs, defaultColDef, rowStyle, getRowStyle } from './data';
 import { ContainAgGrid } from './style';
-import {Button, StyledDelete, StyledEdit} from './Icons';
+import { Button, StyledDelete, StyledEdit } from './Icons';
 import { IProducts } from '../../redux/Product/type';
 import { AppState } from '../../redux/store';
 import { delateProduct } from '../../redux/Admin/action';
@@ -44,7 +44,7 @@ const Table = ({ data }: IProps) => {
               <StyledEdit />
             </Link>
             <Button
-                // onClick={()=>deleteOnClick(e._id)}
+            // onClick={()=>deleteOnClick(e._id)}
             >
               <StyledDelete />
             </Button>
@@ -64,7 +64,6 @@ const Table = ({ data }: IProps) => {
           rowHeight={60}
           rowData={getRowData() as []}
         >
-
           <AgGridColumn field="ID" width={300} />
           <AgGridColumn field="NAME" width={350} />
           <AgGridColumn field="PRICE" width={220} />
@@ -77,4 +76,3 @@ const Table = ({ data }: IProps) => {
 };
 
 export default Table;
-
