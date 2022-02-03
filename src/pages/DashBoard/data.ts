@@ -14,7 +14,7 @@ export const defaultColDef = {
 
 export const rowStyle = {
   borderBottom: 'white 3px solid',
-  padding: '16px',
+  padding: '15px',
   fontFamily: 'normal ',
   fontSize: '15px',
 };

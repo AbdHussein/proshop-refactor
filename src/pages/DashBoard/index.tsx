@@ -28,7 +28,7 @@ const DashBoard = () => {
         width="89%"
         margin="80px auto 0 auto"
       >
-        <Typography variant="h2" font-size="32px">
+        <Typography variant="h2">
           Products
         </Typography>
         <Btn>

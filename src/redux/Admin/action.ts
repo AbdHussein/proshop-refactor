@@ -1,12 +1,21 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable no-underscore-dangle */
-import { AxiosResponse } from 'axios';
+import {AxiosPromise, AxiosResponse} from 'axios';
 import { Dispatch } from 'redux';
 import { AppState } from '../store';
 import Api from '../../utils/Api/axios';
 import { EnumAdminAction } from './constant';
 import { ICreateProduct, IProducts, TAllActionAdmin } from './type';
 import { formDataCstom } from '../../utils/helper/formData';
+const createFormData = (image: File) => {
+  let data = new FormData();
+  data.append("image", image);
+  return data;
+};
+const uploadPhoto = (image: File): AxiosPromise<string> => {
+  const formData = createFormData(image);
+  return Api.post("/upload", formData) as AxiosPromise<string>;
+};
 
 //  ?keyword=iphone&pageNumber=1
 export const getAllUser = (pageNumber?: number) => {
@@ -141,47 +150,32 @@ export const updateProduct = (
   id: string,
   product: ICreateProduct,
   fun?: Function,
-) => {
-  return async (dispatch: Dispatch<TAllActionAdmin>) => {
+) => async (dispatch: Dispatch<TAllActionAdmin>) => {
+  try {
     dispatch({
-      type: EnumAdminAction.CREATE_PRODUCTS_START,
+      type: EnumAdminAction.UPDATE_PRODUCTS_START,
     });
-
-    try {
-      const responseData = await Api.get(`/products/${id}`);
-      const imageNeeedUpdated = (responseData.data.images as Array<any>).filter(
-        x => typeof x !== 'string',
+      const imageNeeedUpdated = [...product.images].filter(
+          x => typeof x !== 'string',
       );
-      const imageString: Array<string> = (
-        responseData.data.images as Array<any>
-      ).filter(x => typeof x === 'string');
-      const imageUpload = product.images.map(image => {
-        return Api.post('/upload', formDataCstom(image));
-      });
-      const imagesUrl = await Promise.all<AxiosResponse>(imageUpload);
-      const images = imagesUrl.map(x => x.data) as Array<string>;
-      const data = {
-        ...product,
-        images,
-      };
-
-      const response = await Api.update<any>(`/products/${id}`, data);
+    const promises = imageNeeedUpdated.map((image) => uploadPhoto(image as File));
+    const urls = await Promise.all<AxiosResponse>(promises);
+    const form = { ...product, images: [...urls.map((url) => url.data)] };
+    const res = await Api.update(`/products/${id}`, form);
+    fun?.();
+    dispatch({
+      type: EnumAdminAction.UPDATE_PRODUCTS_SUCCESS,
+      payload: res.data,
+    });
+  }
+    catch (e: any) {
       dispatch({
-        type: EnumAdminAction.DELETE_USER_START_SUCCESS,
-        payload: {
-          user: response.data,
-        },
-      });
-    } catch (e: any) {
-      dispatch({
-        type: EnumAdminAction.DELETE_USER_START_FILL,
+        type: EnumAdminAction.UPDATE_PRODUCTS_FILL,
         payload: {
           error: e?.response?.data?.message,
         },
       });
-      fun?.();
     }
-  };
 };
 export const delateProduct = (id: string) => {
   return async (

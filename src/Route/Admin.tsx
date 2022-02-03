@@ -20,7 +20,7 @@ if (role) {
       component: <AddNewProduct />,
     },
     {
-      path: '/updateroduct/:id',
+      path: '/update-product/:id',
       component: <AddNewProduct />,
     },
     {
