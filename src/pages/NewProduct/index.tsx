@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { ThunkDispatch } from 'redux-thunk';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,47 +43,46 @@ function NewProduct() {
     images: product.product?.images || [],
     name: product.product?.name || '',
     brand: product.product?.brand || '',
-    categories:  product.product?.categories || [],
+    categories: product.product?.categories || [],
     description: product.product?.description || '',
-    countInStock: product.product?.countInStock as number || 0,
-    price: product.product?.price as number  || 0,
-    discount: product.product?.discount as number  || 0  ,
+    countInStock: (product.product?.countInStock as number) || 0,
+    price: (product.product?.price as number) || 0,
+    discount: (product.product?.discount as number) || 0,
     colors: product.product?.colors || [],
   };
-    
+
   const formik = useFormik<IAddProductSchema>({
     initialValues,
-    validationSchema : AddProductSchema,
+    validationSchema: AddProductSchema,
     enableReinitialize: true,
     onSubmit: async (values: IAddProductSchema, errors) => {
-        console.log(errors, 'values', values, );
-        if (id) {
-            // Update Product
-            dispatch(
-                updateProduct(id as string, values, () => {
-                    navigate("/dashboard");
-                })
-            );
-        }
-    }
+      console.log(errors, 'values', values);
+      if (id) {
+        // Update Product
+        dispatch(
+          updateProduct(id as string, values, () => {
+            navigate('/dashboard');
+          }),
+        );
+      }
+    },
 
-
-      // dispatch(
-      //   addProduct(
-      //     {
-      //       brand: values.brand,
-      //       images: values.images as File[],
-      //       colors: values.colors,
-      //       categories: values.categories,
-      //       price: values.price,
-      //       discount: 0,
-      //       countInStock: values.countInStock,
-      //       name: values.name,
-      //       description: values.description,
-      //     },
-      //     () => navigation(`/`),
-      //   ),
-      // );
+    // dispatch(
+    //   addProduct(
+    //     {
+    //       brand: values.brand,
+    //       images: values.images as File[],
+    //       colors: values.colors,
+    //       categories: values.categories,
+    //       price: values.price,
+    //       discount: 0,
+    //       countInStock: values.countInStock,
+    //       name: values.name,
+    //       description: values.description,
+    //     },
+    //     () => navigation(`/`),
+    //   ),
+    // );
     // },
   });
 

@@ -8,7 +8,7 @@ import {
   Image,
 } from '../../../components';
 import { InputFile } from '../../../components/Form/checkBox/style';
-import {ImagesContainer, InputsContainer, WarperFile} from '../style';
+import { ImagesContainer, InputsContainer, WarperFile } from '../style';
 
 const ProductImages = ({ formik }: any) => {
   const [preview0, setPreview0] = useState<any>(formik.values.images[0]);
@@ -73,14 +73,11 @@ const ProductImages = ({ formik }: any) => {
           }}
         />
       </Container>
-        {formik.errors.images &&
-	    <Typography
-		    variant="p"
-		    color="red"
-	    >
-            {formik.errors.images}
-	    </Typography>
-        }
+      {formik.errors.images && (
+        <Typography variant="p" color="red">
+          {formik.errors.images}
+        </Typography>
+      )}
     </ImagesContainer>
   );
 };

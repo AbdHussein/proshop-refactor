@@ -19,4 +19,4 @@ export const StyledEdit = styled(MdModeEditOutline)`
 export const Button = styled(`button`)`
   background-color: unset;
   border: none;
-`
+`;

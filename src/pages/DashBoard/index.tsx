@@ -28,9 +28,7 @@ const DashBoard = () => {
         width="89%"
         margin="80px auto 0 auto"
       >
-        <Typography variant="h2">
-          Products
-        </Typography>
+        <Typography variant="h2">Products</Typography>
         <Btn>
           <Link to="/addproduct" style={{ textDecoration: 'none' }}>
             <Typography font-size="20px">New Product</Typography>

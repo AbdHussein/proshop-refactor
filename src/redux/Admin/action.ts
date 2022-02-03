@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable no-underscore-dangle */
-import {AxiosPromise, AxiosResponse} from 'axios';
+import { AxiosPromise, AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import { AppState } from '../store';
 import Api from '../../utils/Api/axios';
 import { EnumAdminAction } from './constant';
 import { ICreateProduct, IProducts, TAllActionAdmin } from './type';
 import { formDataCstom } from '../../utils/helper/formData';
+
 const createFormData = (image: File) => {
-  let data = new FormData();
-  data.append("image", image);
+  const data = new FormData();
+  data.append('image', image);
   return data;
 };
 const uploadPhoto = (image: File): AxiosPromise<string> => {
   const formData = createFormData(image);
-  return Api.post("/upload", formData) as AxiosPromise<string>;
+  return Api.post('/upload', formData) as AxiosPromise<string>;
 };
 
 //  ?keyword=iphone&pageNumber=1
@@ -146,29 +147,28 @@ export const addProduct = (product: ICreateProduct, fun?: Function) => {
   };
 };
 
-export const updateProduct = (
-  id: string,
-  product: ICreateProduct,
-  fun?: Function,
-) => async (dispatch: Dispatch<TAllActionAdmin>) => {
-  try {
-    dispatch({
-      type: EnumAdminAction.UPDATE_PRODUCTS_START,
-    });
+export const updateProduct =
+  (id: string, product: ICreateProduct, fun?: Function) =>
+  async (dispatch: Dispatch<TAllActionAdmin>) => {
+    try {
+      dispatch({
+        type: EnumAdminAction.UPDATE_PRODUCTS_START,
+      });
       const imageNeeedUpdated = [...product.images].filter(
-          x => typeof x !== 'string',
+        x => typeof x !== 'string',
       );
-    const promises = imageNeeedUpdated.map((image) => uploadPhoto(image as File));
-    const urls = await Promise.all<AxiosResponse>(promises);
-    const form = { ...product, images: [...urls.map((url) => url.data)] };
-    const res = await Api.update(`/products/${id}`, form);
-    fun?.();
-    dispatch({
-      type: EnumAdminAction.UPDATE_PRODUCTS_SUCCESS,
-      payload: res.data,
-    });
-  }
-    catch (e: any) {
+      const promises = imageNeeedUpdated.map(image =>
+        uploadPhoto(image as File),
+      );
+      const urls = await Promise.all<AxiosResponse>(promises);
+      const form = { ...product, images: [...urls.map(url => url.data)] };
+      const res = await Api.update(`/products/${id}`, form);
+      fun?.();
+      dispatch({
+        type: EnumAdminAction.UPDATE_PRODUCTS_SUCCESS,
+        payload: res.data,
+      });
+    } catch (e: any) {
       dispatch({
         type: EnumAdminAction.UPDATE_PRODUCTS_FILL,
         payload: {
@@ -176,7 +176,7 @@ export const updateProduct = (
         },
       });
     }
-};
+  };
 export const delateProduct = (id: string) => {
   return async (
     dispatch: Dispatch<TAllActionAdmin>,

@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import {Container, Typography, InputController, Row} from '../../../components';
+import {
+  Container,
+  Typography,
+  InputController,
+  Row,
+} from '../../../components';
 import { ErrorSection } from '../../../components/Form/inputController/errorSection';
 import {
   FiledWrapper,
@@ -18,7 +23,7 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
     category: !product,
     color: !product,
   });
-  console.log(formik,'formik', formik.errors.name)
+  console.log(formik, 'formik', formik.errors.name);
   useEffect(() => {
     if (product?.categories?.length > 0) {
       setSelected({
@@ -85,22 +90,16 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
           />
         </InputsContainer>
         <InputsContainer>
-          {formik.errors.name &&
-          <Typography
-              variant="p"
-              color="red"
-          >
-            {formik.errors.name}
-          </Typography>
-          }
-          {formik.errors.brand &&
-          <Typography
-              variant="p"
-              color="red"
-          >
-            {formik.errors.brand}
-          </Typography>
-          }
+          {formik.errors.name && (
+            <Typography variant="p" color="red">
+              {formik.errors.name}
+            </Typography>
+          )}
+          {formik.errors.brand && (
+            <Typography variant="p" color="red">
+              {formik.errors.brand}
+            </Typography>
+          )}
         </InputsContainer>
         <InputsContainer justify-Content="space-between">
           {formik.values.id.length ? (
@@ -142,14 +141,11 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
                 />
               )}
             </InputWrapper>
-            {formik.errors.colors &&
-            <Typography
-                variant="p"
-                color="red"
-            >
-              {formik.errors.colors}
-            </Typography>
-            }
+            {formik.errors.colors && (
+              <Typography variant="p" color="red">
+                {formik.errors.colors}
+              </Typography>
+            )}
           </FiledWrapper>
 
           <FiledWrapper style={{ marginLeft: '0.5em' }}>
@@ -175,14 +171,11 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
                 />
               )}
             </InputWrapper>
-            {formik.errors.category &&
-            <Typography
-                variant="p"
-                color="red"
-            >
-              {formik.errors.category}
-            </Typography>
-            }
+            {formik.errors.category && (
+              <Typography variant="p" color="red">
+                {formik.errors.category}
+              </Typography>
+            )}
           </FiledWrapper>
         </InputsContainer>
 
@@ -198,14 +191,11 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
                 onChange={formik.handleChange}
               />
             </InputWrapper>
-            {formik.errors.description &&
-            <Typography
-                variant="p"
-                color="red"
-            >
-              {formik.errors.description}
-            </Typography>
-            }
+            {formik.errors.description && (
+              <Typography variant="p" color="red">
+                {formik.errors.description}
+              </Typography>
+            )}
           </FiledWrapper>
         </Container>
 
@@ -231,22 +221,16 @@ const ProductDetails = ({ formik, categories, product, edit }: any) => {
           />
         </InputsContainer>
         <InputsContainer>
-          {formik.errors.countInStock &&
-          <Typography
-              variant="p"
-              color="red"
-          >
-            {formik.errors.countInStock}
-          </Typography>
-          }
-          {formik.errors.price &&
-          <Typography
-              variant="p"
-              color="red"
-          >
-            {formik.errors.price}
-          </Typography>
-          }
+          {formik.errors.countInStock && (
+            <Typography variant="p" color="red">
+              {formik.errors.countInStock}
+            </Typography>
+          )}
+          {formik.errors.price && (
+            <Typography variant="p" color="red">
+              {formik.errors.price}
+            </Typography>
+          )}
         </InputsContainer>
       </Container>
     </FormContainer>
